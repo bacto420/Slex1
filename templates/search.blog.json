@@ -43,7 +43,7 @@
       ],
       "settings": {
         "title": "Blog",
-        "show_title": true,
+        "show_title": false,
         "image_ratio": "natural",
         "placeholder_count": 5
       }

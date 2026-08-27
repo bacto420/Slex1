@@ -80,7 +80,7 @@
       ],
       "settings": {
         "title": "Media",
-        "show_title": true,
+        "show_title": false,
         "columns": 3,
         "image_ratio": "portrait",
         "placeholder_count": 9

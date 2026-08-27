@@ -4,54 +4,60 @@ Shopify-Theme für www.bactoclothing.com.
 
 ## Blog und Media
 
-Blog und Media haben **je ein eigenes Template mit eigenen Blöcken**. Vorher
-liefen beide Seiten auf `templates/page.json`. Shopify speichert Blöcke am
-Template und nicht an der einzelnen Seite — dadurch teilten sich Blog und
-Media einen einzigen Satz Blöcke, und ein Bild, das auf der einen Seite
-eingesetzt wurde, tauchte auch auf der anderen auf. Genau diese Verbindung ist
-jetzt aufgehoben.
+Blog und Media sind **zwei getrennte Abschnitte mit je eigenen Bildblöcken**.
+Vorher steckten beide Blocksätze in ein und demselben Abschnitt auf
+`templates/page.json`. Shopify speichert Blöcke am Template und nicht an der
+einzelnen Seite — dadurch teilten sich Blog und Media eine einzige Blockliste,
+und ein Bild, das auf der einen Seite eingesetzt wurde, tauchte auch auf der
+anderen auf. Genau diese Verbindung ist jetzt aufgehoben.
 
-| Bereich | Template | Section | Blocktyp | Darstellung |
-| --- | --- | --- | --- | --- |
-| Blog | `templates/page.blog.json` | `main-blog-gallery` | `blog_image` | Bilder über die volle Breite der Website, direkt untereinander |
-| Media | `templates/page.media.json` | `main-media` | `media_image` | Raster aus 9 anklickbaren Bildern, jedes mit eigenem Link |
-| Blogbeiträge | `templates/blog.json` | `main-blog-posts` | — | echte Shopify-Artikel unter `/blogs/...` |
-| Normale Seite | `templates/page.json` | `main-page` | — | nur Seitentext |
+| Bereich | Abschnitt | Blocktyp | Darstellung |
+| --- | --- | --- | --- |
+| Blog | `main-blog-gallery` | `blog_image` | Bilder über die volle Breite der Website, direkt untereinander |
+| Media | `main-media` | `media_image` | Raster aus 9 anklickbaren Bildern, jedes mit eigenem Link |
+| Blogbeiträge | `main-blog-posts` | — | echte Shopify-Artikel unter `/blogs/...` |
+| Normale Seite | `main-page` | — | nur Seitentext |
 
-### Einmalig im Shopify-Adminbereich einstellen
+Beide Abschnitte sitzen auf der Standard-Seitenvorlage `templates/page.json`.
+Es muss also **keiner Seite eine Theme-Vorlage zugewiesen werden**. Jeder
+Abschnitt zeigt sich nur dort, wo er hingehört — entschieden am Handle der
+Seite:
 
-Der Shop hat noch keine Seiten „Blog" und „Media". Beide einmal anlegen und
-dabei die passende Vorlage zuweisen:
+* Adresse enthält `blog` oder `journal` → Abschnitt **Blog**
+* Adresse enthält `media` oder `presse` → Abschnitt **Media**
+* alles andere → nur der normale Seitentext
 
-1. **Onlineshop → Seiten → Seite hinzufügen** → Titel `Blog`, Inhalt leer,
-   rechts unter *Theme-Vorlage* `blog` wählen → Speichern.
-2. Dasselbe noch einmal mit Titel `Media` und Vorlage `media`.
+Auf allen übrigen Seiten bleiben beide Abschnitte leer. Im Theme-Editor steht
+dort ein kurzer Hinweis, auf welcher Seite der Abschnitt erscheint; im Shop
+sieht man davon nichts.
 
-Entscheidend ist die Adresse: sie muss auf `/pages/blog` bzw. `/pages/media`
-enden — daran erkennt der Header die Seiten und verlinkt das Menü von selbst
-dorthin. Bei diesen Titeln passiert das automatisch.
+### Bilder einsetzen
 
-Danach im Theme-Editor die Bilder setzen:
+Onlineshop → Themes → **Anpassen**, oben im Dropdown die Seite **Blog** bzw.
+**Media** auswählen. Links in der Seitenleiste die Abschnitte aufklappen:
 
-* **Blog** — Block *Blog image* pro Bild, nur *Image* und optionale
-  *Caption*. Jedes Bild läuft randlos über die volle Breite, direkt unter dem
-  vorherigen. *Image height* schneidet auf Wunsch alle Bilder auf dasselbe
-  Format. Voreingestellt sind 5 Blöcke.
+* **Blog** — Block *Blog image* pro Bild, nur *Image* und optionale *Caption*.
+  Jedes Bild läuft randlos über die volle Breite, direkt unter dem vorherigen.
+  *Image height* schneidet auf Wunsch alle Bilder auf dasselbe Format.
+  Voreingestellt sind 5 Blöcke.
 * **Media** — Block *Media image* pro Bild. Jeder Block hat *Image*, *Link*
   (dorthin führt der Klick), *Open in a new tab* und eine optionale *Caption*.
   Voreingestellt sind 9 Blöcke; *Images per row* und *Image shape* steuern das
   Raster.
 
-Solange eine Seite noch auf der Standardvorlage läuft, zeigt sie die
-Platzhalterbilder plus einen Hinweis, der nur im Theme-Editor sichtbar ist.
+Blöcke lassen sich über *Block hinzufügen* ergänzen (bis 24) und per Drag &
+Drop umsortieren.
 
-Existiert gar keine Seite „Blog" bzw. „Media", greift die Navigation auf
-`templates/search.blog.json` und `templates/search.media.json` zurück. Auch
-diese beiden halten ihre Bilder getrennt.
+### Adressen der Seiten
 
-Diese zwei Fallback-Templates fehlten vorher. Ohne sie liefert Shopify für
+Der Header verlinkt automatisch auf die Seiten mit den Handles `blog` und
+`media`, die Adressen lauten also `/pages/blog` und `/pages/media`.
+
+Existiert eine der beiden Seiten nicht, greift die Navigation auf
+`templates/search.blog.json` bzw. `templates/search.media.json` zurück. Diese
+zwei Fallback-Templates fehlten ursprünglich; ohne sie liefert Shopify für
 `/search?view=blog` **und** `/search?view=media` dasselbe `search.json` aus —
-beide Menüpunkte zeigten also auf ein und dieselbe Seite. Das ist der zweite
+beide Menüpunkte zeigten also auf ein und dieselbe Seite. Das war der zweite
 Teil der „Blog und Media hängen zusammen"-Ursache.
 
 ## Aufbau
@@ -62,6 +68,6 @@ config/     Theme-Einstellungen
 layout/     theme.liquid
 locales/    Übersetzungen
 sections/   Sections inkl. Schema
-snippets/   gallery-blog, gallery-media
+snippets/   gallery-blog (Vollbreite), gallery-media (Raster mit Links)
 templates/  Templates je Route
 ```

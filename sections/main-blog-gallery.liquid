@@ -2,9 +2,37 @@
   Blog — images at the full width of the site, stacked flush on top of each
   other. No page gutter, no gap, no links.
 
-  The images live in this section's own blocks. The Media section keeps its
-  own, separate blocks, so filling one in never touches the other.
+  The images live in this section's own blocks. The Media section is a
+  separate section with separate blocks, so filling one in never touches the
+  other.
+
+  The section sits on the default page template together with Media, so
+  neither page needs a template picked for it in the admin. Each one only
+  shows up where it belongs, decided by the page handle:
+
+      handle contains "blog" or "journal"  → this section
+      no page at all (search view template) → this section
+
+  Everywhere else it stays silent, apart from a note in the theme editor
+  saying where it does appear.
 {%- endcomment -%}
+
+{%- assign handle = page.handle | default: '' -%}
+{%- assign show = true -%}
+{%- if handle != blank -%}
+  {%- unless handle contains 'blog' or handle contains 'journal' -%}
+    {%- assign show = false -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- unless show -%}
+  {%- if request.design_mode -%}
+    <p class="section-note">
+      “{{ section.settings.title | default: 'Blog' }}” only appears on a page whose web address
+      contains “blog”. Nothing from this section is shown on “{{ page.title }}”.
+    </p>
+  {%- endif -%}
+{%- else -%}
 
 <div class="blog-page">
   {%- if section.settings.title != blank and section.settings.show_title -%}
@@ -20,6 +48,8 @@
       ratio: section.settings.image_ratio,
       count: section.settings.placeholder_count -%}
 </div>
+
+{%- endunless -%}
 
 {% schema %}
 {

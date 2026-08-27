@@ -1,9 +1,37 @@
 {%- comment -%}
   Media — a grid of images, each one linking straight out to its own address.
 
-  The images live in this section's own blocks. The Blog section keeps its
-  own, separate blocks, so filling one in never touches the other.
+  The images live in this section's own blocks. The Blog section is a
+  separate section with separate blocks, so filling one in never touches the
+  other.
+
+  The section sits on the default page template together with Blog, so
+  neither page needs a template picked for it in the admin. Each one only
+  shows up where it belongs, decided by the page handle:
+
+      handle contains "media" or "presse"   → this section
+      no page at all (search view template) → this section
+
+  Everywhere else it stays silent, apart from a note in the theme editor
+  saying where it does appear.
 {%- endcomment -%}
+
+{%- assign handle = page.handle | default: '' -%}
+{%- assign show = true -%}
+{%- if handle != blank -%}
+  {%- unless handle contains 'media' or handle contains 'presse' -%}
+    {%- assign show = false -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- unless show -%}
+  {%- if request.design_mode -%}
+    <p class="section-note">
+      “{{ section.settings.title | default: 'Media' }}” only appears on a page whose web address
+      contains “media”. Nothing from this section is shown on “{{ page.title }}”.
+    </p>
+  {%- endif -%}
+{%- else -%}
 
 <div class="media-page">
   {%- if section.settings.title != blank and section.settings.show_title -%}
@@ -19,6 +47,8 @@
       columns: section.settings.columns,
       count: section.settings.placeholder_count -%}
 </div>
+
+{%- endunless -%}
 
 {% schema %}
 {

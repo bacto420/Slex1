@@ -1,63 +1,32 @@
 {%- comment -%}
-  Default page section — ordinary page text, nothing else.
+  Default page section — ordinary page text.
 
   It used to carry both the Blog image blocks and the Media tile blocks.
   Shopify stores blocks on the TEMPLATE, not on the individual page, so every
   page running on "page.json" shared one single set of blocks: filling in an
   image on the Blog page changed the Media page too, and the other way round.
 
-  Blog and Media now live on their own templates ("page.blog" and
-  "page.media"), each with its own section and its own blocks. Nothing is
-  shared any more.
+  Blog and Media are now two separate sections on this template, each with
+  its own blocks, and each rendering only on the page it belongs to. Nothing
+  is shared any more, and no page has to have a template picked for it.
 
-  Pick the matching template under Online Store → Pages → (page) → Theme
-  template. Until that is done, a page whose address contains "blog" or
-  "media" still shows the placeholder gallery below, plus a note in the theme
-  editor explaining which template to choose.
+  On those two pages this section steps aside — the Blog and Media sections
+  print the heading and the page text themselves.
 {%- endcomment -%}
 
 {%- assign handle = page.handle | default: '' -%}
-{%- assign wants_blog = false -%}
-{%- assign wants_media = false -%}
-{%- if handle contains 'blog' or handle contains 'journal' -%}
-  {%- assign wants_blog = true -%}
-{%- elsif handle contains 'media' or handle contains 'presse' -%}
-  {%- assign wants_media = true -%}
+{%- assign taken_over = false -%}
+{%- if handle contains 'blog' or handle contains 'journal'
+    or handle contains 'media' or handle contains 'presse' -%}
+  {%- assign taken_over = true -%}
 {%- endif -%}
 
-{%- if wants_blog or wants_media -%}
-  {%- assign wanted_template = 'media' -%}
-  {%- if wants_blog -%}{%- assign wanted_template = 'blog' -%}{%- endif -%}
-
-  <div class="{% if wants_blog %}blog-page{% else %}media-page{% endif %}">
-    {%- if section.settings.show_title and page.title != blank -%}
-      <h1 class="blog-page__title">{{ page.title }}</h1>
-    {%- endif -%}
-    {%- if page.content != blank -%}
-      <div class="blog-page__intro rte">{{ page.content }}</div>
-    {%- endif -%}
-
-    {%- if request.design_mode -%}
-      <p class="template-hint">
-        This page still uses the default page template, so the images below are
-        placeholders. Open Online Store → Pages → “{{ page.title }}” and set
-        Theme template to “{{ wanted_template }}” to edit the real images here.
-      </p>
-    {%- endif -%}
-
-    {%- if wants_blog -%}
-      {%- render 'gallery-blog', count: 5 -%}
-    {%- else -%}
-      {%- render 'gallery-media', count: 9 -%}
-    {%- endif -%}
-  </div>
-
-{%- else -%}
+{%- unless taken_over -%}
   <div class="article">
     {%- if section.settings.show_title -%}<h1>{{ page.title }}</h1>{%- endif -%}
     <div class="rte">{{ page.content }}</div>
   </div>
-{%- endif -%}
+{%- endunless -%}
 
 {% schema %}
 {
@@ -66,7 +35,7 @@
     { "type": "checkbox", "id": "show_title", "label": "Show page title", "default": true },
     {
       "type": "paragraph",
-      "content": "Blog and Media have their own templates now. Choose “blog” or “media” as the theme template of the page to edit their images."
+      "content": "On the Blog and Media pages this section stays empty — edit those images in the “Blog” and “Media” sections below."
     }
   ]
 }

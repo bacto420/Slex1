@@ -790,9 +790,9 @@ textarea:focus {
   pointer-events: none;
 }
 
-/* Shown in the theme editor only, when a page has not been pointed at its
-   own template yet. */
-.template-hint {
+/* Shown in the theme editor only, on pages where a gallery section stays
+   silent because it belongs to a different page. */
+.section-note {
   margin: 0 var(--space-md) var(--space-md);
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--color-line);
