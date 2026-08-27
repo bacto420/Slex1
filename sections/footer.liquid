@@ -1,0 +1,248 @@
+{%- comment -%}
+  Footer — carries the statutory identity block, the legal navigation and
+  the withdrawal button required by § 13a FAGG.
+
+  The withdrawal button is deliberately a real button on every page, not a
+  text link and not a PDF: the statute is explicit that neither of those
+  satisfies it.
+{%- endcomment -%}
+
+{%- comment -%}
+  Blog and Media addresses.
+
+  Preference order: a real page if one exists, otherwise the gallery
+  templates riding on /search — that route exists in every store from the
+  start, so these links can never hit a 404 and need no setup.
+{%- endcomment -%}
+{%- assign blog_url = routes.search_url | append: '?view=blog' -%}
+{%- if pages.blog != empty and pages.blog.handle -%}
+  {%- assign blog_url = pages.blog.url -%}
+{%- endif -%}
+
+{%- assign media_url = routes.search_url | append: '?view=media' -%}
+{%- if pages.media != empty and pages.media.handle -%}
+  {%- assign media_url = pages.media.url -%}
+{%- endif -%}
+
+{%- comment -%}
+  A link typed as plain text in the editor turns into a search query
+  (/search?q=blog). That is never intended here, so ignore it.
+{%- endcomment -%}
+{%- assign nav_blog = section.settings.blog_url -%}
+{%- if nav_blog == blank or nav_blog contains 'q=' -%}
+  {%- assign nav_blog = blog_url -%}
+{%- endif -%}
+{%- assign nav_media = section.settings.media_url -%}
+{%- if nav_media == blank or nav_media contains 'q=' -%}
+  {%- assign nav_media = media_url -%}
+{%- endif -%}
+
+<footer class="footer">
+  {%- if section.settings.show_withdrawal -%}
+    {%- assign w_label = section.settings.withdrawal_label | default: 'Vertrag widerrufen' -%}
+    <div class="footer__withdrawal">
+      {%- comment -%}
+        The button opens the form right here rather than linking away. That
+        keeps it working on every page from the first minute, with no page to
+        create first — and § 13a FAGG wants a button, not a link.
+      {%- endcomment -%}
+      <button type="button" class="btn-withdraw" data-widerruf-open aria-haspopup="dialog">
+        {{ w_label }}
+      </button>
+      {%- if section.settings.withdrawal_note != blank -%}
+        <p class="footer__withdrawal-note">{{ section.settings.withdrawal_note }}</p>
+      {%- endif -%}
+    </div>
+
+    <dialog class="wdialog" id="WiderrufDialog" aria-label="{{ w_label }}">
+      <div class="wdialog__inner">
+        <button type="button" class="wdialog__close" data-widerruf-close aria-label="Schließen">&times;</button>
+        <h2 class="wdialog__title">{{ w_label }}</h2>
+
+        {%- form 'contact', class: 'widerruf__form', id: 'WiderrufFooterForm' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="widerruf__done" role="status" data-widerruf-success>
+              <h3>{{ section.settings.success_heading | default: 'Widerruf eingegangen' }}</h3>
+              <div class="rte">{{ section.settings.success_text }}</div>
+              <p class="widerruf__stamp">{{ 'now' | date: '%d.%m.%Y, %H:%M' }} (Wien)</p>
+            </div>
+          {%- else -%}
+            {%- if form.errors -%}
+              <div class="widerruf__errors" role="alert">{{ form.errors | default_errors }}</div>
+            {%- endif -%}
+
+            <div class="widerruf__step" data-step="1">
+              <div class="widerruf__intro rte">{{ section.settings.withdrawal_intro }}</div>
+
+              <label class="field-label" for="WFName">Name *</label>
+              <input type="text" id="WFName" name="contact[name]" required autocomplete="name" data-required>
+
+              <label class="field-label" for="WFOrder">Bestellnummer *</label>
+              <input type="text" id="WFOrder" name="contact[Bestellnummer]" required placeholder="#1001" data-required>
+
+              <label class="field-label" for="WFEmail">E-Mail-Adresse für die Eingangsbestätigung *</label>
+              <input type="email" id="WFEmail" name="contact[email]" required autocomplete="email" data-required>
+
+              <label class="field-label" for="WFItems">Welche Artikel widerrufen Sie? (leer lassen für die gesamte Bestellung)</label>
+              <textarea id="WFItems" name="contact[Artikel]" rows="3"></textarea>
+
+              <input type="hidden" name="contact[Art der Meldung]" value="Widerruf über die Rücktrittsfunktion">
+              <input type="hidden" name="contact[Abgesendet am]" data-widerruf-stamp value="">
+              <input type="hidden" name="contact[body]" data-widerruf-body value="Widerruf über die Rücktrittsfunktion der Website.">
+
+              <button type="button" class="btn btn--inline" data-widerruf-next>Weiter zur Bestätigung</button>
+            </div>
+
+            <div class="widerruf__step" data-step="2" hidden>
+              <p class="widerruf__legend">Bitte prüfen und bestätigen</p>
+              <dl class="widerruf__review" data-widerruf-review></dl>
+              <div class="widerruf__note rte">{{ section.settings.withdrawal_confirm_note }}</div>
+              <div class="widerruf__actions">
+                <button type="submit" class="btn btn--confirm">
+                  {{ section.settings.withdrawal_confirm_label | default: 'Widerruf bestätigen' }}
+                </button>
+                <button type="button" class="btn btn--ghost btn--inline" data-widerruf-back>Zurück zur Bearbeitung</button>
+              </div>
+            </div>
+
+            <noscript>
+              <p class="widerruf__note">Ohne JavaScript senden Sie das Formular direkt ab.</p>
+              <button type="submit" class="btn btn--confirm">
+                {{ section.settings.withdrawal_confirm_label | default: 'Widerruf bestätigen' }}
+              </button>
+            </noscript>
+          {%- endif -%}
+        {%- endform -%}
+
+        {%- if section.settings.withdrawal_url != blank -%}
+          <p class="wdialog__alt">
+            <a href="{{ section.settings.withdrawal_url }}">Widerruf auf eigener Seite öffnen</a>
+          </p>
+        {%- endif -%}
+      </div>
+    </dialog>
+  {%- endif -%}
+
+  <div class="footer__cols">
+    {%- comment -%} Identity — ECG § 5, UGB § 14, MedienG § 25. {%- endcomment -%}
+    <div class="footer__col footer__col--identity">
+      <h2 class="footer__heading">{{ section.settings.identity_heading | default: 'Anbieter' }}</h2>
+      <div class="rte footer__identity">{{ section.settings.identity_text }}</div>
+    </div>
+
+    {%- comment -%} Contact — FAGG § 4 requires address, phone and email. {%- endcomment -%}
+    <div class="footer__col">
+      <h2 class="footer__heading">{{ section.settings.contact_heading | default: 'Kontakt' }}</h2>
+      <div class="rte footer__contact">{{ section.settings.contact_text }}</div>
+    </div>
+
+    {%- comment -%} Shipping and returns — FAGG § 4 information duties. {%- endcomment -%}
+    <div class="footer__col">
+      <h2 class="footer__heading">{{ section.settings.shipping_heading | default: 'Versand & Rücksendung' }}</h2>
+      <div class="rte footer__shipping">{{ section.settings.shipping_text }}</div>
+    </div>
+
+    {%- comment -%} Legal navigation, editable as blocks. {%- endcomment -%}
+    <div class="footer__col">
+      <h2 class="footer__heading">{{ section.settings.legal_heading | default: 'Rechtliches' }}</h2>
+      <ul class="footer__links">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'link' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.url | default: '#' }}">{{ block.settings.label }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <li><a href="/pages/impressum">Impressum</a></li>
+          <li><a href="/pages/agb">AGB</a></li>
+          <li><a href="/pages/datenschutz">Datenschutz</a></li>
+          <li><a href="/pages/widerrufsbelehrung">Widerrufsbelehrung</a></li>
+          <li><a href="/pages/versand-und-ruecksendung">Versand &amp; Rücksendung</a></li>
+          <li><a href="/pages/zahlungsarten">Zahlungsarten</a></li>
+          <li><a href="/pages/streitbeilegung">Streitbeilegung</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
+    <ul class="footer__nav">
+      <li><a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a></li>
+      <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.nav.shop' | t }}</a></li>
+      <li><a href="{{ nav_blog }}">{{ 'general.nav.blog' | t }}</a></li>
+      <li><a href="{{ nav_media }}">{{ 'general.nav.media' | t }}</a></li>
+      <li><a href="{{ routes.cart_url }}">{{ 'general.nav.cart' | t }}</a></li>
+    </ul>
+    {%- if section.settings.note != blank -%}
+      <div>{{ section.settings.note }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.price_note != blank -%}
+    <p class="footer__pricenote">{{ section.settings.price_note }}</p>
+  {%- endif -%}
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "header", "content": "Withdrawal button (§ 13a FAGG)" },
+    { "type": "checkbox", "id": "show_withdrawal", "label": "Show withdrawal button", "default": true },
+    { "type": "text", "id": "withdrawal_label", "label": "Button label",
+      "info": "Statutory wording. Only change to an equally unambiguous phrase.",
+      "default": "Vertrag widerrufen" },
+    { "type": "richtext", "id": "withdrawal_intro", "label": "Intro inside the form",
+      "default": "<p>Sie können Ihren Vertrag hier widerrufen. Ein Kundenkonto ist nicht erforderlich. Den Eingang bestätigen wir Ihnen unverzüglich per E-Mail.</p>" },
+    { "type": "text", "id": "withdrawal_confirm_label", "label": "Confirmation button",
+      "info": "Statutory wording. Only change to an equally unambiguous phrase.",
+      "default": "Widerruf bestätigen" },
+    { "type": "richtext", "id": "withdrawal_confirm_note", "label": "Note above the confirmation button",
+      "default": "<p>Mit dem Bestätigen erklären Sie den Widerruf verbindlich. Der Eingang wird Ihnen unverzüglich per E-Mail bestätigt.</p>" },
+    { "type": "text", "id": "success_heading", "label": "Success heading", "default": "Widerruf eingegangen" },
+    { "type": "richtext", "id": "success_text", "label": "Success text",
+      "default": "<p>Wir haben Ihren Widerruf erhalten. Eine Eingangsbestätigung mit Datum und Uhrzeit geht Ihnen per E-Mail zu. Bitte senden Sie die Ware innerhalb von 14 Tagen zurück.</p>" },
+    { "type": "url", "id": "withdrawal_url", "label": "Optional: link to a separate withdrawal page",
+      "info": "Only needed if you also want a standalone page using the \"page.widerruf\" template." },
+    { "type": "text", "id": "withdrawal_note", "label": "Note under the button",
+      "default": "Widerruf ohne Kundenkonto – auch für Gastbestellungen" },
+
+    { "type": "header", "content": "Provider details" },
+    { "type": "text", "id": "identity_heading", "label": "Heading", "default": "Anbieter" },
+    { "type": "richtext", "id": "identity_text", "label": "Provider details",
+      "default": "<p>Firmenname e.U.<br/>Musterstraße 1, 1010 Wien, Österreich<br/>UID: ATU00000000<br/>Firmenbuch: FN 000000a, Landesgericht Wien</p>" },
+
+    { "type": "header", "content": "Contact" },
+    { "type": "text", "id": "contact_heading", "label": "Heading", "default": "Kontakt" },
+    { "type": "richtext", "id": "contact_text", "label": "Contact details",
+      "default": "<p>E-Mail: hallo@example.at<br/>Telefon: +43 000 0000000<br/>Mo–Fr 9–17 Uhr</p>" },
+
+    { "type": "header", "content": "Shipping and returns" },
+    { "type": "text", "id": "shipping_heading", "label": "Heading", "default": "Versand & Rücksendung" },
+    { "type": "richtext", "id": "shipping_text", "label": "Shipping and returns",
+      "default": "<p>Lieferzeit 2–4 Werktage<br/>Versandkosten ab 4,90 €<br/>Rücksendekosten trägt der Kunde<br/>Rücksendeadresse: Musterstraße 1, 1010 Wien</p>" },
+
+    { "type": "header", "content": "Legal links" },
+    { "type": "text", "id": "legal_heading", "label": "Heading", "default": "Rechtliches" },
+
+    { "type": "header", "content": "Bottom bar" },
+    { "type": "text", "id": "note", "label": "Footer note", "default": "ALL RIGHTS RESERVED" },
+    { "type": "text", "id": "price_note", "label": "Price note",
+      "default": "Alle Preise inkl. gesetzlicher USt., zzgl. Versandkosten." }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Legal link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Impressum" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 12
+}
+{% endschema %}

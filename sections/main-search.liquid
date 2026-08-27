@@ -1,0 +1,35 @@
+<div class="page-width section">
+  <h1 class="section__title">{{ 'general.search.title' | t }}</h1>
+
+  <form action="{{ routes.search_url }}" method="get" role="search" style="max-width: 420px;">
+    <input type="search" name="q" value="{{ search.terms | escape }}"
+           aria-label="{{ 'general.search.title' | t }}" placeholder="{{ 'general.search.title' | t }}">
+    <button type="submit" class="btn btn--inline">{{ 'general.search.submit' | t }}</button>
+  </form>
+
+  {%- if search.performed -%}
+    <ul class="card-grid" style="margin-top: var(--space-lg);">
+      {%- for item in search.results -%}
+        <li>
+          <a href="{{ item.url }}">
+            {%- if item.featured_image -%}
+              <div class="product-tile__media">
+                {{ item.featured_image | image_url: width: 900 | image_tag: alt: item.title, loading: 'lazy' }}
+              </div>
+            {%- endif -%}
+            <h2 class="card__title">{{ item.title }}</h2>
+          </a>
+        </li>
+      {%- else -%}
+        <li>{{ 'general.search.no_results' | t }}</li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": []
+}
+{% endschema %}

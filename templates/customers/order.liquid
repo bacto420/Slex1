@@ -1,0 +1,9 @@
+<div class="article">
+  <h1>{{ order.name }}</h1>
+  <p class="card__meta">{{ order.created_at | date: '%d.%m.%Y' }}</p>
+  <table class="cart-table">
+    {%- for line_item in order.line_items -%}
+      <tr><td>{{ line_item.title }}</td><td style="text-align:right;">{{ line_item.final_line_price | money }}</td></tr>
+    {%- endfor -%}
+  </table>
+</div>

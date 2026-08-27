@@ -1,0 +1,158 @@
+{%- comment -%}
+  Withdrawal form — § 13a FAGG (AT, in force 01.10.2026) / § 356a BGB (DE,
+  in force since 19.06.2026).
+
+  What the law asks for and where it is handled:
+    • button labelled "Vertrag widerrufen"        → footer.liquid
+    • reachable without login, guests included    → this is a plain page
+    • form with name, contract ID, contact means  → fields below
+    • a SECOND button "Widerruf bestätigen"       → the confirm step below
+    • acknowledgement by email, with date + time  → see the note in the
+      schema; Shopify's contact form mails the shop, so the customer-facing
+      acknowledgement needs one of the routes described there.
+{%- endcomment -%}
+
+<div class="widerruf">
+  <h1 class="widerruf__title">{{ section.settings.heading | default: 'Vertrag widerrufen' }}</h1>
+
+  {%- form 'contact', class: 'widerruf__form', id: 'WiderrufForm' -%}
+    {%- if form.posted_successfully? -%}
+      {%- comment -%}
+        Shopify redirects back with this flag once the form is accepted.
+        The on-screen stamp is a courtesy — the acknowledgement that the
+        statute requires is the email, see the schema notes.
+      {%- endcomment -%}
+      <div class="widerruf__done" role="status">
+        <h2>{{ section.settings.success_heading | default: 'Widerruf eingegangen' }}</h2>
+        <div class="rte">{{ section.settings.success_text }}</div>
+        <p class="widerruf__stamp">
+          {{ 'now' | date: '%d.%m.%Y, %H:%M' }} {{ section.settings.timezone_label }}
+        </p>
+        <p><a class="btn btn--ghost btn--inline" href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a></p>
+      </div>
+
+    {%- else -%}
+      {%- if form.errors -%}
+        <div class="widerruf__errors" role="alert">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.intro != blank -%}
+        <div class="widerruf__intro rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+
+      {%- comment -%} Step 1 — the three fields the statute requires. {%- endcomment -%}
+      <div class="widerruf__step" data-step="1">
+        <p class="widerruf__legend">{{ section.settings.step1_label | default: 'Ihre Angaben' }}</p>
+
+        <label class="field-label" for="WiderrufName">
+          {{ section.settings.label_name | default: 'Name' }} *
+        </label>
+        <input type="text" id="WiderrufName" name="contact[name]" required
+               autocomplete="name" data-required>
+
+        <label class="field-label" for="WiderrufOrder">
+          {{ section.settings.label_order | default: 'Bestellnummer' }} *
+        </label>
+        <input type="text" id="WiderrufOrder" name="contact[Bestellnummer]" required
+               placeholder="#1001" data-required>
+
+        <label class="field-label" for="WiderrufEmail">
+          {{ section.settings.label_email | default: 'E-Mail-Adresse für die Eingangsbestätigung' }} *
+        </label>
+        <input type="email" id="WiderrufEmail" name="contact[email]" required
+               autocomplete="email" data-required>
+
+        <label class="field-label" for="WiderrufItems">
+          {{ section.settings.label_items | default: 'Welche Artikel widerrufen Sie? (leer lassen für die gesamte Bestellung)' }}
+        </label>
+        <textarea id="WiderrufItems" name="contact[Artikel]" rows="3"></textarea>
+
+        <label class="field-label" for="WiderrufReceived">
+          {{ section.settings.label_received | default: 'Ware erhalten am (optional)' }}
+        </label>
+        <input type="date" id="WiderrufReceived" name="contact[Erhalten am]">
+
+        <input type="hidden" name="contact[Art der Meldung]" value="Widerruf über die Rücktrittsfunktion">
+        <input type="hidden" name="contact[Abgesendet am]" id="WiderrufStamp" value="">
+        <input type="hidden" name="contact[body]" id="WiderrufBody" value="Widerruf über die Rücktrittsfunktion der Website.">
+
+        <button type="button" class="btn btn--inline" data-widerruf-next>
+          {{ section.settings.next_label | default: 'Weiter zur Bestätigung' }}
+        </button>
+      </div>
+
+      {%- comment -%}
+        Step 2 — the confirmation the statute demands. The button carries
+        nothing but the required wording.
+      {%- endcomment -%}
+      <div class="widerruf__step widerruf__step--confirm" data-step="2" hidden>
+        <p class="widerruf__legend">{{ section.settings.step2_label | default: 'Bitte prüfen und bestätigen' }}</p>
+
+        <dl class="widerruf__review" data-widerruf-review></dl>
+
+        {%- if section.settings.confirm_note != blank -%}
+          <div class="widerruf__note rte">{{ section.settings.confirm_note }}</div>
+        {%- endif -%}
+
+        <div class="widerruf__actions">
+          <button type="submit" class="btn btn--confirm">
+            {{ section.settings.confirm_label | default: 'Widerruf bestätigen' }}
+          </button>
+          <button type="button" class="btn btn--ghost btn--inline" data-widerruf-back>
+            {{ section.settings.back_label | default: 'Zurück zur Bearbeitung' }}
+          </button>
+        </div>
+      </div>
+
+      <noscript>
+        <div class="widerruf__note">
+          <p>{{ section.settings.noscript_note | default: 'Ohne aktiviertes JavaScript senden Sie das Formular direkt mit der folgenden Schaltfläche ab.' }}</p>
+          <button type="submit" class="btn btn--confirm">
+            {{ section.settings.confirm_label | default: 'Widerruf bestätigen' }}
+          </button>
+        </div>
+      </noscript>
+
+      {%- if section.settings.alt_note != blank -%}
+        <div class="widerruf__alt rte">{{ section.settings.alt_note }}</div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Widerruf form",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Vertrag widerrufen" },
+    { "type": "richtext", "id": "intro", "label": "Intro text",
+      "default": "<p>Mit diesem Formular können Sie Ihren Vertrag widerrufen. Sie brauchen dafür kein Kundenkonto. Nach dem Absenden erhalten Sie eine Eingangsbestätigung per E-Mail.</p>" },
+    { "type": "text", "id": "step1_label", "label": "Step 1 heading", "default": "Ihre Angaben" },
+    { "type": "text", "id": "label_name", "label": "Field: name", "default": "Name" },
+    { "type": "text", "id": "label_order", "label": "Field: order number", "default": "Bestellnummer" },
+    { "type": "text", "id": "label_email", "label": "Field: email", "default": "E-Mail-Adresse für die Eingangsbestätigung" },
+    { "type": "text", "id": "label_items", "label": "Field: items", "default": "Welche Artikel widerrufen Sie? (leer lassen für die gesamte Bestellung)" },
+    { "type": "text", "id": "label_received", "label": "Field: received on", "default": "Ware erhalten am (optional)" },
+    { "type": "text", "id": "next_label", "label": "Button: go to confirmation", "default": "Weiter zur Bestätigung" },
+    { "type": "text", "id": "step2_label", "label": "Step 2 heading", "default": "Bitte prüfen und bestätigen" },
+    { "type": "richtext", "id": "confirm_note", "label": "Note above the confirm button",
+      "default": "<p>Mit dem Bestätigen erklären Sie den Widerruf verbindlich. Der Eingang wird Ihnen unverzüglich per E-Mail bestätigt.</p>" },
+    { "type": "text", "id": "confirm_label", "label": "Confirmation button",
+      "info": "Statutory wording. Only change to an equally unambiguous phrase such as \"Rücktritt bestätigen\".",
+      "default": "Widerruf bestätigen" },
+    { "type": "text", "id": "back_label", "label": "Button: back", "default": "Zurück zur Bearbeitung" },
+    { "type": "text", "id": "noscript_note", "label": "Note shown without JavaScript",
+      "default": "Ohne aktiviertes JavaScript senden Sie das Formular direkt mit der folgenden Schaltfläche ab." },
+    { "type": "header", "content": "After sending" },
+    { "type": "text", "id": "success_heading", "label": "Success heading", "default": "Widerruf eingegangen" },
+    { "type": "richtext", "id": "success_text", "label": "Success text",
+      "default": "<p>Wir haben Ihren Widerruf erhalten. Eine Eingangsbestätigung mit Datum und Uhrzeit geht Ihnen per E-Mail zu. Bitte senden Sie die Ware innerhalb von 14 Tagen zurück.</p>" },
+    { "type": "text", "id": "timezone_label", "label": "Time zone label", "default": "(Wien)" },
+    { "type": "richtext", "id": "alt_note", "label": "Alternative ways to withdraw",
+      "default": "<p>Sie können den Widerruf auch formlos per E-Mail oder Brief erklären. Das Muster-Widerrufsformular finden Sie in der Widerrufsbelehrung.</p>" }
+  ],
+  "presets": [{ "name": "Widerruf form" }]
+}
+{% endschema %}

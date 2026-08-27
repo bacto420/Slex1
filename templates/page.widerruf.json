@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-widerruf",
+      "settings": {
+        "heading": "Vertrag widerrufen"
+      }
+    }
+  },
+  "order": ["main"]
+}

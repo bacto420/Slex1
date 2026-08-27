@@ -1,0 +1,31 @@
+<div class="page-width section">
+  <h1 class="section__title">{{ 'general.nav.shop' | t }}</h1>
+  <ul class="card-grid">
+    {%- for collection in collections -%}
+      <li>
+        <a href="{{ collection.url }}">
+          <div class="product-tile__media">
+            {%- if collection.featured_image -%}
+              {{ collection.featured_image | image_url: width: 1200 | image_tag:
+                 widths: '300,600,900,1200',
+                 sizes: '(max-width: 749px) 100vw, 33vw',
+                 alt: collection.title,
+                 loading: 'lazy' }}
+            {%- else -%}
+              <img src="{{ 'placeholder-1.svg' | asset_url }}" alt="{{ collection.title }}"
+                   width="1200" height="1500" loading="lazy">
+            {%- endif -%}
+          </div>
+          <h2 class="card__title">{{ collection.title }}</h2>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "settings": []
+}
+{% endschema %}

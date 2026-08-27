@@ -1,0 +1,64 @@
+<div class="product">
+  <div class="product__gallery">
+    {%- if product.images.size > 0 -%}
+      {%- for image in product.images -%}
+        <div class="split__media">
+          {{ image | image_url: width: 1600 | image_tag:
+             widths: '400,600,900,1200,1600',
+             sizes: '(max-width: 900px) 100vw, 55vw',
+             alt: image.alt | default: product.title,
+             loading: 'lazy' }}
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <div class="split__media">
+        <img src="{{ 'placeholder-product-1.svg' | asset_url }}" alt="{{ product.title }}"
+             width="1200" height="1500">
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="product__info">
+    <h1 class="product__title">{{ product.title }}</h1>
+    <div class="product__price">{{ product.price | money }}</div>
+
+    {%- if product.description != blank -%}
+      <div class="product__description rte">{{ product.description }}</div>
+    {%- endif -%}
+
+    {%- form 'product', product -%}
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <label class="field-label" for="Option-{{ forloop.index }}">{{ option.name }}</label>
+          <select id="Option-{{ forloop.index }}" name="options[{{ option.name | escape }}]">
+            {%- for value in option.values -%}
+              <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>
+                {{ value }}
+              </option>
+            {%- endfor -%}
+          </select>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+      <label class="field-label" for="Quantity">{{ 'products.quantity' | t }}</label>
+      <input type="number" id="Quantity" name="quantity" value="1" min="1">
+
+      <button type="submit" class="btn" {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}
+          {{ 'products.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.sold_out' | t }}
+        {%- endif -%}
+      </button>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

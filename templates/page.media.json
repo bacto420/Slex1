@@ -1,0 +1,65 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-media",
+      "blocks": {
+        "m1": {
+          "type": "media_tile",
+          "settings": {
+            "caption": "Media 01",
+            "new_tab": true
+          }
+        },
+        "m2": {
+          "type": "media_tile",
+          "settings": {
+            "caption": "Media 02",
+            "new_tab": true
+          }
+        },
+        "m3": {
+          "type": "media_tile",
+          "settings": {
+            "caption": "Media 03",
+            "new_tab": true
+          }
+        },
+        "m4": {
+          "type": "media_tile",
+          "settings": {
+            "caption": "Media 04",
+            "new_tab": true
+          }
+        },
+        "m5": {
+          "type": "media_tile",
+          "settings": {
+            "caption": "Media 05",
+            "new_tab": true
+          }
+        },
+        "m6": {
+          "type": "media_tile",
+          "settings": {
+            "caption": "Media 06",
+            "new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5",
+        "m6"
+      ],
+      "settings": {
+        "title": "Media"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

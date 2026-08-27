@@ -1,0 +1,26 @@
+<article class="article">
+  <h1>{{ article.title }}</h1>
+  <div class="card__meta">{{ article.published_at | date: '%d.%m.%Y' }}</div>
+
+  {%- if article.image -%}
+    <div class="split__media" style="margin: var(--space-md) 0;">
+      {{ article.image | image_url: width: 1600 | image_tag:
+         widths: '400,800,1200,1600',
+         sizes: '(max-width: 760px) 100vw, 760px',
+         alt: article.title }}
+    </div>
+  {%- endif -%}
+
+  <div class="rte">{{ article.content }}</div>
+
+  <p style="margin-top: var(--space-lg);">
+    <a class="btn btn--ghost btn--inline" href="{{ blog.url }}">&larr; {{ blog.title }}</a>
+  </p>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

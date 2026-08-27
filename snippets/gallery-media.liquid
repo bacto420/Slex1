@@ -1,0 +1,55 @@
+{%- comment -%}
+  Six tappable media tiles, each linking wherever it is pointed.
+  Usage: {% render 'gallery-media', blocks: section.blocks %}
+{%- endcomment -%}
+
+{%- assign ph = 'placeholder-1.svg,placeholder-2.svg,placeholder-3.svg' | split: ',' -%}
+
+{%- assign n_blocks = 0 -%}
+{%- for block in blocks -%}
+  {%- if block.type == 'media_tile' -%}{%- assign n_blocks = n_blocks | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+
+<ul class="card-grid media-grid">
+  {%- if n_blocks > 0 -%}
+    {%- assign i = 0 -%}
+    {%- for block in blocks -%}
+      {%- if block.type != 'media_tile' -%}{%- continue -%}{%- endif -%}
+      {%- assign idx = i | modulo: 3 -%}
+      {%- assign i = i | plus: 1 -%}
+      <li {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.link | default: '#' }}"
+           {% if block.settings.new_tab %}target="_blank" rel="noopener"{% endif %}
+           aria-label="{{ block.settings.caption | default: 'Media' | escape }}">
+          <div class="product-tile__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag:
+                 widths: '300,500,700,900,1200',
+                 sizes: '(max-width: 749px) 100vw, 33vw',
+                 alt: block.settings.caption | default: shop.name, loading: 'lazy' }}
+            {%- else -%}
+              <img src="{{ ph[idx] | asset_url }}" alt="{{ block.settings.caption | default: 'Media' }}"
+                   width="1200" height="1500" loading="lazy">
+            {%- endif -%}
+          </div>
+          {%- if block.settings.caption != blank -%}
+            <h2 class="card__title">{{ block.settings.caption }}</h2>
+          {%- endif -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  {%- else -%}
+    {%- for n in (1..6) -%}
+      {%- assign idx = forloop.index0 | modulo: 3 -%}
+      <li>
+        <a href="#" aria-label="Media 0{{ n }}">
+          <div class="product-tile__media">
+            <img src="{{ ph[idx] | asset_url }}" alt="Media 0{{ n }}"
+                 width="1200" height="1500" loading="lazy">
+          </div>
+          <h2 class="card__title">Media 0{{ n }}</h2>
+        </a>
+      </li>
+    {%- endfor -%}
+  {%- endif -%}
+</ul>

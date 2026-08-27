@@ -1,0 +1,88 @@
+{%- comment -%}
+  Blog — full-width images stacked directly on top of each other, no gaps.
+{%- endcomment -%}
+
+{%- assign ph = 'placeholder-wide-1.svg,placeholder-wide-2.svg,placeholder-wide-3.svg,placeholder-wide-4.svg,placeholder-wide-5.svg' | split: ',' -%}
+{%- assign ratio = section.settings.image_ratio | default: 'natural' -%}
+
+<ul class="blog-stack blog-stack--{{ ratio }}">
+  {%- if blog.articles_count > 0 -%}
+    {%- for article in blog.articles -%}
+      <li>
+        <a href="{{ article.url }}">
+          {%- if article.image -%}
+            {{ article.image | image_url: width: 2400 | image_tag:
+               widths: '600,900,1200,1800,2400',
+               sizes: '100vw',
+               alt: article.title,
+               loading: 'lazy' }}
+          {%- else -%}
+            {%- assign idx = forloop.index0 | modulo: 5 -%}
+            <img src="{{ ph[idx] | asset_url }}" alt="{{ article.title }}"
+                 width="1600" height="900" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.show_caption -%}
+            <span class="blog-stack__caption">
+              {{ article.title }}
+              <span class="blog-stack__date">{{ article.published_at | date: '%d.%m.%Y' }}</span>
+            </span>
+          {%- endif -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign slots = section.settings.placeholder_count | default: 10 -%}
+    {%- for i in (1..slots) -%}
+      {%- assign idx = forloop.index0 | modulo: 5 -%}
+      <li>
+        <a href="#">
+          <img src="{{ ph[idx] | asset_url }}" alt="Journal entry {{ i }}"
+               width="1600" height="900" loading="lazy">
+          {%- if section.settings.show_caption -%}
+            <span class="blog-stack__caption">
+              Journal entry {{ i | prepend: '0' | slice: -2, 2 }}
+              <span class="blog-stack__date">{{ 'now' | date: '%d.%m.%Y' }}</span>
+            </span>
+          {%- endif -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  {%- endif -%}
+</ul>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "range",
+      "id": "placeholder_count",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "label": "Placeholder slots",
+      "info": "Only shown while the blog has no posts yet. Real posts replace them automatically.",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image height",
+      "info": "\"Original\" keeps each image as it is. The other options crop every image to the same shape so the column stays even.",
+      "options": [
+        { "value": "natural", "label": "Original proportions" },
+        { "value": "wide", "label": "Crop to 16:9" },
+        { "value": "cinema", "label": "Crop to 21:9" },
+        { "value": "classic", "label": "Crop to 4:3" }
+      ],
+      "default": "natural"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_caption",
+      "label": "Show title over the image",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

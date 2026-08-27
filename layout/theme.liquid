@@ -1,0 +1,77 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {{ content_for_header }}
+
+    {%- comment -%}
+      Display face. "Earwig Factory" is not licensed for web embedding via
+      Google/Shopify — Michroma is the closest freely licensed match.
+      To swap in a self-hosted font later: upload the .woff2 to Assets and
+      set --font-stack in the inline block below.
+    {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&display=swap">
+
+    <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
+
+    <style>
+      :root {
+        --color-bg: {{ settings.color_background | default: '#000000' }};
+        --color-text: {{ settings.color_text | default: '#ffffff' }};
+        --color-muted: {{ settings.color_muted | default: '#8a8a8a' }};
+      }
+    </style>
+  </head>
+
+  <body class="template-{{ template.name | handle }}{% if settings.background_image != blank %} has-site-bg{% endif %}">
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+
+    {%- comment -%}
+      Site-wide background graphic. Sits on its own fixed layer behind
+      everything, so its opacity can be dialled down and the black page
+      colour reads through it.
+    {%- endcomment -%}
+    {%- if settings.background_image != blank -%}
+      <div class="site-bg site-bg--{{ settings.background_fit | default: 'cover' }}"
+           aria-hidden="true"
+           style="
+             --bg-image: url({{ settings.background_image | image_url: width: 3200 }});
+             --bg-opacity: {{ settings.background_opacity | default: 35 | divided_by: 100.0 }};
+             --bg-blur: {{ settings.background_blur | default: 0 }}px;
+             --bg-attachment: {% if settings.background_fixed %}fixed{% else %}scroll{% endif %};
+           "></div>
+    {%- endif -%}
+
+    {% section 'header' %}
+
+    <main id="MainContent" class="main-content" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  </body>
+</html>

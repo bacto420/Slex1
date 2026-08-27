@@ -1,0 +1,235 @@
+{%- comment -%}
+  Header — dark, centered logo with a horizontal (Y-axis) 360° spin.
+  Navigation is fixed to: Home, Shop, Blog, Media, Cart.
+{%- endcomment -%}
+
+{%- if section.settings.show_announcement and section.settings.announcement_text != blank -%}
+  <div class="announcement">
+    <div class="announcement__track">
+      {%- for i in (1..12) -%}
+        <span class="announcement__item">{{ section.settings.announcement_text }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{%- comment -%}
+  Blog and Media addresses.
+
+  Preference order: a real page if one exists, otherwise the gallery
+  templates riding on /search — that route exists in every store from the
+  start, so these links can never hit a 404 and need no setup.
+{%- endcomment -%}
+{%- assign blog_url = routes.search_url | append: '?view=blog' -%}
+{%- if pages.blog != empty and pages.blog.handle -%}
+  {%- assign blog_url = pages.blog.url -%}
+{%- endif -%}
+
+{%- assign media_url = routes.search_url | append: '?view=media' -%}
+{%- if pages.media != empty and pages.media.handle -%}
+  {%- assign media_url = pages.media.url -%}
+{%- endif -%}
+
+{%- comment -%}
+  A link typed as plain text in the editor turns into a search query
+  (/search?q=blog). That is never intended here, so ignore it.
+{%- endcomment -%}
+{%- assign nav_blog = section.settings.blog_url -%}
+{%- if nav_blog == blank or nav_blog contains 'q=' -%}
+  {%- assign nav_blog = blog_url -%}
+{%- endif -%}
+{%- assign nav_media = section.settings.media_url -%}
+{%- if nav_media == blank or nav_media contains 'q=' -%}
+  {%- assign nav_media = media_url -%}
+{%- endif -%}
+
+<header class="header">
+  <div class="header__inner">
+    <nav class="header__nav" data-menu data-open="false" aria-label="{{ 'general.nav.primary' | t }}">
+      <button class="header__toggle" type="button" data-menu-toggle aria-expanded="false">Menu</button>
+      <ul class="nav-list">
+        <li>
+          <a href="{{ routes.root_url }}" {% if template.name == 'index' %}aria-current="page"{% endif %}>
+            {{ 'general.nav.home' | t }}
+          </a>
+        </li>
+        <li>
+          <a href="{{ section.settings.shop_url | default: routes.all_products_collection_url }}"
+             {% if template.name == 'collection' or template.name == 'product' %}aria-current="page"{% endif %}>
+            {{ 'general.nav.shop' | t }}
+          </a>
+        </li>
+        <li>
+          <a href="{{ nav_blog }}"
+             {% if template.name == 'blog' or template.name == 'article' %}aria-current="page"{% endif %}>
+            {{ 'general.nav.blog' | t }}
+          </a>
+        </li>
+        <li>
+          <a href="{{ nav_media }}">
+            {{ 'general.nav.media' | t }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    {%- comment -%}
+      3D chrome logo — a pre-rendered 360° turn of the actual STL model.
+      Rendered offline with a studio environment map, so the metal carries
+      real reflections and the modelled thickness reads on the edges.
+      Delivered as a 72-frame sprite strip; see assets/base.css for the
+      frame stepping and the section <style> block for the speed.
+    {%- endcomment -%}
+    <a class="header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      {%- if section.settings.use_text_logo -%}
+        <span class="header__logo-text">{{ section.settings.logo_text | default: shop.name }}</span>
+
+      {%- elsif section.settings.logo != blank -%}
+        {%- comment -%} Merchant supplied a flat logo — show it as-is. {%- endcomment -%}
+        {{ section.settings.logo | image_url: width: 1600 | image_tag:
+           widths: '400,800,1200,1600',
+           sizes: '(max-width: 749px) 88vw, 900px',
+           alt: shop.name,
+           class: 'header__logo-flat',
+           loading: 'eager' }}
+
+      {%- else -%}
+        {%- comment -%}
+          Pre-rendered turn of the STL, 180 frames at 30 fps as an animated
+          WebP. Phones get a smaller cut so they do not pull the full file.
+        {%- endcomment -%}
+        <picture>
+          <source media="(max-width: 749px)" srcset="{{ 'logo-3d-mobile.webp' | asset_url }}" type="image/webp">
+          <img class="header__logo-spin"
+               src="{{ 'logo-3d.webp' | asset_url }}"
+               width="780" height="136"
+               alt="{{ shop.name }}"
+               fetchpriority="high" decoding="async">
+        </picture>
+
+      {%- endif -%}
+    </a>
+
+    <nav class="header__nav--right" aria-label="{{ 'general.nav.secondary' | t }}">
+      <ul class="nav-list">
+        <li class="nav-list__cart">
+          <a href="{{ routes.cart_url }}" {% if template.name == 'cart' %}aria-current="page"{% endif %}>
+            {{ 'general.nav.cart' | t }} <span class="cart-count">({{ cart.item_count }})</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Flat logo image (optional)",
+      "info": "Leave empty to use the rendered 3D chrome logo. Setting an image here replaces it with a flat, non-rotating logo."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_text_logo",
+      "label": "Use text instead of an image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "BACTO"
+    },
+    {
+      "type": "range",
+      "id": "logo_scale_inner",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Logo size on other pages",
+      "info": "Share of the home page size used on shop, blog, media and cart.",
+      "default": 65
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 40,
+      "max": 240,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo height",
+      "default": 130
+    },
+    {
+      "type": "header",
+      "content": "Navigation links"
+    },
+    {
+      "type": "url",
+      "id": "shop_url",
+      "label": "Shop link"
+    },
+    {
+      "type": "url",
+      "id": "blog_url",
+      "label": "Blog link",
+      "info": "Leave empty — the theme finds the right address on its own. Only paste a full address here, never plain words."
+    },
+    {
+      "type": "url",
+      "id": "media_url",
+      "label": "Media link",
+      "info": "Leave empty — the theme finds the right address on its own."
+    },
+    {
+      "type": "header",
+      "content": "Announcement bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "WORLDWIDE SHIPPING — BACTO"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  {%- assign lh = section.settings.logo_height | default: 130 -%}
+  {%- assign lw = lh | times: 780 | divided_by: 136 -%}
+  {%- assign inner = section.settings.logo_scale_inner | default: 65 -%}
+  :root {
+    --logo-height: {{ lh }}px;
+    --logo-width: {{ lw }}px;
+  }
+
+  /* Every page except the home page carries the mark smaller. */
+  body:not(.template-index) {
+    --logo-width: {{ lw | times: inner | divided_by: 100 | round }}px;
+    --logo-height: {{ lh | times: inner | divided_by: 100 | round }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    :root {
+      --logo-height: {{ lh | times: 0.7 | round }}px;
+      --logo-width: {{ lw | times: 0.7 | round }}px;
+    }
+
+    body:not(.template-index) {
+      --logo-width: {{ lw | times: 0.7 | times: inner | divided_by: 100 | round }}px;
+      --logo-height: {{ lh | times: 0.7 | times: inner | divided_by: 100 | round }}px;
+    }
+  }
+</style>

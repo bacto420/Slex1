@@ -1,0 +1,102 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Bacto Dark",
+    "theme_version": "1.0.0",
+    "theme_author": "Bacto",
+    "theme_documentation_url": "https://shopify.dev",
+    "theme_support_url": "https://shopify.dev"
+  },
+  {
+    "name": "Appearance",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "This theme is dark by default: black background, white type."
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted text",
+        "default": "#8a8a8a"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Background graphic",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Lays one image behind the whole site. Lower the opacity to let the black background show through."
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background image"
+      },
+      {
+        "type": "range",
+        "id": "background_opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "Opacity",
+        "default": 35
+      },
+      {
+        "type": "select",
+        "id": "background_fit",
+        "label": "Scaling",
+        "options": [
+          {
+            "value": "cover",
+            "label": "Fill the screen (crop)"
+          },
+          {
+            "value": "contain",
+            "label": "Fit the screen (no crop)"
+          },
+          {
+            "value": "tile",
+            "label": "Repeat as a tile"
+          }
+        ],
+        "default": "cover"
+      },
+      {
+        "type": "checkbox",
+        "id": "background_fixed",
+        "label": "Hold still while scrolling",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "background_blur",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Blur",
+        "default": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,121 @@
+{%- comment -%}
+  Default page section.
+
+  Shopify stores sections and their blocks on the TEMPLATE, not on the
+  individual page — so two pages sharing "page.json" would otherwise show
+  each other's content. That is exactly the "Media blocks also appear on the
+  Blog page" problem.
+
+  The fix: both kinds of block live in this one section, but each renders
+  only on the page it belongs to, decided by the page handle:
+
+      handle contains "blog"   → the full-bleed image stack
+      handle contains "media"  → the tappable media tiles
+      anything else            → ordinary page content
+
+  So no template has to be picked in the page settings, and nothing bleeds
+  across. Dedicated page.blog / page.media templates still exist for anyone
+  who prefers them.
+{%- endcomment -%}
+
+
+{%- assign handle = page.handle | default: '' -%}
+{%- assign is_blog = false -%}
+{%- assign is_media = false -%}
+{%- if handle contains 'blog' or handle contains 'journal' -%}
+  {%- assign is_blog = true -%}
+{%- elsif handle contains 'media' or handle contains 'presse' -%}
+  {%- assign is_media = true -%}
+{%- endif -%}
+
+
+
+{%- if is_blog -%}
+  {%- if page.title != blank and section.settings.show_title -%}
+    <h1 class="blog-page__title">{{ page.title }}</h1>
+  {%- endif -%}
+  {%- if page.content != blank -%}
+    <div class="blog-page__intro rte">{{ page.content }}</div>
+  {%- endif -%}
+  {%- render 'gallery-blog',
+      blocks: section.blocks,
+      ratio: section.settings.image_ratio,
+      count: section.settings.placeholder_count -%}
+
+{%- elsif is_media -%}
+  <div class="page-width section">
+    {%- if page.title != blank and section.settings.show_title -%}
+      <h1 class="section__title">{{ page.title }}</h1>
+    {%- endif -%}
+    {%- if page.content != blank -%}
+      <div class="rte" style="max-width: 640px; margin-bottom: var(--space-lg);">{{ page.content }}</div>
+    {%- endif -%}
+    {%- render 'gallery-media', blocks: section.blocks -%}
+  </div>
+
+{%- else -%}
+  <div class="article">
+    {%- if section.settings.show_title -%}<h1>{{ page.title }}</h1>{%- endif -%}
+    <div class="rte">{{ page.content }}</div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    { "type": "checkbox", "id": "show_title", "label": "Show page title", "default": true },
+    {
+      "type": "paragraph",
+      "content": "A page whose web address contains \"blog\" shows the Blog image blocks. One containing \"media\" shows the Media tiles. Every other page shows its normal text."
+    },
+    {
+      "type": "header",
+      "content": "Blog pages"
+    },
+    {
+      "type": "range",
+      "id": "placeholder_count",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "label": "Placeholder images",
+      "info": "Shown until you add Blog image blocks.",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image height",
+      "options": [
+        { "value": "natural", "label": "Original proportions" },
+        { "value": "wide", "label": "Crop to 16:9" },
+        { "value": "cinema", "label": "Crop to 21:9" },
+        { "value": "classic", "label": "Crop to 4:3" }
+      ],
+      "default": "natural"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blog_image",
+      "name": "Blog image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "media_tile",
+      "name": "Media tile",
+      "settings": [
+        { "type": "paragraph", "content": "Only appears on pages whose address contains \"media\"." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "checkbox", "id": "new_tab", "label": "Open in a new tab", "default": true },
+        { "type": "text", "id": "caption", "label": "Caption" }
+      ]
+    }
+  ],
+  "max_blocks": 40
+}
+{% endschema %}

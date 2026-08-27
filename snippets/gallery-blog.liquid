@@ -1,0 +1,47 @@
+{%- comment -%}
+  Blog: nothing but images. Full screen width, stacked, no gap, no captions,
+  no links. One block = one image.
+  Usage: {% render 'gallery-blog', blocks: section.blocks, ratio: 'natural', count: 10 %}
+{%- endcomment -%}
+
+{%- assign ph = 'placeholder-wide-1.svg,placeholder-wide-2.svg,placeholder-wide-3.svg,placeholder-wide-4.svg,placeholder-wide-5.svg' | split: ',' -%}
+{%- assign r = ratio | default: 'natural' -%}
+
+{%- assign n_blocks = 0 -%}
+{%- for block in blocks -%}
+  {%- if block.type == 'blog_image' -%}{%- assign n_blocks = n_blocks | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+
+<ul class="blog-stack blog-stack--{{ r }}">
+  {%- if n_blocks > 0 -%}
+    {%- assign i = 0 -%}
+    {%- for block in blocks -%}
+      {%- if block.type != 'blog_image' -%}{%- continue -%}{%- endif -%}
+      {%- assign idx = i | modulo: 5 -%}
+      {%- assign i = i | plus: 1 -%}
+      <li {{ block.shopify_attributes }}>
+        <span class="blog-stack__static">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 2400 | image_tag:
+               widths: '600,900,1200,1800,2400', sizes: '100vw',
+               alt: shop.name, loading: 'lazy' }}
+          {%- else -%}
+            <img src="{{ ph[idx] | asset_url }}" alt=""
+                 width="1600" height="900" loading="lazy">
+          {%- endif -%}
+        </span>
+      </li>
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign slots = count | default: 10 -%}
+    {%- for n in (1..slots) -%}
+      {%- assign idx = forloop.index0 | modulo: 5 -%}
+      <li>
+        <span class="blog-stack__static">
+          <img src="{{ ph[idx] | asset_url }}" alt=""
+               width="1600" height="900" loading="lazy">
+        </span>
+      </li>
+    {%- endfor -%}
+  {%- endif -%}
+</ul>

@@ -1,0 +1,48 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "nav": {
+      "primary": "Primary navigation",
+      "secondary": "Secondary navigation",
+      "home": "Home",
+      "shop": "Shop",
+      "blog": "Blog",
+      "media": "Media",
+      "cart": "Cart"
+    },
+    "search": {
+      "title": "Search",
+      "submit": "Search",
+      "no_results": "No results found."
+    },
+    "404": {
+      "subtext": "This page does not exist."
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content"
+  },
+  "products": {
+    "quantity": "Quantity",
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out"
+  },
+  "cart": {
+    "title": "Cart",
+    "product": "Product",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "update": "Update",
+    "remove": "Remove",
+    "checkout": "Checkout",
+    "empty": "Your cart is empty."
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Gift card — {{ value }}"
+    }
+  }
+}

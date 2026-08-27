@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "home_split": {
+      "type": "home-split",
+      "settings": {
+        "product_name_1": "Product 01",
+        "product_name_2": "Product 02",
+        "product_name_3": "Product 03"
+      }
+    }
+  },
+  "order": ["home_split"]
+}

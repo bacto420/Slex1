@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "main-collection", "settings": { "show_title": true, "show_price": true, "products_limit": 3 } }
+  },
+  "order": ["main"]
+}
