@@ -20,10 +20,16 @@ jetzt aufgehoben.
 
 ### Einmalig im Shopify-Adminbereich einstellen
 
-Damit die Seiten ihr eigenes Template benutzen:
+Der Shop hat noch keine Seiten „Blog" und „Media". Beide einmal anlegen und
+dabei die passende Vorlage zuweisen:
 
-1. **Onlineshop → Seiten → „Blog"** → rechts unter *Theme-Vorlage* `blog` wählen → Speichern.
-2. **Onlineshop → Seiten → „Media"** → unter *Theme-Vorlage* `media` wählen → Speichern.
+1. **Onlineshop → Seiten → Seite hinzufügen** → Titel `Blog`, Inhalt leer,
+   rechts unter *Theme-Vorlage* `blog` wählen → Speichern.
+2. Dasselbe noch einmal mit Titel `Media` und Vorlage `media`.
+
+Entscheidend ist die Adresse: sie muss auf `/pages/blog` bzw. `/pages/media`
+enden — daran erkennt der Header die Seiten und verlinkt das Menü von selbst
+dorthin. Bei diesen Titeln passiert das automatisch.
 
 Danach im Theme-Editor die Bilder setzen:
 
@@ -41,6 +47,11 @@ Platzhalterbilder plus einen Hinweis, der nur im Theme-Editor sichtbar ist.
 Existiert gar keine Seite „Blog" bzw. „Media", greift die Navigation auf
 `templates/search.blog.json` und `templates/search.media.json` zurück. Auch
 diese beiden halten ihre Bilder getrennt.
+
+Diese zwei Fallback-Templates fehlten vorher. Ohne sie liefert Shopify für
+`/search?view=blog` **und** `/search?view=media` dasselbe `search.json` aus —
+beide Menüpunkte zeigten also auf ein und dieselbe Seite. Das ist der zweite
+Teil der „Blog und Media hängen zusammen"-Ursache.
 
 ## Aufbau
 
