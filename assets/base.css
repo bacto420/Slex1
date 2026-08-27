@@ -668,42 +668,42 @@ textarea:focus {
   margin-top: 4px;
 }
 
-/* Blog — a grid of tappable images. Every tile links out on its own. */
-.blog-grid {
+/* A grid of tappable images — used by Media. Every tile links out on its own. */
+.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(var(--blog-cols, 3), 1fr);
+  grid-template-columns: repeat(var(--grid-cols, 3), 1fr);
   gap: var(--space-md);
   list-style: none;
   margin: 0;
   padding: var(--space-md);
 }
 
-.blog-grid--2 { --blog-cols: 2; }
-.blog-grid--3 { --blog-cols: 3; }
-.blog-grid--4 { --blog-cols: 4; }
+.gallery-grid--2 { --grid-cols: 2; }
+.gallery-grid--3 { --grid-cols: 3; }
+.gallery-grid--4 { --grid-cols: 4; }
 
-.blog-grid > li {
+.gallery-grid > li {
   margin: 0;
   padding: 0;
 }
 
-.blog-grid__link {
+.gallery-grid__link {
   display: block;
   line-height: 0;
 }
 
-.blog-grid__link:hover { opacity: 1; }
+.gallery-grid__link:hover { opacity: 1; }
 
-.blog-grid__media {
+.gallery-grid__media {
   display: block;
   position: relative;
   overflow: hidden;
   background: #0b0b0b;
-  aspect-ratio: var(--blog-tile-ratio, 16 / 9);
+  aspect-ratio: var(--tile-ratio, 4 / 5);
 }
 
-.blog-grid__media img,
-.blog-grid__media svg {
+.gallery-grid__media img,
+.gallery-grid__media svg {
   display: block;
   width: 100%;
   height: 100%;
@@ -711,12 +711,12 @@ textarea:focus {
   transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.blog-grid__link:hover .blog-grid__media img,
-.blog-grid__link:hover .blog-grid__media svg {
+.gallery-grid__link:hover .gallery-grid__media img,
+.gallery-grid__link:hover .gallery-grid__media svg {
   transform: scale(1.03);
 }
 
-.blog-grid__caption {
+.gallery-grid__caption {
   display: block;
   margin-top: var(--space-sm);
   line-height: 1.4;
@@ -726,10 +726,10 @@ textarea:focus {
   color: var(--color-text);
 }
 
-/* Media — one image per row, edge to edge, flush against the next. No page
-   gutter, no gap, no line-height leak between the rows. Same on every screen
-   size: the full width of the site. */
-.media-stack {
+/* One image per row, edge to edge, flush against the next — used by Blog. No
+   page gutter, no gap, no line-height leak between the rows. Same on every
+   screen size: the full width of the site. */
+.gallery-stack {
   display: block;
   list-style: none;
   margin: 0;
@@ -738,7 +738,7 @@ textarea:focus {
   line-height: 0;
 }
 
-.media-stack > li {
+.gallery-stack > li {
   display: block;
   margin: 0;
   padding: 0;
@@ -747,14 +747,14 @@ textarea:focus {
   line-height: 0;
 }
 
-.media-stack__frame {
+.gallery-stack__frame {
   display: block;
   position: relative;
   line-height: 0;
 }
 
-.media-stack img,
-.media-stack svg {
+.gallery-stack img,
+.gallery-stack svg {
   display: block;
   width: 100%;
   height: auto;
@@ -765,18 +765,18 @@ textarea:focus {
 
 /* Optional uniform crop, so mixed portrait and landscape uploads still make
    an even column. */
-.media-stack--wide img,
-.media-stack--cinema img,
-.media-stack--classic img {
+.gallery-stack--wide img,
+.gallery-stack--cinema img,
+.gallery-stack--classic img {
   height: 100%;
   object-fit: cover;
 }
 
-.media-stack--wide .media-stack__frame    { aspect-ratio: 16 / 9; }
-.media-stack--cinema .media-stack__frame  { aspect-ratio: 21 / 9; }
-.media-stack--classic .media-stack__frame { aspect-ratio: 4 / 3; }
+.gallery-stack--wide .gallery-stack__frame    { aspect-ratio: 16 / 9; }
+.gallery-stack--cinema .gallery-stack__frame  { aspect-ratio: 21 / 9; }
+.gallery-stack--classic .gallery-stack__frame { aspect-ratio: 4 / 3; }
 
-.media-stack__caption {
+.gallery-stack__caption {
   position: absolute;
   left: var(--space-md);
   bottom: var(--space-md);
@@ -801,7 +801,7 @@ textarea:focus {
   color: var(--color-muted);
 }
 
-/* Media — tappable tiles */
+/* Shared card bits */
 .media-grid a {
   display: block;
 }
@@ -1191,7 +1191,7 @@ textarea:focus {
 @media screen and (max-width: 900px) {
   .product-grid,
   .card-grid,
-  .blog-grid {
+  .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1266,7 +1266,7 @@ textarea:focus {
 
   .product-grid,
   .card-grid,
-  .blog-grid {
+  .gallery-grid {
     grid-template-columns: 1fr;
   }
 

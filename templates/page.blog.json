@@ -6,64 +6,31 @@
         "image_1": {
           "type": "blog_image",
           "settings": {
-            "caption": "",
-            "new_tab": true
+            "caption": ""
           }
         },
         "image_2": {
           "type": "blog_image",
           "settings": {
-            "caption": "",
-            "new_tab": true
+            "caption": ""
           }
         },
         "image_3": {
           "type": "blog_image",
           "settings": {
-            "caption": "",
-            "new_tab": true
+            "caption": ""
           }
         },
         "image_4": {
           "type": "blog_image",
           "settings": {
-            "caption": "",
-            "new_tab": true
+            "caption": ""
           }
         },
         "image_5": {
           "type": "blog_image",
           "settings": {
-            "caption": "",
-            "new_tab": true
-          }
-        },
-        "image_6": {
-          "type": "blog_image",
-          "settings": {
-            "caption": "",
-            "new_tab": true
-          }
-        },
-        "image_7": {
-          "type": "blog_image",
-          "settings": {
-            "caption": "",
-            "new_tab": true
-          }
-        },
-        "image_8": {
-          "type": "blog_image",
-          "settings": {
-            "caption": "",
-            "new_tab": true
-          }
-        },
-        "image_9": {
-          "type": "blog_image",
-          "settings": {
-            "caption": "",
-            "new_tab": true
+            "caption": ""
           }
         }
       },
@@ -72,18 +39,13 @@
         "image_2",
         "image_3",
         "image_4",
-        "image_5",
-        "image_6",
-        "image_7",
-        "image_8",
-        "image_9"
+        "image_5"
       ],
       "settings": {
         "title": "Blog",
         "show_title": true,
-        "columns": 3,
-        "image_ratio": "wide",
-        "placeholder_count": 9
+        "image_ratio": "natural",
+        "placeholder_count": 5
       }
     }
   },

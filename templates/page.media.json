@@ -6,31 +6,64 @@
         "image_1": {
           "type": "media_image",
           "settings": {
-            "caption": ""
+            "caption": "",
+            "new_tab": true
           }
         },
         "image_2": {
           "type": "media_image",
           "settings": {
-            "caption": ""
+            "caption": "",
+            "new_tab": true
           }
         },
         "image_3": {
           "type": "media_image",
           "settings": {
-            "caption": ""
+            "caption": "",
+            "new_tab": true
           }
         },
         "image_4": {
           "type": "media_image",
           "settings": {
-            "caption": ""
+            "caption": "",
+            "new_tab": true
           }
         },
         "image_5": {
           "type": "media_image",
           "settings": {
-            "caption": ""
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_6": {
+          "type": "media_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_7": {
+          "type": "media_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_8": {
+          "type": "media_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_9": {
+          "type": "media_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
           }
         }
       },
@@ -39,13 +72,18 @@
         "image_2",
         "image_3",
         "image_4",
-        "image_5"
+        "image_5",
+        "image_6",
+        "image_7",
+        "image_8",
+        "image_9"
       ],
       "settings": {
         "title": "Media",
         "show_title": true,
-        "image_ratio": "natural",
-        "placeholder_count": 5
+        "columns": 3,
+        "image_ratio": "portrait",
+        "placeholder_count": 9
       }
     }
   },

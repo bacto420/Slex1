@@ -1,62 +1,54 @@
 {%- comment -%}
-  Blog: a grid of tappable images. One block = one image = one link.
-  Tapping an image sends the visitor straight to the address on that block.
+  Blog: nothing but images, each one the full width of the site, stacked
+  directly on top of the next with no gap and no link.
 
   These blocks live only on the Blog section, so nothing here is shared with
   the Media page.
 
-  Usage: {% render 'gallery-blog', blocks: section.blocks, columns: 3, count: 9 %}
+  Usage: {% render 'gallery-blog', blocks: section.blocks, ratio: 'natural', count: 5 %}
 {%- endcomment -%}
 
 {%- assign ph = 'placeholder-wide-1.svg,placeholder-wide-2.svg,placeholder-wide-3.svg,placeholder-wide-4.svg,placeholder-wide-5.svg' | split: ',' -%}
-{%- assign cols = columns | default: 3 -%}
+{%- assign r = ratio | default: 'natural' -%}
 
 {%- assign n_blocks = 0 -%}
 {%- for block in blocks -%}
   {%- if block.type == 'blog_image' -%}{%- assign n_blocks = n_blocks | plus: 1 -%}{%- endif -%}
 {%- endfor -%}
 
-<ul class="blog-grid blog-grid--{{ cols }}">
+<ul class="gallery-stack gallery-stack--{{ r }}">
   {%- if n_blocks > 0 -%}
     {%- assign i = 0 -%}
     {%- for block in blocks -%}
       {%- if block.type != 'blog_image' -%}{%- continue -%}{%- endif -%}
       {%- assign idx = i | modulo: 5 -%}
       {%- assign i = i | plus: 1 -%}
-      {%- assign label = block.settings.caption | default: shop.name -%}
       <li {{ block.shopify_attributes }}>
-        <a class="blog-grid__link" href="{{ block.settings.link | default: '#' }}"
-           {% if block.settings.new_tab %}target="_blank" rel="noopener"{% endif %}
-           aria-label="{{ label | escape }}">
-          <span class="blog-grid__media">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 1600 | image_tag:
-                 widths: '400,600,900,1200,1600',
-                 sizes: '(max-width: 749px) 100vw, (max-width: 900px) 50vw, 33vw',
-                 alt: label,
-                 loading: 'lazy' }}
-            {%- else -%}
-              <img src="{{ ph[idx] | asset_url }}" alt="{{ label | escape }}"
-                   width="1600" height="900" loading="lazy">
-            {%- endif -%}
-          </span>
-          {%- if block.settings.caption != blank -%}
-            <span class="blog-grid__caption">{{ block.settings.caption }}</span>
+        <span class="gallery-stack__frame">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 2400 | image_tag:
+               widths: '600,900,1200,1800,2400', sizes: '100vw',
+               alt: block.settings.caption | default: shop.name,
+               loading: 'lazy' }}
+          {%- else -%}
+            <img src="{{ ph[idx] | asset_url }}" alt="{{ block.settings.caption | default: shop.name | escape }}"
+                 width="1600" height="900" loading="lazy">
           {%- endif -%}
-        </a>
+          {%- if block.settings.caption != blank -%}
+            <span class="gallery-stack__caption">{{ block.settings.caption }}</span>
+          {%- endif -%}
+        </span>
       </li>
     {%- endfor -%}
   {%- else -%}
-    {%- assign slots = count | default: 9 -%}
+    {%- assign slots = count | default: 5 -%}
     {%- for n in (1..slots) -%}
       {%- assign idx = forloop.index0 | modulo: 5 -%}
       <li>
-        <a class="blog-grid__link" href="#" aria-label="Journal {{ n }}">
-          <span class="blog-grid__media">
-            <img src="{{ ph[idx] | asset_url }}" alt="Journal {{ n }}"
-                 width="1600" height="900" loading="lazy">
-          </span>
-        </a>
+        <span class="gallery-stack__frame">
+          <img src="{{ ph[idx] | asset_url }}" alt=""
+               width="1600" height="900" loading="lazy">
+        </span>
       </li>
     {%- endfor -%}
   {%- endif -%}

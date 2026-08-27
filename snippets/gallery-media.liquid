@@ -1,54 +1,62 @@
 {%- comment -%}
-  Media: nothing but images, each one the full width of the site, stacked
-  directly on top of the next with no gap and no link.
+  Media: a grid of tappable images. One block = one image = one link.
+  Tapping an image sends the visitor straight to the address on that block.
 
   These blocks live only on the Media section, so nothing here is shared
   with the Blog page.
 
-  Usage: {% render 'gallery-media', blocks: section.blocks, ratio: 'natural', count: 5 %}
+  Usage: {% render 'gallery-media', blocks: section.blocks, columns: 3, count: 9 %}
 {%- endcomment -%}
 
-{%- assign ph = 'placeholder-wide-1.svg,placeholder-wide-2.svg,placeholder-wide-3.svg,placeholder-wide-4.svg,placeholder-wide-5.svg' | split: ',' -%}
-{%- assign r = ratio | default: 'natural' -%}
+{%- assign ph = 'placeholder-1.svg,placeholder-2.svg,placeholder-3.svg' | split: ',' -%}
+{%- assign cols = columns | default: 3 -%}
 
 {%- assign n_blocks = 0 -%}
 {%- for block in blocks -%}
   {%- if block.type == 'media_image' -%}{%- assign n_blocks = n_blocks | plus: 1 -%}{%- endif -%}
 {%- endfor -%}
 
-<ul class="media-stack media-stack--{{ r }}">
+<ul class="gallery-grid gallery-grid--{{ cols }}">
   {%- if n_blocks > 0 -%}
     {%- assign i = 0 -%}
     {%- for block in blocks -%}
       {%- if block.type != 'media_image' -%}{%- continue -%}{%- endif -%}
-      {%- assign idx = i | modulo: 5 -%}
+      {%- assign idx = i | modulo: 3 -%}
       {%- assign i = i | plus: 1 -%}
+      {%- assign label = block.settings.caption | default: shop.name -%}
       <li {{ block.shopify_attributes }}>
-        <span class="media-stack__frame">
-          {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 2400 | image_tag:
-               widths: '600,900,1200,1800,2400', sizes: '100vw',
-               alt: block.settings.caption | default: shop.name,
-               loading: 'lazy' }}
-          {%- else -%}
-            <img src="{{ ph[idx] | asset_url }}" alt="{{ block.settings.caption | default: shop.name | escape }}"
-                 width="1600" height="900" loading="lazy">
-          {%- endif -%}
+        <a class="gallery-grid__link" href="{{ block.settings.link | default: '#' }}"
+           {% if block.settings.new_tab %}target="_blank" rel="noopener"{% endif %}
+           aria-label="{{ label | escape }}">
+          <span class="gallery-grid__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1600 | image_tag:
+                 widths: '400,600,900,1200,1600',
+                 sizes: '(max-width: 749px) 100vw, (max-width: 900px) 50vw, 33vw',
+                 alt: label,
+                 loading: 'lazy' }}
+            {%- else -%}
+              <img src="{{ ph[idx] | asset_url }}" alt="{{ label | escape }}"
+                   width="1200" height="1500" loading="lazy">
+            {%- endif -%}
+          </span>
           {%- if block.settings.caption != blank -%}
-            <span class="media-stack__caption">{{ block.settings.caption }}</span>
+            <span class="gallery-grid__caption">{{ block.settings.caption }}</span>
           {%- endif -%}
-        </span>
+        </a>
       </li>
     {%- endfor -%}
   {%- else -%}
-    {%- assign slots = count | default: 5 -%}
+    {%- assign slots = count | default: 9 -%}
     {%- for n in (1..slots) -%}
-      {%- assign idx = forloop.index0 | modulo: 5 -%}
+      {%- assign idx = forloop.index0 | modulo: 3 -%}
       <li>
-        <span class="media-stack__frame">
-          <img src="{{ ph[idx] | asset_url }}" alt=""
-               width="1600" height="900" loading="lazy">
-        </span>
+        <a class="gallery-grid__link" href="#" aria-label="Media {{ n }}">
+          <span class="gallery-grid__media">
+            <img src="{{ ph[idx] | asset_url }}" alt="Media {{ n }}"
+                 width="1200" height="1500" loading="lazy">
+          </span>
+        </a>
       </li>
     {%- endfor -%}
   {%- endif -%}

@@ -13,8 +13,8 @@ jetzt aufgehoben.
 
 | Bereich | Template | Section | Blocktyp | Darstellung |
 | --- | --- | --- | --- | --- |
-| Blog | `templates/page.blog.json` | `main-blog-gallery` | `blog_image` | Raster aus 9 anklickbaren Bildern, jedes mit eigenem Link |
-| Media | `templates/page.media.json` | `main-media` | `media_image` | Bilder über die volle Breite der Website, direkt untereinander |
+| Blog | `templates/page.blog.json` | `main-blog-gallery` | `blog_image` | Bilder über die volle Breite der Website, direkt untereinander |
+| Media | `templates/page.media.json` | `main-media` | `media_image` | Raster aus 9 anklickbaren Bildern, jedes mit eigenem Link |
 | Blogbeiträge | `templates/blog.json` | `main-blog-posts` | — | echte Shopify-Artikel unter `/blogs/...` |
 | Normale Seite | `templates/page.json` | `main-page` | — | nur Seitentext |
 
@@ -33,13 +33,14 @@ dorthin. Bei diesen Titeln passiert das automatisch.
 
 Danach im Theme-Editor die Bilder setzen:
 
-* **Blog** — Block *Blog image* pro Bild. Jeder Block hat *Image*, *Link*
+* **Blog** — Block *Blog image* pro Bild, nur *Image* und optionale
+  *Caption*. Jedes Bild läuft randlos über die volle Breite, direkt unter dem
+  vorherigen. *Image height* schneidet auf Wunsch alle Bilder auf dasselbe
+  Format. Voreingestellt sind 5 Blöcke.
+* **Media** — Block *Media image* pro Bild. Jeder Block hat *Image*, *Link*
   (dorthin führt der Klick), *Open in a new tab* und eine optionale *Caption*.
   Voreingestellt sind 9 Blöcke; *Images per row* und *Image shape* steuern das
   Raster.
-* **Media** — Block *Media image* pro Bild, nur *Image* und optionale
-  *Caption*. Jedes Bild läuft randlos über die volle Breite. *Image height*
-  schneidet auf Wunsch alle Bilder auf dasselbe Format.
 
 Solange eine Seite noch auf der Standardvorlage läuft, zeigt sie die
 Platzhalterbilder plus einen Hinweis, der nur im Theme-Editor sichtbar ist.
