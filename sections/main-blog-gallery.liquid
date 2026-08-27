@@ -13,8 +13,9 @@
       handle contains "blog" or "journal"  → this section
       no page at all (search view template) → this section
 
-  Everywhere else it stays silent, apart from a note in the theme editor
-  saying where it does appear.
+  Everywhere else it renders nothing at all — in the theme editor too, so
+  there is never a stray banner tempting anyone to hide the section. Hiding
+  it would hide it on its own page as well: one section, one template.
 {%- endcomment -%}
 
 {%- assign handle = page.handle | default: '' -%}
@@ -25,14 +26,7 @@
   {%- endunless -%}
 {%- endif -%}
 
-{%- unless show -%}
-  {%- if request.design_mode -%}
-    <p class="section-note">
-      “{{ section.settings.title | default: 'Blog' }}” only appears on a page whose web address
-      contains “blog”. Nothing from this section is shown on “{{ page.title }}”.
-    </p>
-  {%- endif -%}
-{%- else -%}
+{%- if show -%}
 
 <div class="blog-page">
   {%- if section.settings.title != blank and section.settings.show_title -%}
@@ -49,7 +43,7 @@
       count: section.settings.placeholder_count -%}
 </div>
 
-{%- endunless -%}
+{%- endif -%}
 
 {% schema %}
 {

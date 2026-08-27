@@ -790,22 +790,7 @@ textarea:focus {
   pointer-events: none;
 }
 
-/* Shown in the theme editor only, on pages where a gallery section stays
-   silent because it belongs to a different page. */
-.section-note {
-  margin: 0 var(--space-md) var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-line);
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--color-muted);
-}
-
 /* Shared card bits */
-.media-grid a {
-  display: block;
-}
-
 .card__title {
   margin: var(--space-sm) 0 4px;
   font-size: 12px;

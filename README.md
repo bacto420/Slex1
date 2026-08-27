@@ -27,9 +27,13 @@ Seite:
 * Adresse enthält `media` oder `presse` → Abschnitt **Media**
 * alles andere → nur der normale Seitentext
 
-Auf allen übrigen Seiten bleiben beide Abschnitte leer. Im Theme-Editor steht
-dort ein kurzer Hinweis, auf welcher Seite der Abschnitt erscheint; im Shop
-sieht man davon nichts.
+Auf allen übrigen Seiten geben beide Abschnitte gar nichts aus — auch nicht
+im Theme-Editor. In der Seitenleiste des Editors stehen sie zwar bei jeder
+Seite, zeigen aber nur dort etwas, wo sie hingehören.
+
+Wichtig: die beiden Abschnitte **nicht ausblenden**. Es ist jeweils ein
+einziger Abschnitt auf einem gemeinsamen Template — wer ihn auf der
+Media-Seite ausblendet, blendet ihn auch auf der Blog-Seite aus.
 
 ### Bilder einsetzen
 
