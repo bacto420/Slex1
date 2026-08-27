@@ -668,6 +668,139 @@ textarea:focus {
   margin-top: 4px;
 }
 
+/* Blog — a grid of tappable images. Every tile links out on its own. */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--blog-cols, 3), 1fr);
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: var(--space-md);
+}
+
+.blog-grid--2 { --blog-cols: 2; }
+.blog-grid--3 { --blog-cols: 3; }
+.blog-grid--4 { --blog-cols: 4; }
+
+.blog-grid > li {
+  margin: 0;
+  padding: 0;
+}
+
+.blog-grid__link {
+  display: block;
+  line-height: 0;
+}
+
+.blog-grid__link:hover { opacity: 1; }
+
+.blog-grid__media {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: #0b0b0b;
+  aspect-ratio: var(--blog-tile-ratio, 16 / 9);
+}
+
+.blog-grid__media img,
+.blog-grid__media svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.blog-grid__link:hover .blog-grid__media img,
+.blog-grid__link:hover .blog-grid__media svg {
+  transform: scale(1.03);
+}
+
+.blog-grid__caption {
+  display: block;
+  margin-top: var(--space-sm);
+  line-height: 1.4;
+  font-size: 12px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* Media — one image per row, edge to edge, flush against the next. No page
+   gutter, no gap, no line-height leak between the rows. Same on every screen
+   size: the full width of the site. */
+.media-stack {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+.media-stack > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+.media-stack__frame {
+  display: block;
+  position: relative;
+  line-height: 0;
+}
+
+.media-stack img,
+.media-stack svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border: 0;
+  vertical-align: top;
+}
+
+/* Optional uniform crop, so mixed portrait and landscape uploads still make
+   an even column. */
+.media-stack--wide img,
+.media-stack--cinema img,
+.media-stack--classic img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-stack--wide .media-stack__frame    { aspect-ratio: 16 / 9; }
+.media-stack--cinema .media-stack__frame  { aspect-ratio: 21 / 9; }
+.media-stack--classic .media-stack__frame { aspect-ratio: 4 / 3; }
+
+.media-stack__caption {
+  position: absolute;
+  left: var(--space-md);
+  bottom: var(--space-md);
+  right: var(--space-md);
+  line-height: 1.4;
+  font-size: 12px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+/* Shown in the theme editor only, when a page has not been pointed at its
+   own template yet. */
+.template-hint {
+  margin: 0 var(--space-md) var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-line);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
 /* Media — tappable tiles */
 .media-grid a {
   display: block;
@@ -1057,7 +1190,8 @@ textarea:focus {
 
 @media screen and (max-width: 900px) {
   .product-grid,
-  .card-grid {
+  .card-grid,
+  .blog-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1131,7 +1265,8 @@ textarea:focus {
   }
 
   .product-grid,
-  .card-grid {
+  .card-grid,
+  .blog-grid {
     grid-template-columns: 1fr;
   }
 

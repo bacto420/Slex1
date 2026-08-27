@@ -1,0 +1,93 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog-gallery",
+      "blocks": {
+        "image_1": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_2": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_3": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_4": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_5": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_6": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_7": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_8": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        },
+        "image_9": {
+          "type": "blog_image",
+          "settings": {
+            "caption": "",
+            "new_tab": true
+          }
+        }
+      },
+      "block_order": [
+        "image_1",
+        "image_2",
+        "image_3",
+        "image_4",
+        "image_5",
+        "image_6",
+        "image_7",
+        "image_8",
+        "image_9"
+      ],
+      "settings": {
+        "title": "Blog",
+        "show_title": true,
+        "columns": 3,
+        "image_ratio": "wide",
+        "placeholder_count": 9
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

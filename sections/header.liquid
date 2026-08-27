@@ -18,7 +18,9 @@
 
   Preference order: a real page if one exists, otherwise the gallery
   templates riding on /search — that route exists in every store from the
-  start, so these links can never hit a 404 and need no setup.
+  start, so these links can never hit a 404 and need no setup. Those two
+  fallbacks are templates/search.blog.json and templates/search.media.json;
+  each keeps its own images, exactly like the page templates do.
 {%- endcomment -%}
 {%- assign blog_url = routes.search_url | append: '?view=blog' -%}
 {%- if pages.blog != empty and pages.blog.handle -%}
@@ -61,12 +63,13 @@
         </li>
         <li>
           <a href="{{ nav_blog }}"
-             {% if template.name == 'blog' or template.name == 'article' %}aria-current="page"{% endif %}>
+             {% if template.name == 'blog' or template.name == 'article' or template.suffix == 'blog' %}aria-current="page"{% endif %}>
             {{ 'general.nav.blog' | t }}
           </a>
         </li>
         <li>
-          <a href="{{ nav_media }}">
+          <a href="{{ nav_media }}"
+             {% if template.suffix == 'media' %}aria-current="page"{% endif %}>
             {{ 'general.nav.media' | t }}
           </a>
         </li>
