@@ -14,8 +14,10 @@
     Second item   → the percentage comes off the cheapest product only,
                     which is what a "Buy X get Y" automatic discount does.
 
-  Nothing renders until at least two products are picked, so a half-filled
-  section never reaches a customer.
+  A half-filled section never reaches a customer: with fewer than two
+  products picked nothing goes out to the shop. In the theme editor it does
+  show — as an outline with a line saying what is missing — otherwise the
+  section would be invisible exactly while it is being set up.
 {%- endcomment -%}
 
 {%- liquid
@@ -129,6 +131,41 @@
         {%- endif -%}
       </div>
     </div>
+  </div>
+
+{%- elsif request.design_mode -%}
+  {%- comment -%}
+    Editor only — so the section can be found and filled in. Never shown in
+    the shop, and it carries no prices: an example price is a promise the
+    checkout would not keep.
+  {%- endcomment -%}
+  <div class="page-width section bundle bundle--setup">
+    <div class="bundle__head">
+      <h2 class="section__title bundle__title">{{ section.settings.title }}</h2>
+      <span class="bundle__badge">−{{ pct }}%</span>
+    </div>
+
+    <ul class="bundle__set">
+      {%- for block in section.blocks -%}
+        {%- if forloop.index0 > 0 -%}
+          <li class="bundle__plus" aria-hidden="true">+</li>
+        {%- endif -%}
+        <li class="bundle__item" {{ block.shopify_attributes }}>
+          <span class="bundle__media">
+            <img src="{{ 'placeholder-product-1.svg' | asset_url }}" alt=""
+                 width="1200" height="1500" loading="lazy">
+          </span>
+          <span class="bundle__name">
+            {{ block.settings.label | default: block.settings.product.title | default: 'Product' }}
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <p class="bundle__setup-note">
+      Pick a product in each block on the left. The bundle appears in the shop
+      as soon as two are set — until then customers see nothing here.
+    </p>
   </div>
 {%- endif -%}
 

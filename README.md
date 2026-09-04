@@ -73,8 +73,13 @@ Bundle-Preis, die Ersparnis und ein Button, der beide Artikel auf einmal in den
 Warenkorb legt.
 
 Einstellbar im Theme-Editor (Produkte → Bundle deal): Überschrift, Untertitel,
-Rabattsatz, Wortlaut der Zeilen und pro Block ein Produkt. Solange weniger als
-zwei Produkte gewählt sind, wird der Abschnitt gar nicht ausgegeben.
+Rabattsatz, Wortlaut der Zeilen und pro Block ein Produkt.
+
+Ausgeliefert wird der Abschnitt mit zwei **leeren** Produkt-Blöcken. Solange
+weniger als zwei Produkte gewählt sind, gibt er im Shop nichts aus — im
+Theme-Editor dagegen schon: dort steht ein gestrichelter Rahmen mit dem
+Hinweis, dass noch Produkte fehlen. Sonst wäre der Abschnitt ausgerechnet
+während der Einrichtung unsichtbar.
 
 **Der Rabatt selbst kommt nicht aus dem Theme.** Ein Theme kann einen Deal nur
 zeigen, nicht gewähren — der Nachlass muss als automatischer Rabatt unter

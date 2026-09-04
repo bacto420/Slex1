@@ -1313,6 +1313,24 @@ textarea:focus {
   text-transform: uppercase;
 }
 
+/* Editor-only state, while the section has no products yet. */
+.bundle--setup {
+  outline: 1px dashed var(--color-line);
+  outline-offset: -1px;
+}
+
+.bundle--setup .bundle__media {
+  opacity: 0.45;
+}
+
+.bundle__setup-note {
+  margin: var(--space-md) 0 0;
+  max-width: 52ch;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
 .bundle__note,
 .bundle__sold-out {
   margin: var(--space-sm) 0 0;
