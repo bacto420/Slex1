@@ -64,6 +64,35 @@ zwei Fallback-Templates fehlten ursprünglich; ohne sie liefert Shopify für
 beide Menüpunkte zeigten also auf ein und dieselbe Seite. Das war der zweite
 Teil der „Blog und Media hängen zusammen"-Ursache.
 
+## Bundle-Deal auf der Produktseite
+
+Unter jeder Produktseite sitzt der Abschnitt **Bundle deal**
+(`sections/product-bundle.liquid`): zwei Produkte nebeneinander mit einem Plus
+dazwischen, daneben der Einzelpreis-Gesamtbetrag durchgestrichen, der
+Bundle-Preis, die Ersparnis und ein Button, der beide Artikel auf einmal in den
+Warenkorb legt.
+
+Einstellbar im Theme-Editor (Produkte → Bundle deal): Überschrift, Untertitel,
+Rabattsatz, Wortlaut der Zeilen und pro Block ein Produkt. Solange weniger als
+zwei Produkte gewählt sind, wird der Abschnitt gar nicht ausgegeben.
+
+**Der Rabatt selbst kommt nicht aus dem Theme.** Ein Theme kann einen Deal nur
+zeigen, nicht gewähren — der Nachlass muss als automatischer Rabatt unter
+*Rabatte* im Adminbereich existieren, sonst verlangt der Warenkorb den vollen
+Preis, obwohl die Seite einen niedrigeren angezeigt hat.
+
+Die Einstellung *Discount applies to* muss zu diesem Rabatt passen:
+
+| Einstellung | passender Rabatt im Admin |
+| --- | --- |
+| *The whole bundle* | 15 % auf alle Artikel des Sets — z. B. „Betrag auf Produkte" auf eine Kollektion mit Mindestmenge 2 |
+| *The cheaper item only* | „Kauf X, erhalte Y": 1 Jacke gekauft → 15 % auf 1 Longsleeve |
+
+Shopify kann „genau eine Jacke **und** ein Longsleeve zusammen" nativ nicht
+exakt abbilden; am nächsten kommt „Kauf X, erhalte Y". Für einen echten
+Bundle-Rabatt auf die Gesamtsumme braucht es eine Bundle-App oder Shopify
+Functions.
+
 ## Aufbau
 
 ```

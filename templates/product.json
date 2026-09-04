@@ -1,4 +1,45 @@
 {
-  "sections": { "main": { "type": "main-product", "settings": {} } },
-  "order": ["main"]
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "bundle": {
+      "type": "product-bundle",
+      "blocks": {
+        "item_1": {
+          "type": "bundle_item",
+          "settings": {
+            "label": ""
+          }
+        },
+        "item_2": {
+          "type": "bundle_item",
+          "settings": {
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2"
+      ],
+      "settings": {
+        "title": "Bundle deal",
+        "subtitle": "Buy the jacket together with the longsleeve and save 15%.",
+        "discount_percent": 15,
+        "discount_scope": "total",
+        "label_regular": "Separately",
+        "label_bundle": "Together",
+        "label_saving": "You save",
+        "button_label": "Add bundle to cart",
+        "label_sold_out": "Currently unavailable",
+        "note": "The saving is applied automatically at checkout."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bundle"
+  ]
 }

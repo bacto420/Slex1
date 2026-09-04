@@ -1,0 +1,213 @@
+{%- comment -%}
+  Bundle deal — shown under the product page.
+
+  Two (or more) products side by side with a plus between them, the regular
+  total struck through and the bundle price next to it, plus a button that
+  drops the whole set into the cart at once.
+
+  IMPORTANT: a theme can only show a deal, it cannot grant one. The saving
+  has to exist as an automatic discount in the Shopify admin, otherwise the
+  cart charges full price and the page has advertised a price the customer
+  never gets. "Discount applies to" must match how that discount is set up:
+
+    Whole bundle  → the percentage comes off every product in the set.
+    Second item   → the percentage comes off the cheapest product only,
+                    which is what a "Buy X get Y" automatic discount does.
+
+  Nothing renders until at least two products are picked, so a half-filled
+  section never reaches a customer.
+{%- endcomment -%}
+
+{%- liquid
+  assign count = 0
+  assign regular = 0
+  assign cheapest = 0
+  assign all_available = true
+
+  for block in section.blocks
+    assign p = block.settings.product
+    if p == blank
+      continue
+    endif
+    assign count = count | plus: 1
+    assign regular = regular | plus: p.price
+    if cheapest == 0 or p.price < cheapest
+      assign cheapest = p.price
+    endif
+    unless p.available
+      assign all_available = false
+    endunless
+  endfor
+
+  assign pct = section.settings.discount_percent | default: 15
+
+  if section.settings.discount_scope == 'cheapest'
+    assign saving = cheapest | times: pct | divided_by: 100.0 | round
+  else
+    assign saving = regular | times: pct | divided_by: 100.0 | round
+  endif
+  assign bundle_total = regular | minus: saving
+-%}
+
+{%- if count > 1 -%}
+  <div class="page-width section bundle">
+    <div class="bundle__head">
+      <h2 class="section__title bundle__title">{{ section.settings.title }}</h2>
+      <span class="bundle__badge">−{{ pct }}%</span>
+    </div>
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="bundle__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    <div class="bundle__body">
+      <ul class="bundle__set">
+        {%- assign shown = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign p = block.settings.product -%}
+          {%- if p == blank -%}{%- continue -%}{%- endif -%}
+          {%- assign shown = shown | plus: 1 -%}
+          {%- if shown > 1 -%}
+            <li class="bundle__plus" aria-hidden="true">+</li>
+          {%- endif -%}
+          <li class="bundle__item" {{ block.shopify_attributes }}>
+            <a href="{{ p.url }}">
+              <span class="bundle__media">
+                {%- if p.featured_image -%}
+                  {{ p.featured_image | image_url: width: 800 | image_tag:
+                     widths: '200,300,400,600,800',
+                     sizes: '(max-width: 749px) 40vw, 220px',
+                     alt: p.title,
+                     loading: 'lazy' }}
+                {%- else -%}
+                  <img src="{{ 'placeholder-product-1.svg' | asset_url }}" alt="{{ p.title | escape }}"
+                       width="1200" height="1500" loading="lazy">
+                {%- endif -%}
+              </span>
+              <span class="bundle__name">{{ block.settings.label | default: p.title }}</span>
+              <span class="bundle__price">{{ p.price | money }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="bundle__summary">
+        <dl class="bundle__totals">
+          <div>
+            <dt>{{ section.settings.label_regular }}</dt>
+            <dd><s>{{ regular | money }}</s></dd>
+          </div>
+          <div class="bundle__totals-row--deal">
+            <dt>{{ section.settings.label_bundle }}</dt>
+            <dd>{{ bundle_total | money }}</dd>
+          </div>
+        </dl>
+
+        <p class="bundle__saving">{{ section.settings.label_saving }} {{ saving | money }}</p>
+
+        {%- if all_available -%}
+          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data"
+                class="bundle__form">
+            {%- assign line = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- assign p = block.settings.product -%}
+              {%- if p == blank -%}{%- continue -%}{%- endif -%}
+              <input type="hidden" name="items[{{ line }}][id]"
+                     value="{{ p.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="items[{{ line }}][quantity]" value="1">
+              {%- assign line = line | plus: 1 -%}
+            {%- endfor -%}
+            <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
+            <button type="submit" class="btn bundle__btn">{{ section.settings.button_label }}</button>
+          </form>
+        {%- else -%}
+          <p class="bundle__sold-out">{{ section.settings.label_sold_out }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.note != blank -%}
+          <p class="bundle__note">{{ section.settings.note }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bundle deal",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The theme only shows the deal. Create the matching automatic discount under Discounts in the admin, otherwise the cart charges full price."
+    },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Bundle deal" },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Buy the jacket together with the longsleeve and save 15%."
+    },
+    {
+      "type": "header",
+      "content": "Saving"
+    },
+    {
+      "type": "range",
+      "id": "discount_percent",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "label": "Discount",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "discount_scope",
+      "label": "Discount applies to",
+      "info": "Must match the automatic discount in the admin, so the price shown here is the price the customer pays.",
+      "options": [
+        { "value": "total", "label": "The whole bundle" },
+        { "value": "cheapest", "label": "The cheaper item only (Buy X get Y)" }
+      ],
+      "default": "total"
+    },
+    {
+      "type": "header",
+      "content": "Wording"
+    },
+    { "type": "text", "id": "label_regular", "label": "Regular total", "default": "Separately" },
+    { "type": "text", "id": "label_bundle", "label": "Bundle total", "default": "Together" },
+    { "type": "text", "id": "label_saving", "label": "Saving", "default": "You save" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Add bundle to cart" },
+    { "type": "text", "id": "label_sold_out", "label": "Unavailable", "default": "Currently unavailable" },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Small print",
+      "default": "The saving is applied automatically at checkout."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_item",
+      "name": "Bundle product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "label", "label": "Name shown", "info": "Optional. Defaults to the product title." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Bundle deal",
+      "blocks": [
+        { "type": "bundle_item" },
+        { "type": "bundle_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
