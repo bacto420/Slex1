@@ -6,7 +6,7 @@ Stand: 15. September 2026
 
 BACTO GesbR
 Gesellschafter: Alexander Seitz, Thomas Cytryn
-Klosterweg 1, 6600 Reutte, Österreich
+Josef-Pohler-Weg 5, 6600 Reutte, Österreich
 E-Mail: info@bacto-clothing.com
 Telefon: +43 676 7860882
 

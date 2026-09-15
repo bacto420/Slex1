@@ -7,7 +7,7 @@ Stand: 15. September 2026
 Diese Bedingungen gelten für alle Bestellungen über www.bacto-clothing.com.
 Vertragspartner ist
 
-**BACTO GesbR**, Klosterweg 1, 6600 Reutte, Österreich
+**BACTO GesbR**, Josef-Pohler-Weg 5, 6600 Reutte, Österreich
 UID: ATU79119446, E-Mail: info@bacto-clothing.com
 
 Abweichende Bedingungen des Kunden gelten nur, wenn wir ihnen schriftlich

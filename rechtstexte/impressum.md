@@ -10,7 +10,7 @@ Gesellschaft bürgerlichen Rechts
 Gesellschafter: Alexander Seitz, Thomas Cytryn
 (beide zur Vertretung berechtigt, persönlich und solidarisch haftend)
 
-Klosterweg 1
+Josef-Pohler-Weg 5
 6600 Reutte
 Österreich
 
@@ -24,7 +24,8 @@ Telefon: +43 676 7860882
 UID-Nummer: ATU79119446
 Firmenbuch: nicht eingetragen (Gesellschaft bürgerlichen Rechts)
 
-Unternehmensgegenstand: Handel mit Bekleidung
+Unternehmensgegenstand: Vertrieb von Kleidungsstücken samt Accessoires
+EORI-Nummer: ATEOS1000140126
 Gewerbebehörde: Bezirkshauptmannschaft Reutte
 Mitglied der Wirtschaftskammer Tirol, Sparte Handel
 Fachgruppe: ⚠ BITTE ERGÄNZEN — genaue Fachgruppe laut WKO-Mitgliedsschreiben

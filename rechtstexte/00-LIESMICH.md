@@ -17,11 +17,46 @@ Was noch offen ist:
 | Genaue WKO-Fachgruppe | Mitgliedsschreiben der Wirtschaftskammer Tirol, oder [firmen.wko.at](https://firmen.wko.at). Die Landeskammer selbst steht schon drin |
 | Widerrufs-Ausnahmen | Nur aufzählen, was auf euer Sortiment zutrifft. Bei Custom-Prints greift die Ausnahme für Maßanfertigungen |
 
-Zur Kontrolle: Die Gewerbebehörde ist als Bezirkshauptmannschaft Reutte
-eingetragen. Prüf einmal auf [gisa.gv.at](https://www.gisa.gv.at), ob das
-stimmt und auf welchen Namen die Gewerbeberechtigung läuft — bei einer GesbR
-hält sie in der Regel jeder Gesellschafter persönlich, nicht die
-Gesellschaft.
+## Aus euren Unterlagen übernommen
+
+Geprüft am 15.09.2026 gegen Gesellschaftsvertrag, UID-Bescheid,
+EORI-Bescheid, Steuernummern-Mitteilung und die FinanzOnline-Abfrage
+„Beteiligte" vom 27.08.2026.
+
+| Angabe | Wert | Quelle |
+| --- | --- | --- |
+| Sitz | Josef-Pohler-Weg 5, 6600 Reutte | Finanzamt, Zollamt, Beteiligten-Abfrage |
+| Gesellschafter | Thomas Cytryn (50 %), Alexander Seitz (50 %) | Beteiligten-Abfrage 2026 |
+| UID | ATU79119446 | UID-Bescheid vom 06.03.2023 |
+| EORI | ATEOS1000140126 | Zollamt Österreich, 09.01.2024 |
+| Unternehmensgegenstand | Vertrieb von Kleidungsstücken samt Accessoires | Gesellschaftsvertrag, Punkt II |
+
+Die **Steuernummer 84 203/7152 steht bewusst nirgends im Impressum.** Sie ist
+nicht offenlegungspflichtig, und sie zu veröffentlichen bringt euch nichts
+außer einem Angriffspunkt. Pflicht ist nur die UID.
+
+Ebenso wenig gehören Geburtsdaten oder die Privatadressen der Gesellschafter
+auf die Website. Der Sitz genügt, auch wenn er mit einer Privatadresse
+zusammenfällt.
+
+## Zwei Dinge außerhalb der Website
+
+**Der Gesellschaftsvertrag ist veraltet.** Er nennt Philipp Reinpold, Simon
+Walser und Alexander Seitz mit 42,5 / 15 / 42,5 Prozent. Beim Finanzamt sind
+für 2026 Thomas Cytryn und Alexander Seitz mit je 50 Prozent eingetragen. Der
+Vertrag bildet also weder die heutigen Gesellschafter noch die
+Gewinnverteilung ab. Bei einer GesbR haftet jeder Gesellschafter persönlich
+und unbeschränkt — wer laut Vertrag noch drinsteht, hat ein Problem, und wer
+nicht drinsteht, hat keine vertragliche Grundlage für seinen Anteil. Das
+gehört mit eurer Steuerberatung (at reutte Steuerberatungs GmbH) und
+idealerweise einem Juristen bereinigt. Das ist unabhängig vom Shop, aber
+wichtiger als alles andere auf dieser Liste.
+
+**Die Gewerbeberechtigung ist durch keines der Dokumente belegt.** UID und
+EORI sind Steuer- und Zollkennzeichen, kein Gewerbeschein. Prüf auf
+[gisa.gv.at](https://www.gisa.gv.at), ob eine Gewerbeberechtigung für den
+Handel besteht und auf wen sie läuft. Erst daraus ergibt sich auch die genaue
+WKO-Fachgruppe, die im Impressum noch fehlt.
 
 ## Meta- und TikTok-Pixel
 

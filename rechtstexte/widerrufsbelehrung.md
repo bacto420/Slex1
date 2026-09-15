@@ -20,7 +20,7 @@ beginnt die Frist mit dem Erhalt der **letzten** Ware.
 Um Ihr Widerrufsrecht auszuüben, müssen Sie uns
 
 **BACTO GesbR**
-Klosterweg 1, 6600 Reutte, Österreich
+Josef-Pohler-Weg 5, 6600 Reutte, Österreich
 E-Mail: info@bacto-clothing.com
 Telefon: +43 676 7860882
 
@@ -63,7 +63,7 @@ uns zurückzusenden oder zu übergeben. Die Frist ist gewahrt, wenn Sie die
 Waren vor Ablauf der Frist von 14 Tagen absenden.
 
 Rücksendeadresse:
-BACTO GesbR, Klosterweg 1, 6600 Reutte, Österreich
+BACTO GesbR, Josef-Pohler-Weg 5, 6600 Reutte, Österreich
 
 **Sie tragen die unmittelbaren Kosten der Rücksendung der Waren.**
 
@@ -93,7 +93,7 @@ bitte dieses Formular aus und senden Sie es zurück.)*
 
 An
 BACTO GesbR
-Klosterweg 1, 6600 Reutte, Österreich
+Josef-Pohler-Weg 5, 6600 Reutte, Österreich
 E-Mail: info@bacto-clothing.com
 
 Hiermit widerrufe(n) ich/wir (\*) den von mir/uns (\*) abgeschlossenen Vertrag
