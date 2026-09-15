@@ -17,6 +17,69 @@
     });
   }
 
+
+  /* ------------------------------------------------------------------
+     Footer columns as an accordion.
+
+     Built as an enhancement rather than as markup: the page ships with
+     every column open, and only a browser running this script folds them
+     away. Without JavaScript the legal links stay visible, which is what
+     § 5 ECG asks for — a fold that never opens would hide the Impressum.
+     ------------------------------------------------------------------ */
+  var cols = document.querySelector('[data-footer-accordion]');
+
+  if (cols) {
+    var mode = cols.getAttribute('data-footer-accordion') || 'always';
+    var phone = window.matchMedia('(max-width: 749px)');
+    var panels = [];
+
+    Array.prototype.forEach.call(
+      cols.querySelectorAll('[data-footer-heading]'),
+      function (heading, i) {
+        var panel = heading.parentNode.querySelector('[data-footer-panel]');
+        if (!panel) return;
+
+        /* The heading keeps its level; the button lives inside it, so the
+           outline stays intact for screen readers. */
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'footer__toggle';
+        button.innerHTML = heading.innerHTML;
+        heading.innerHTML = '';
+        heading.appendChild(button);
+
+        panel.id = panel.id || 'FooterPanel' + i;
+        button.setAttribute('aria-controls', panel.id);
+
+        var setOpen = function (open) {
+          panel.hidden = !open;
+          button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+
+        button.addEventListener('click', function () {
+          setOpen(button.getAttribute('aria-expanded') !== 'true');
+        });
+
+        panels.push(setOpen);
+      }
+    );
+
+    /* "Only on phones" has to react to a window being resized across the
+       breakpoint, otherwise a column folded on a narrow window stays folded
+       when it widens again. */
+    var apply = function () {
+      var folded = mode === 'always' || (mode === 'mobile' && phone.matches);
+      cols.setAttribute('data-folded', folded ? 'true' : 'false');
+      panels.forEach(function (setOpen) { setOpen(!folded); });
+    };
+
+    apply();
+    if (mode === 'mobile') {
+      if (phone.addEventListener) phone.addEventListener('change', apply);
+      else if (phone.addListener) phone.addListener(apply);
+    }
+  }
+
   /* ------------------------------------------------------------------
      Withdrawal form — two steps, as § 13a FAGG requires: fill in, then a
      separate screen whose only primary action is "Widerruf bestätigen".

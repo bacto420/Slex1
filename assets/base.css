@@ -970,6 +970,54 @@ textarea:focus {
   margin-bottom: var(--space-sm);
 }
 
+/* Folded columns. The heading keeps its level and its look; the button
+   inside it carries the interaction, so nothing shifts when the script
+   turns it on. */
+.footer__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.footer__toggle:hover {
+  color: var(--color-text);
+}
+
+/* A plus that becomes a minus. Only drawn once a column can actually
+   fold — an open-by-default column shows no affordance it does not have. */
+[data-folded="true"] .footer__toggle::after {
+  content: "+";
+  flex: 0 0 auto;
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 200ms ease;
+}
+
+[data-folded="true"] .footer__toggle[aria-expanded="true"]::after {
+  content: "−";
+}
+
+[data-folded="true"] .footer__heading {
+  margin-bottom: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+[data-folded="true"] .footer__panel {
+  padding-top: var(--space-sm);
+}
+
 .footer__col .rte {
   font-size: 12px;
   line-height: 1.7;

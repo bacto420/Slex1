@@ -132,28 +132,29 @@
     </dialog>
   {%- endif -%}
 
-  <div class="footer__cols">
+  <div class="footer__cols" data-footer-accordion="{{ section.settings.collapse_columns | default: 'always' }}">
     {%- comment -%} Identity — ECG § 5, UGB § 14, MedienG § 25. {%- endcomment -%}
     <div class="footer__col footer__col--identity">
-      <h2 class="footer__heading">{{ section.settings.identity_heading | default: 'Anbieter' }}</h2>
-      <div class="rte footer__identity">{{ section.settings.identity_text }}</div>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.identity_heading | default: 'Anbieter' }}</h2>
+      <div class="footer__panel" data-footer-panel><div class="rte footer__identity">{{ section.settings.identity_text }}</div></div>
     </div>
 
     {%- comment -%} Contact — FAGG § 4 requires address, phone and email. {%- endcomment -%}
     <div class="footer__col">
-      <h2 class="footer__heading">{{ section.settings.contact_heading | default: 'Kontakt' }}</h2>
-      <div class="rte footer__contact">{{ section.settings.contact_text }}</div>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.contact_heading | default: 'Kontakt' }}</h2>
+      <div class="footer__panel" data-footer-panel><div class="rte footer__contact">{{ section.settings.contact_text }}</div></div>
     </div>
 
     {%- comment -%} Shipping and returns — FAGG § 4 information duties. {%- endcomment -%}
     <div class="footer__col">
-      <h2 class="footer__heading">{{ section.settings.shipping_heading | default: 'Versand & Rücksendung' }}</h2>
-      <div class="rte footer__shipping">{{ section.settings.shipping_text }}</div>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.shipping_heading | default: 'Versand & Rücksendung' }}</h2>
+      <div class="footer__panel" data-footer-panel><div class="rte footer__shipping">{{ section.settings.shipping_text }}</div></div>
     </div>
 
     {%- comment -%} Legal navigation, editable as blocks. {%- endcomment -%}
     <div class="footer__col">
-      <h2 class="footer__heading">{{ section.settings.legal_heading | default: 'Rechtliches' }}</h2>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.legal_heading | default: 'Rechtliches' }}</h2>
+      <div class="footer__panel" data-footer-panel>
       <ul class="footer__links">
         {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
@@ -190,6 +191,7 @@
           {%- endfor -%}
         {%- endif -%}
       </ul>
+      </div>
     </div>
   </div>
 
@@ -263,6 +265,19 @@
     { "type": "header", "content": "Legal links" },
     { "type": "text", "id": "legal_heading", "label": "Heading", "default": "Rechtliches" },
 
+    { "type": "header", "content": "Columns" },
+    {
+      "type": "select",
+      "id": "collapse_columns",
+      "label": "Fold the columns away",
+      "info": "The headings become buttons. Without JavaScript everything stays visible, so the legal links are always reachable.",
+      "options": [
+        { "value": "always", "label": "On every screen" },
+        { "value": "mobile", "label": "Only on phones" },
+        { "value": "never", "label": "Never — always open" }
+      ],
+      "default": "always"
+    },
     { "type": "header", "content": "Bottom bar" },
     { "type": "text", "id": "note", "label": "Footer note", "default": "ALL RIGHTS RESERVED" },
     { "type": "text", "id": "cookie_link_label", "label": "Cookie settings link",
