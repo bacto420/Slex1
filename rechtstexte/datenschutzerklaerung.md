@@ -44,9 +44,18 @@ erfolgte — § 132 BAO und § 212 UGB.
 sehen wir nie; sie werden ausschließlich vom Zahlungsdienstleister
 verarbeitet.
 
-**Anbieter:** Shopify Payments, Apple Pay, Google Pay, PayPal
-⚠ BITTE ERGÄNZEN — weitere aktive Zahlungsarten ergänzen oder nicht
-genutzte streichen.
+**Anbieter:**
+
+- Shopify Payments und Shop Pay — Shopify International Limited, Dublin,
+  Irland. Darüber laufen die Kartenzahlungen mit Visa, Mastercard, American
+  Express, Maestro und UnionPay.
+- PayPal (Europe) S.à r.l. et Cie, S.C.A., Luxemburg
+- Apple Pay — Apple Distribution International Ltd., Irland
+- Google Pay — Google Ireland Limited, Irland
+
+Die Zahlungsdienstleister verarbeiten die Zahlungsdaten als **eigene
+Verantwortliche** nach ihren eigenen Datenschutzbestimmungen. Wir erhalten
+von ihnen nur die Information, ob die Zahlung erfolgreich war.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. b DSGVO.
 
@@ -142,7 +151,7 @@ EU-Kommission.
 | Empfänger | Zweck | Sitz | Rolle |
 | --- | --- | --- | --- |
 | Shopify International Ltd. | Shop-Plattform, Hosting | Irland / Kanada | Auftragsverarbeiter |
-| Shopify Payments, PayPal, Apple, Google | Zahlungsabwicklung | EU / USA | eigene Verantwortliche |
+| Shopify Payments / Shop Pay, PayPal, Apple, Google | Zahlungsabwicklung | Irland / Luxemburg | eigene Verantwortliche |
 | DPD Austria GmbH | Zustellung | Österreich | eigener Verantwortlicher |
 | sevdesk GmbH | Buchhaltung | Deutschland | Auftragsverarbeiter |
 | Meta Platforms Ireland Ltd. | Werbung, nur mit Einwilligung | Irland / USA | gemeinsam Verantwortliche |

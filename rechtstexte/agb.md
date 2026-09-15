@@ -41,12 +41,17 @@ direkt vom Zustelldienst oder von der Zollbehörde eingehoben.
 
 ## 4. Zahlung
 
-Wir akzeptieren Shopify Payments (Kredit- und Debitkarte), Apple Pay,
-Google Pay und PayPal.
-⚠ BITTE ERGÄNZEN — weitere Zahlungsarten ergänzen oder nicht genutzte
-streichen.
+Wir akzeptieren:
 
-Die Zahlung ist mit Abschluss der Bestellung fällig.
+- **Kredit- und Debitkarte** über Shopify Payments: Visa, Mastercard,
+  American Express, Maestro, UnionPay
+- **Shop Pay**
+- **Apple Pay**
+- **Google Pay**
+- **PayPal**
+
+Die Zahlung ist mit Abschluss der Bestellung fällig. Welche Zahlungsarten im
+Einzelfall zur Verfügung stehen, wird Ihnen im Bestellvorgang angezeigt.
 
 ## 5. Lieferung
 

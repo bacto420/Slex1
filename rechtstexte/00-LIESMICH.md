@@ -16,7 +16,6 @@ Was noch offen ist:
 | --- | --- |
 | Genaue WKO-Fachgruppe | Mitgliedsschreiben der Wirtschaftskammer Tirol, oder [firmen.wko.at](https://firmen.wko.at). Die Landeskammer selbst steht schon drin |
 | Feuern Meta- und TikTok-Pixel? | Inkognito-Fenster, F12 → Netzwerk, nach `facebook` filtern, Seite laden ohne Banner-Klick. Bleibt die Liste leer, sind die Pixel aus — dann Marketing-Abschnitte streichen |
-| Zahlungsarten vollständig? | Shopify → Einstellungen → Zahlungen |
 | Widerrufs-Ausnahmen | Nur aufzählen, was auf euer Sortiment zutrifft. Bei Custom-Prints greift die Ausnahme für Maßanfertigungen |
 
 Zur Kontrolle: Die Gewerbebehörde ist als Bezirkshauptmannschaft Reutte
