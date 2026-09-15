@@ -135,25 +135,25 @@
   <div class="footer__cols" data-footer-accordion="{{ section.settings.collapse_columns | default: 'always' }}">
     {%- comment -%} Identity — ECG § 5, UGB § 14, MedienG § 25. {%- endcomment -%}
     <div class="footer__col footer__col--identity">
-      <h2 class="footer__heading" data-footer-heading>{{ section.settings.identity_heading | default: 'Anbieter' }}</h2>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.identity_heading | default: 'Company' }}</h2>
       <div class="footer__panel" data-footer-panel><div class="rte footer__identity">{{ section.settings.identity_text }}</div></div>
     </div>
 
     {%- comment -%} Contact — FAGG § 4 requires address, phone and email. {%- endcomment -%}
     <div class="footer__col">
-      <h2 class="footer__heading" data-footer-heading>{{ section.settings.contact_heading | default: 'Kontakt' }}</h2>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.contact_heading | default: 'Contact' }}</h2>
       <div class="footer__panel" data-footer-panel><div class="rte footer__contact">{{ section.settings.contact_text }}</div></div>
     </div>
 
     {%- comment -%} Shipping and returns — FAGG § 4 information duties. {%- endcomment -%}
     <div class="footer__col">
-      <h2 class="footer__heading" data-footer-heading>{{ section.settings.shipping_heading | default: 'Versand & Rücksendung' }}</h2>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.shipping_heading | default: 'Shipping & Returns' }}</h2>
       <div class="footer__panel" data-footer-panel><div class="rte footer__shipping">{{ section.settings.shipping_text }}</div></div>
     </div>
 
     {%- comment -%} Legal navigation, editable as blocks. {%- endcomment -%}
     <div class="footer__col">
-      <h2 class="footer__heading" data-footer-heading>{{ section.settings.legal_heading | default: 'Rechtliches' }}</h2>
+      <h2 class="footer__heading" data-footer-heading>{{ section.settings.legal_heading | default: 'Legal' }}</h2>
       <div class="footer__panel" data-footer-panel>
       <ul class="footer__links">
         {%- if section.blocks.size > 0 -%}
@@ -248,22 +248,22 @@
       "default": "<p>Ihre Angaben werden ausschließlich zur Bearbeitung des Widerrufs verarbeitet (Art. 6 Abs. 1 lit. b und c DSGVO) und nicht für Werbung verwendet. Einzelheiten und Ihre Rechte: <a href=\"/pages/datenschutz\">Datenschutzerkl\u00e4rung</a>.</p>" },
 
     { "type": "header", "content": "Provider details" },
-    { "type": "text", "id": "identity_heading", "label": "Heading", "default": "Anbieter" },
+    { "type": "text", "id": "identity_heading", "label": "Heading", "default": "Company" },
     { "type": "richtext", "id": "identity_text", "label": "Provider details",
       "default": "<p>Firmenname e.U.<br/>Musterstraße 1, 1010 Wien, Österreich<br/>UID: ATU00000000<br/>Firmenbuch: FN 000000a, Landesgericht Wien</p>" },
 
     { "type": "header", "content": "Contact" },
-    { "type": "text", "id": "contact_heading", "label": "Heading", "default": "Kontakt" },
+    { "type": "text", "id": "contact_heading", "label": "Heading", "default": "Contact" },
     { "type": "richtext", "id": "contact_text", "label": "Contact details",
       "default": "<p>E-Mail: hallo@example.at<br/>Telefon: +43 000 0000000<br/>Mo–Fr 9–17 Uhr</p>" },
 
     { "type": "header", "content": "Shipping and returns" },
-    { "type": "text", "id": "shipping_heading", "label": "Heading", "default": "Versand & Rücksendung" },
+    { "type": "text", "id": "shipping_heading", "label": "Heading", "default": "Shipping & Returns" },
     { "type": "richtext", "id": "shipping_text", "label": "Shipping and returns",
       "default": "<p>Lieferzeit 2–4 Werktage<br/>Versandkosten ab 4,90 €<br/>Rücksendekosten trägt der Kunde<br/>Rücksendeadresse: Musterstraße 1, 1010 Wien</p>" },
 
     { "type": "header", "content": "Legal links" },
-    { "type": "text", "id": "legal_heading", "label": "Heading", "default": "Rechtliches" },
+    { "type": "text", "id": "legal_heading", "label": "Heading", "default": "Legal" },
 
     { "type": "header", "content": "Columns" },
     {
