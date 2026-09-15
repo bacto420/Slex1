@@ -27,12 +27,18 @@
     {%- comment -%}
       Display face. "Earwig Factory" is not licensed for web embedding via
       Google/Shopify — Michroma is the closest freely licensed match.
-      To swap in a self-hosted font later: upload the .woff2 to Assets and
-      set --font-stack in the inline block below.
+
+      Served from this shop, never from fonts.googleapis.com. A webfont
+      fetched from Google hands the visitor's IP address to Google before
+      the page has asked anything, which needs consent that has not been
+      given yet at that point (DSGVO Art. 6; Austrian DSB and LG München
+      I 3 O 17493/20 both on Google Fonts). Self-hosting removes the
+      transfer entirely, and Michroma's SIL Open Font License 1.1 expressly
+      allows it. Attribution and the licence text: LICENSES.md in the theme
+      repository.
     {%- endcomment -%}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&display=swap">
+    <link rel="preload" href="{{ 'michroma-latin.woff2' | asset_url }}" as="font"
+          type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
 
