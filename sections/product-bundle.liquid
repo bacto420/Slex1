@@ -51,8 +51,15 @@
   assign bundle_total = regular | minus: saving
 -%}
 
+{%- liquid
+  assign wrap = 'page-width section bundle'
+  if section.settings.layout == 'centered'
+    assign wrap = 'section bundle bundle--centered'
+  endif
+-%}
+
 {%- if count > 1 -%}
-  <div class="page-width section bundle">
+  <div class="{{ wrap }}">
     <div class="bundle__head">
       <h2 class="section__title bundle__title">{{ section.settings.title }}</h2>
       <span class="bundle__badge">−{{ pct }}%</span>
@@ -139,7 +146,7 @@
     the shop, and it carries no prices: an example price is a promise the
     checkout would not keep.
   {%- endcomment -%}
-  <div class="page-width section bundle bundle--setup">
+  <div class="{{ wrap }} bundle--setup">
     <div class="bundle__head">
       <h2 class="section__title bundle__title">{{ section.settings.title }}</h2>
       <span class="bundle__badge">−{{ pct }}%</span>
@@ -184,6 +191,16 @@
       "id": "subtitle",
       "label": "Subheading",
       "default": "Buy the jacket together with the longsleeve and save 15%."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "split", "label": "Products left, summary right" },
+        { "value": "centered", "label": "Full width, centred" }
+      ],
+      "default": "split"
     },
     {
       "type": "header",

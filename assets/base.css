@@ -1350,6 +1350,49 @@ textarea:focus {
   text-transform: uppercase;
 }
 
+/* Full width and centred — the home page variant. Runs the whole width of
+   the screen instead of the 1600px measure, with everything stacked on one
+   axis so it reads as a closing statement under the product grid. */
+.bundle--centered {
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  text-align: center;
+}
+
+.bundle--centered .bundle__head {
+  justify-content: center;
+}
+
+.bundle--centered .bundle__subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bundle--centered .bundle__body {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: var(--space-lg);
+}
+
+.bundle--centered .bundle__set {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bundle--centered .bundle__item {
+  flex: 0 1 260px;
+}
+
+.bundle--centered .bundle__summary {
+  width: 100%;
+  max-width: 360px;
+}
+
+.bundle--centered .bundle__saving,
+.bundle--centered .bundle__note {
+  text-align: center;
+}
+
 /* Editor-only state, while the section has no products yet. */
 .bundle--setup {
   outline: 1px dashed var(--color-line);
