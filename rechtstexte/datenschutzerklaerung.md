@@ -1,14 +1,14 @@
 # Datenschutzerklärung
 
-Stand: ⚠ BITTE ERGÄNZEN — Datum
+Stand: 15. September 2026
 
 ## 1. Verantwortlicher
 
 BACTO GesbR
 Gesellschafter: Alexander Seitz, Thomas Cytryn
-Klosterweg 1, ⚠ BITTE ERGÄNZEN — PLZ und Ort, Österreich
+Klosterweg 1, 6600 Reutte, Österreich
 E-Mail: info@bacto-clothing.com
-Telefon: ⚠ BITTE ERGÄNZEN
+Telefon: +43 676 7860882
 
 Ein Datenschutzbeauftragter ist nicht bestellt; die Voraussetzungen des
 Art. 37 DSGVO liegen bei uns nicht vor.
@@ -46,9 +46,9 @@ genutzte streichen.
 **Daten:** Name, Lieferadresse, E-Mail-Adresse oder Telefonnummer für die
 Sendungsverfolgung.
 
-**Empfänger:** der beauftragte Zustelldienst.
-⚠ BITTE ERGÄNZEN — konkreten Versanddienstleister nennen, z. B. „DPD Austria
-GmbH, Am Flugplatz 1, 4064 Leonding".
+**Empfänger:** DPD Austria GmbH.
+⚠ BITTE PRÜFEN — vollständige Firmenanschrift laut eurem DPD-Vertrag
+ergänzen.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. b DSGVO.
 
@@ -130,7 +130,7 @@ EU-Kommission.
 | --- | --- | --- |
 | Shopify International Ltd. | Shop-Plattform, Hosting | Irland / Kanada |
 | Shopify Payments, PayPal, Apple, Google | Zahlungsabwicklung | EU / USA |
-| ⚠ Versanddienstleister | Zustellung | ⚠ |
+| DPD Austria GmbH | Zustellung | Österreich |
 | sevdesk GmbH | Buchhaltung | Deutschland |
 | Meta Platforms Ireland Ltd. | Werbung, nur mit Einwilligung | Irland / USA |
 | TikTok Technology Ltd. | Werbung, nur mit Einwilligung | Irland / USA |

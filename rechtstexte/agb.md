@@ -1,13 +1,13 @@
 # Allgemeine Geschäftsbedingungen
 
-Stand: ⚠ BITTE ERGÄNZEN — Datum
+Stand: 15. September 2026
 
 ## 1. Geltungsbereich und Vertragspartner
 
 Diese Bedingungen gelten für alle Bestellungen über www.bacto-clothing.com.
 Vertragspartner ist
 
-**BACTO GesbR**, Klosterweg 1, ⚠ BITTE ERGÄNZEN — PLZ und Ort, Österreich
+**BACTO GesbR**, Klosterweg 1, 6600 Reutte, Österreich
 UID: ATU79119446, E-Mail: info@bacto-clothing.com
 
 Abweichende Bedingungen des Kunden gelten nur, wenn wir ihnen schriftlich
@@ -29,10 +29,11 @@ E-Mail übermittelt. Die Bestellung ist in deutscher Sprache möglich.
 ## 3. Preise und Versandkosten
 
 Alle Preise verstehen sich in Euro inklusive der gesetzlichen Umsatzsteuer.
-Versandkosten kommen hinzu und werden vor Abschluss der Bestellung
-ausgewiesen.
 
-Versandkosten: ⚠ BITTE ERGÄNZEN
+Die Versandkosten hängen vom Lieferland ab. Sie werden im Bestellvorgang
+berechnet und **vor dem verbindlichen Absenden der Bestellung** vollständig
+ausgewiesen. Es entstehen keine Kosten, die Ihnen nicht vorher angezeigt
+wurden.
 
 Bei Lieferungen außerhalb der EU können Zoll, Einfuhrumsatzsteuer und
 Gebühren des Zustelldienstes anfallen. Diese trägt der Kunde und sie werden
@@ -50,7 +51,7 @@ Die Zahlung ist mit Abschluss der Bestellung fällig.
 ## 5. Lieferung
 
 Die Lieferzeit beträgt **3 bis 12 Werktage** ab Zahlungseingang. Wir liefern
-weltweit.
+weltweit. Der Versand erfolgt mit DPD.
 
 Ist ein Artikel nicht verfügbar, informieren wir Sie unverzüglich und
 erstatten bereits geleistete Zahlungen ohne Abzug.

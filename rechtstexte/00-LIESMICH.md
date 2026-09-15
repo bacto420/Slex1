@@ -10,15 +10,21 @@ Jede Stelle mit **⚠ BITTE ERGÄNZEN** muss gefüllt sein. Solange auch nur ein
 offen ist, darf der Text nicht live gehen — ein unvollständiges Impressum ist
 abmahnbar, eine unvollständige Datenschutzerklärung ist ein DSGVO-Verstoß.
 
-Was noch fehlt und wie du es herausfindest:
+Was noch offen ist:
 
-| Fehlt | Wo du es findest |
+| Offen | Wo du es findest |
 | --- | --- |
-| PLZ und Ort zu „Klosterweg 1" | eure Geschäftsadresse |
-| Telefonnummer | bei Fernabsatz verpflichtend (FAGG § 4). Eine Mobilnummer genügt |
-| Gewerbebehörde | GISA-Auszug: [gisa.gv.at](https://www.gisa.gv.at) nach eurem Namen suchen — dort steht Gewerbewortlaut und zuständige Behörde |
-| WKO-Landeskammer und Fachgruppe | steht auf eurem WKO-Mitgliedsschreiben, oder [firmen.wko.at](https://firmen.wko.at) nach BACTO suchen |
-| Versandkosten | eure Shopify-Versandprofile |
+| Genaue WKO-Fachgruppe | Mitgliedsschreiben der Wirtschaftskammer Tirol, oder [firmen.wko.at](https://firmen.wko.at). Die Landeskammer selbst steht schon drin |
+| Vollständige Anschrift der DPD Austria GmbH | euer DPD-Vertrag |
+| Feuern Meta- und TikTok-Pixel? | Inkognito-Fenster, F12 → Netzwerk, nach `facebook` filtern, Seite laden ohne Banner-Klick. Bleibt die Liste leer, sind die Pixel aus — dann Marketing-Abschnitte streichen |
+| Zahlungsarten vollständig? | Shopify → Einstellungen → Zahlungen |
+| Widerrufs-Ausnahmen | Nur aufzählen, was auf euer Sortiment zutrifft. Bei Custom-Prints greift die Ausnahme für Maßanfertigungen |
+
+Zur Kontrolle: Die Gewerbebehörde ist als Bezirkshauptmannschaft Reutte
+eingetragen. Prüf einmal auf [gisa.gv.at](https://www.gisa.gv.at), ob das
+stimmt und auf welchen Namen die Gewerbeberechtigung läuft — bei einer GesbR
+hält sie in der Regel jeder Gesellschafter persönlich, nicht die
+Gesellschaft.
 
 ## Empfohlene Seiten und Adressen
 

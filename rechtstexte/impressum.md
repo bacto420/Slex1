@@ -11,13 +11,13 @@ Gesellschafter: Alexander Seitz, Thomas Cytryn
 (beide zur Vertretung berechtigt, persönlich und solidarisch haftend)
 
 Klosterweg 1
-⚠ BITTE ERGÄNZEN — PLZ und Ort
+6600 Reutte
 Österreich
 
 ## Kontakt
 
 E-Mail: info@bacto-clothing.com
-Telefon: ⚠ BITTE ERGÄNZEN
+Telefon: +43 676 7860882
 
 ## Unternehmensdaten
 
@@ -25,8 +25,9 @@ UID-Nummer: ATU79119446
 Firmenbuch: nicht eingetragen (Gesellschaft bürgerlichen Rechts)
 
 Unternehmensgegenstand: Handel mit Bekleidung
-Gewerbebehörde: ⚠ BITTE ERGÄNZEN — zuständige Bezirkshauptmannschaft laut GISA
-Mitglied der Wirtschaftskammer ⚠ BITTE ERGÄNZEN — Landeskammer, Fachgruppe
+Gewerbebehörde: Bezirkshauptmannschaft Reutte
+Mitglied der Wirtschaftskammer Tirol, Sparte Handel
+Fachgruppe: ⚠ BITTE ERGÄNZEN — genaue Fachgruppe laut WKO-Mitgliedsschreiben
 
 Anwendbare Rechtsvorschrift: Gewerbeordnung 1994, abrufbar unter
 [ris.bka.gv.at](https://www.ris.bka.gv.at)

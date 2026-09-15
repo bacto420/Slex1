@@ -1,6 +1,6 @@
 # Cookie-Richtlinie
 
-Stand: ⚠ BITTE ERGÄNZEN — Datum der Veröffentlichung
+Stand: 15. September 2026
 
 ## Was Cookies sind
 
