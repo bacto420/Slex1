@@ -4,18 +4,17 @@ Stand: 2026-09-15. Diese Texte gehören **nicht** ins Theme-ZIP. Sie werden in
 Shopify als Seiten angelegt (Onlineshop → Seiten → Seite hinzufügen) und im
 Footer verlinkt.
 
-## Vor dem Veröffentlichen
+## Stand
 
-Jede Stelle mit **⚠ BITTE ERGÄNZEN** muss gefüllt sein. Solange auch nur eine
-offen ist, darf der Text nicht live gehen — ein unvollständiges Impressum ist
-abmahnbar, eine unvollständige Datenschutzerklärung ist ein DSGVO-Verstoß.
+**Alle fünf Texte sind vollständig.** Es ist keine Stelle mehr offen, die
+gefüllt werden muss.
 
-Was noch offen ist:
-
-| Offen | Wo du es findest |
-| --- | --- |
-| Genaue WKO-Fachgruppe | Mitgliedsschreiben der Wirtschaftskammer Tirol, oder [firmen.wko.at](https://firmen.wko.at). Die Landeskammer selbst steht schon drin |
-| Widerrufs-Ausnahmen | Nur aufzählen, was auf euer Sortiment zutrifft. Bei Custom-Prints greift die Ausnahme für Maßanfertigungen |
+Eine Angabe fehlt bewusst: die **WKO-Fachgruppe**. § 5 ECG verlangt die
+Kammer, der ihr angehört — das ist die Wirtschaftskammer Tirol, und die steht
+drin. Die Fachgruppe darunter ist üblich, aber nicht vorgeschrieben. Wollt ihr
+sie ergänzen, steht sie auf der jährlichen Grundumlagenvorschreibung der WKO;
+sonst genügt ein Anruf bei der WKO Tirol unter 05 90 90 5. Findet ihr sie
+nicht, lasst sie weg — das Impressum ist auch ohne sie vollständig.
 
 ## Aus euren Unterlagen übernommen
 
@@ -57,6 +56,16 @@ EORI sind Steuer- und Zollkennzeichen, kein Gewerbeschein. Prüf auf
 [gisa.gv.at](https://www.gisa.gv.at), ob eine Gewerbeberechtigung für den
 Handel besteht und auf wen sie läuft. Erst daraus ergibt sich auch die genaue
 WKO-Fachgruppe, die im Impressum noch fehlt.
+
+## Wenn sich das Sortiment ändert
+
+Die Widerrufsbelehrung sagt derzeit zu, dass das Widerrufsrecht für das
+**gesamte** Sortiment gilt. Das stimmt, solange es keine Sonderanfertigungen
+gibt. Nehmt ihr wieder Custom-Prints, Wunschnamen, Wunschgrößen oder
+versiegelte Hygieneartikel ins Programm, muss der Abschnitt „Umfang des
+Widerrufsrechts" zurück auf die Ausnahmen nach § 18 FAGG — sonst habt ihr ein
+Rückgaberecht versprochen, das ihr für diese Artikel nicht geben wolltet, und
+seid daran gebunden.
 
 ## Meta- und TikTok-Pixel
 

@@ -73,16 +73,11 @@ und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen
 zurückzuführen ist. Anprobieren ist erlaubt — Tragen, Waschen oder das
 Entfernen von Etiketten geht darüber hinaus.
 
-## Ausnahmen vom Widerrufsrecht
+## Umfang des Widerrufsrechts
 
-Das Widerrufsrecht besteht nach § 18 FAGG unter anderem nicht bei Waren, die
-nach Kundenspezifikation angefertigt oder eindeutig auf persönliche
-Bedürfnisse zugeschnitten sind, und bei versiegelten Waren, die aus Gründen
-des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind,
-wenn ihre Versiegelung nach der Lieferung entfernt wurde.
-
-⚠ BITTE PRÜFEN — Nur die Ausnahmen aufzählen, die auf euer Sortiment
-tatsächlich zutreffen. Custom-Prints würden unter die erste Ausnahme fallen.
+Das Widerrufsrecht gilt für **unser gesamtes Sortiment**. Wir führen weder
+Sonderanfertigungen noch personalisierte Artikel, für die das Gesetz eine
+Ausnahme vorsieht.
 
 ---
 

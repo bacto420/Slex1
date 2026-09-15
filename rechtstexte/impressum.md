@@ -28,7 +28,6 @@ Unternehmensgegenstand: Vertrieb von Kleidungsstücken samt Accessoires
 EORI-Nummer: ATEOS1000140126
 Gewerbebehörde: Bezirkshauptmannschaft Reutte
 Mitglied der Wirtschaftskammer Tirol, Sparte Handel
-Fachgruppe: ⚠ BITTE ERGÄNZEN — genaue Fachgruppe laut WKO-Mitgliedsschreiben
 
 Anwendbare Rechtsvorschrift: Gewerbeordnung 1994, abrufbar unter
 [ris.bka.gv.at](https://www.ris.bka.gv.at)
