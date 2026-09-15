@@ -106,6 +106,15 @@
         </div>
       </div>
 
+
+      {%- comment -%}
+        Art. 13 DSGVO — the person has to be told what happens with the data
+        at the moment it is collected, not somewhere else on the site.
+      {%- endcomment -%}
+      {%- if section.settings.privacy_note != blank -%}
+        <div class="widerruf__privacy rte">{{ section.settings.privacy_note }}</div>
+      {%- endif -%}
+
       <noscript>
         <div class="widerruf__note">
           <p>{{ section.settings.noscript_note | default: 'Ohne aktiviertes JavaScript senden Sie das Formular direkt mit der folgenden Schaltfläche ab.' }}</p>
@@ -127,6 +136,9 @@
   "name": "Widerruf form",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Vertrag widerrufen" },
+    { "type": "richtext", "id": "privacy_note", "label": "Privacy note at the form",
+      "info": "Art. 13 DSGVO — shown with the form itself. Point the link at your privacy page.",
+      "default": "<p>Ihre Angaben werden ausschließlich zur Bearbeitung des Widerrufs verarbeitet (Art. 6 Abs. 1 lit. b und c DSGVO) und nicht für Werbung verwendet. Einzelheiten und Ihre Rechte: <a href=\"/pages/datenschutz\">Datenschutzerkl\u00e4rung</a>.</p>" },
     { "type": "richtext", "id": "intro", "label": "Intro text",
       "default": "<p>Mit diesem Formular können Sie Ihren Vertrag widerrufen. Sie brauchen dafür kein Kundenkonto. Nach dem Absenden erhalten Sie eine Eingangsbestätigung per E-Mail.</p>" },
     { "type": "text", "id": "step1_label", "label": "Step 1 heading", "default": "Ihre Angaben" },

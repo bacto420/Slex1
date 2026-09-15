@@ -105,6 +105,15 @@
               </div>
             </div>
 
+
+            {%- comment -%}
+              Art. 13 DSGVO — the person has to be told what happens with the data
+              at the moment it is collected, not somewhere else on the site.
+            {%- endcomment -%}
+            {%- if section.settings.privacy_note != blank -%}
+              <div class="widerruf__privacy rte">{{ section.settings.privacy_note }}</div>
+            {%- endif -%}
+
             <noscript>
               <p class="widerruf__note">Ohne JavaScript senden Sie das Formular direkt ab.</p>
               <button type="submit" class="btn btn--confirm">
@@ -155,13 +164,30 @@
             {%- endif -%}
           {%- endfor -%}
         {%- else -%}
-          <li><a href="/pages/impressum">Impressum</a></li>
-          <li><a href="/pages/agb">AGB</a></li>
-          <li><a href="/pages/datenschutz">Datenschutz</a></li>
-          <li><a href="/pages/widerrufsbelehrung">Widerrufsbelehrung</a></li>
-          <li><a href="/pages/versand-und-ruecksendung">Versand &amp; Rücksendung</a></li>
-          <li><a href="/pages/zahlungsarten">Zahlungsarten</a></li>
-          <li><a href="/pages/streitbeilegung">Streitbeilegung</a></li>
+          {%- comment -%}
+            No link blocks configured yet. Rather than printing a fixed list
+            of German handles — which 404s in a shop whose pages are named in
+            English — each entry looks for the page itself and is only
+            printed once one of its candidate addresses actually exists. A
+            legal notice has to be "leicht und unmittelbar zugänglich"
+            (ECG § 5), and a link into nothing is neither.
+          {%- endcomment -%}
+          {%- assign legal_items = 'Impressum~impressum,imprint,legal-notice;AGB~agb,allgemeine-geschaeftsbedingungen,general-terms-and-conditions,terms-of-service;Datenschutz~datenschutz,datenschutzerklaerung,data-protection,privacy-policy;Widerrufsbelehrung~widerrufsbelehrung,widerruf,cancellation-policy,refund-policy;Versand & Rücksendung~versand-und-ruecksendung,versand,terms-of-payment-and-dispatch,shipping-policy,return;Zahlungsarten~zahlungsarten,terms-of-payment-and-dispatch;Kontakt~kontakt,contact' | split: ';' -%}
+          {%- for item in legal_items -%}
+            {%- assign parts = item | split: '~' -%}
+            {%- assign candidates = parts[1] | split: ',' -%}
+            {%- assign found_url = '' -%}
+            {%- for handle in candidates -%}
+              {%- assign candidate = pages[handle] -%}
+              {%- if candidate != empty and candidate.handle -%}
+                {%- assign found_url = candidate.url -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if found_url != '' -%}
+              <li><a href="{{ found_url }}">{{ parts[0] }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
         {%- endif -%}
       </ul>
     </div>
@@ -209,6 +235,9 @@
       "info": "Only needed if you also want a standalone page using the \"page.widerruf\" template." },
     { "type": "text", "id": "withdrawal_note", "label": "Note under the button",
       "default": "Widerruf ohne Kundenkonto – auch für Gastbestellungen" },
+    { "type": "richtext", "id": "privacy_note", "label": "Privacy note at the form",
+      "info": "Art. 13 DSGVO — shown with the form itself. Point the link at your privacy page.",
+      "default": "<p>Ihre Angaben werden ausschließlich zur Bearbeitung des Widerrufs verarbeitet (Art. 6 Abs. 1 lit. b und c DSGVO) und nicht für Werbung verwendet. Einzelheiten und Ihre Rechte: <a href=\"/pages/datenschutz\">Datenschutzerkl\u00e4rung</a>.</p>" },
 
     { "type": "header", "content": "Provider details" },
     { "type": "text", "id": "identity_heading", "label": "Heading", "default": "Anbieter" },

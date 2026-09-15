@@ -1191,6 +1191,15 @@ textarea:focus {
   text-align: center;
 }
 
+.widerruf__privacy {
+  margin-top: var(--space-md);
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.widerruf__privacy a { text-decoration: underline; }
+
 .widerruf__stamp {
   font-size: 11px;
   letter-spacing: 0.08em;
