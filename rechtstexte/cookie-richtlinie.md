@@ -23,6 +23,19 @@ Rechtsgrundlage: § 165 Abs. 3 TKG 2021 und Art. 6 Abs. 1 lit. a DSGVO für
 einwilligungspflichtige Cookies, Art. 6 Abs. 1 lit. f DSGVO für technisch
 notwendige.
 
+## Über den Browser steuern
+
+Unabhängig von unserem Banner können Sie Cookies in Ihrem Browser selbst
+regeln. Üblicherweise lässt sich dort einstellen, dass
+
+- Sie über das Setzen von Cookies informiert werden und im Einzelfall
+  entscheiden,
+- Cookies generell oder für bestimmte Arten nicht angenommen werden,
+- gesetzte Cookies beim Schließen des Browsers automatisch gelöscht werden.
+
+Werden alle Cookies abgelehnt, funktionieren Warenkorb und Bestellvorgang
+nicht mehr vollständig — diese Cookies sind technisch notwendig.
+
 ## Die Kategorien
 
 ### Notwendig — immer aktiv

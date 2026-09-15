@@ -94,11 +94,27 @@ DSGVO zur Erfüllung der Pflichten aus dem FAGG.
 
 ### 3.6 Betrieb der Website
 
-**Daten:** IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite,
-übertragene Datenmenge, Browsertyp und Betriebssystem.
+Rufen Sie unsere Seiten auf, ohne uns darüber hinaus Daten zu übermitteln,
+erfasst der Server automatisch die Angaben, die Ihr Browser übermittelt. Im
+Serverprotokoll werden festgehalten:
+
+- die Herkunftsadresse (die Seite, von der aus Sie zu uns gekommen sind)
+- Name und Adresse der aufgerufenen Seite
+- Datum und Uhrzeit des Zugriffs
+- die Zeitzonendifferenz zur Greenwich Mean Time
+- Ihre IP-Adresse
+- Typ, Sprache und Version Ihres Browsers
+- das Betriebssystem Ihres Geräts
+- die übertragene Datenmenge
+- der HTTP-Statuscode, also ob der Zugriff erfolgreich war
 
 **Zweck:** Auslieferung der Seite, Stabilität und Sicherheit, Abwehr von
 Missbrauch.
+
+**Speicherdauer:** Die Protokolle werden von Shopify als Betreiber der
+Plattform geführt und dort nach kurzer Zeit automatisch gelöscht. Auf die
+genaue Dauer haben wir keinen Einfluss; wir werten die Protokolle nicht aus
+und führen sie nicht mit anderen Daten zusammen.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse
 ist der sichere und störungsfreie Betrieb des Shops.
