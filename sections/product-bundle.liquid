@@ -203,6 +203,17 @@
       "default": "split"
     },
     {
+      "type": "range",
+      "id": "tile_width",
+      "min": 220,
+      "max": 520,
+      "step": 20,
+      "unit": "px",
+      "label": "Product size",
+      "info": "Only applies to the centred layout.",
+      "default": 360
+    },
+    {
       "type": "header",
       "content": "Saving"
     },
@@ -265,3 +276,9 @@
   ]
 }
 {% endschema %}
+
+<style>
+  #shopify-section-{{ section.id }} .bundle--centered {
+    --bundle-tile: {{ section.settings.tile_width | default: 360 }}px;
+  }
+</style>

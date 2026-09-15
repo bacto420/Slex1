@@ -1398,13 +1398,17 @@ textarea:focus {
   text-transform: uppercase;
 }
 
-/* Full width and centred — the home page variant. Runs the whole width of
-   the screen instead of the 1600px measure, with everything stacked on one
-   axis so it reads as a closing statement under the product grid. */
+/* Full width and centred — the home page variant. A band of its own under
+   the product grid: the whole width of the screen, everything stacked on one
+   axis, and the tiles large enough to carry the block on a desktop. The
+   column is a flex container rather than a text-align trick, so the head,
+   the set and the summary all centre on the same axis whatever their width. */
 .bundle--centered {
-  padding-left: var(--space-md);
-  padding-right: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  padding: var(--space-xl) var(--space-md);
 }
 
 .bundle--centered .bundle__head {
@@ -1412,33 +1416,75 @@ textarea:focus {
 }
 
 .bundle--centered .bundle__subtitle {
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 52ch;
 }
 
 .bundle--centered .bundle__body {
-  grid-template-columns: 1fr;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-lg);
+  width: 100%;
 }
 
 .bundle--centered .bundle__set {
   justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-lg);
   flex-wrap: wrap;
+  width: 100%;
 }
 
+/* Fixed width rather than a flex basis that can shrink: two tiles that no
+   longer fit have to wrap onto their own lines, not squeeze together. */
 .bundle--centered .bundle__item {
-  flex: 0 1 260px;
+  flex: 0 0 auto;
+  width: var(--bundle-tile, 360px);
+  max-width: 100%;
+}
+
+.bundle--centered .bundle__plus {
+  font-size: 28px;
 }
 
 .bundle--centered .bundle__summary {
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
 }
 
 .bundle--centered .bundle__saving,
-.bundle--centered .bundle__note {
+.bundle--centered .bundle__note,
+.bundle--centered .bundle__setup-note {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* A touch more type on a desktop, so the band does not read as a footnote
+   under the product grid. */
+@media screen and (min-width: 750px) {
+  .bundle--centered .bundle__title,
+  .bundle--centered .bundle__subtitle {
+    font-size: 14px;
+  }
+
+  .bundle--centered .bundle__badge {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .bundle--centered .bundle__name {
+    font-size: 12px;
+  }
+
+  .bundle--centered .bundle__totals > div {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .bundle--centered .bundle__totals-row--deal dd {
+    font-size: 15px;
+  }
 }
 
 /* Editor-only state, while the section has no products yet. */
@@ -1684,6 +1730,11 @@ textarea:focus {
   }
 
   .cookie__panel { padding: var(--space-sm) var(--space-md) var(--space-md); }
+
+  .bundle--centered {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
   .cookie__text { font-size: 11px; }
 
   .btn-withdraw { width: 100%; }
