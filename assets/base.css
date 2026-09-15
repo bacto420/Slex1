@@ -1377,6 +1377,109 @@ textarea:focus {
 }
 
 /* ==========================================================================
+   Cookie banner
+   ========================================================================== */
+
+.cookie {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-line);
+}
+
+.cookie__panel {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--space-md);
+}
+
+.cookie__title {
+  margin: 0 0 var(--space-sm);
+  font-size: 12px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.cookie__text {
+  margin-bottom: var(--space-md);
+  max-width: 68ch;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.cookie__options {
+  display: grid;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--color-line);
+}
+
+.cookie__option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  cursor: pointer;
+}
+
+.cookie__option--locked {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.cookie__option input {
+  margin-top: 2px;
+  flex: 0 0 auto;
+}
+
+.cookie__option strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.cookie__option em {
+  display: block;
+  margin-top: 3px;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* Accept and reject share one class and one width: the reject must not be
+   the harder target. */
+.cookie__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.cookie__btn {
+  width: auto;
+  min-width: 190px;
+  flex: 0 1 auto;
+}
+
+.cookie__btn--quiet {
+  min-width: 0;
+}
+
+.cookie__links {
+  margin-top: var(--space-md);
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.cookie__links a { text-decoration: underline; }
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 
@@ -1482,6 +1585,15 @@ textarea:focus {
   }
 
   .footer__nav { flex-wrap: wrap; gap: var(--space-sm); }
+
+  /* Full-width buttons on a phone, still all the same size. */
+  .cookie__btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .cookie__panel { padding: var(--space-sm) var(--space-md) var(--space-md); }
+  .cookie__text { font-size: 11px; }
 
   .btn-withdraw { width: 100%; }
 }

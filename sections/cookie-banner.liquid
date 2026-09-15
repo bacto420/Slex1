@@ -1,0 +1,234 @@
+{%- comment -%}
+  Cookie banner — wired into Shopify's Customer Privacy API.
+
+  This is the part that matters: a banner that only sets its own cookie
+  looks compliant and blocks nothing. Shopify's tracking pixels and every
+  app running through the Web Pixels API (Meta, TikTok, Shopify Analytics)
+  read their permission from the Consent API, so the banner has to write
+  the answer there — window.Shopify.customerPrivacy.setTrackingConsent().
+  That call is what actually keeps the pixels quiet until the visitor says
+  yes.
+
+  Requirements it is built to meet (§ 165 Abs 3 TKG 2021, DSGVO Art 4 Z 11,
+  Art 7, EDSA Guidelines 03/2022 on deceptive design):
+    • nothing but strictly necessary cookies before a choice is made
+    • "Alle ablehnen" sits on the first level, same size and weight as
+      "Alle akzeptieren" — a reject hidden one level down is not a free
+      choice
+    • per-category choice, each off by default
+    • withdrawal as easy as consent: the footer link reopens this panel
+    • no pre-ticked boxes, no "continue browsing means yes"
+
+  Turn OFF Shopify's own banner under Settings → Customer privacy first,
+  or the visitor gets two.
+{%- endcomment -%}
+
+{%- if section.settings.enabled -%}
+  <div class="cookie" id="CookieBanner" hidden data-cookie-root>
+    <div class="cookie__panel" role="dialog" aria-modal="false"
+         aria-labelledby="CookieTitle" aria-describedby="CookieText">
+
+      <h2 class="cookie__title" id="CookieTitle">{{ section.settings.title }}</h2>
+      <div class="cookie__text rte" id="CookieText">{{ section.settings.text }}</div>
+
+      {%- comment -%} Level two — only opened on request. {%- endcomment -%}
+      <div class="cookie__options" data-cookie-options hidden>
+        <label class="cookie__option cookie__option--locked">
+          <input type="checkbox" checked disabled>
+          <span>
+            <strong>{{ section.settings.cat_necessary }}</strong>
+            <em>{{ section.settings.cat_necessary_note }}</em>
+          </span>
+        </label>
+
+        <label class="cookie__option">
+          <input type="checkbox" data-cookie-category="analytics">
+          <span>
+            <strong>{{ section.settings.cat_analytics }}</strong>
+            <em>{{ section.settings.cat_analytics_note }}</em>
+          </span>
+        </label>
+
+        <label class="cookie__option">
+          <input type="checkbox" data-cookie-category="marketing">
+          <span>
+            <strong>{{ section.settings.cat_marketing }}</strong>
+            <em>{{ section.settings.cat_marketing_note }}</em>
+          </span>
+        </label>
+
+        <label class="cookie__option">
+          <input type="checkbox" data-cookie-category="preferences">
+          <span>
+            <strong>{{ section.settings.cat_preferences }}</strong>
+            <em>{{ section.settings.cat_preferences_note }}</em>
+          </span>
+        </label>
+      </div>
+
+      <div class="cookie__actions">
+        {%- comment -%}
+          Accept and reject are the same element with the same styling. The
+          order is deliberate: reject first, so the easier target is not the
+          one that gives more data away.
+        {%- endcomment -%}
+        <button type="button" class="btn cookie__btn" data-cookie-reject>
+          {{ section.settings.label_reject }}
+        </button>
+        <button type="button" class="btn cookie__btn" data-cookie-accept>
+          {{ section.settings.label_accept }}
+        </button>
+        <button type="button" class="btn btn--ghost cookie__btn cookie__btn--quiet"
+                data-cookie-open-options>
+          {{ section.settings.label_settings }}
+        </button>
+        <button type="button" class="btn btn--ghost cookie__btn cookie__btn--quiet"
+                data-cookie-save hidden>
+          {{ section.settings.label_save }}
+        </button>
+      </div>
+
+      {%- if section.settings.links != blank -%}
+        <div class="cookie__links rte">{{ section.settings.links }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var root = document.getElementById('CookieBanner');
+      if (!root) return;
+
+      var options  = root.querySelector('[data-cookie-options]');
+      var openBtn  = root.querySelector('[data-cookie-open-options]');
+      var saveBtn  = root.querySelector('[data-cookie-save]');
+      var boxes    = root.querySelectorAll('[data-cookie-category]');
+
+      var show = function () { root.hidden = false; };
+      var hide = function () { root.hidden = true; };
+
+      /* The Consent API lives behind a feature flag that has to be pulled in
+         first. Without it there is no way to record a decision, so the
+         banner stays hidden rather than pretending to do something. */
+      var withPrivacy = function (fn) {
+        if (window.Shopify && window.Shopify.customerPrivacy) { fn(); return; }
+        if (!window.Shopify || !window.Shopify.loadFeatures) return;
+        window.Shopify.loadFeatures(
+          [{ name: 'consent-tracking-api', version: '0.1' }],
+          function (error) { if (!error) fn(); }
+        );
+      };
+
+      var record = function (consent) {
+        withPrivacy(function () {
+          window.Shopify.customerPrivacy.setTrackingConsent(
+            {
+              analytics:    !!consent.analytics,
+              marketing:    !!consent.marketing,
+              preferences:  !!consent.preferences,
+              /* CCPA's "do not sell". Never broader than marketing. */
+              sale_of_data: !!consent.marketing
+            },
+            hide
+          );
+        });
+        hide();
+      };
+
+      root.querySelector('[data-cookie-accept]').addEventListener('click', function () {
+        record({ analytics: true, marketing: true, preferences: true });
+      });
+
+      root.querySelector('[data-cookie-reject]').addEventListener('click', function () {
+        record({ analytics: false, marketing: false, preferences: false });
+      });
+
+      openBtn.addEventListener('click', function () {
+        options.hidden = false;
+        openBtn.hidden = true;
+        saveBtn.hidden = false;
+      });
+
+      saveBtn.addEventListener('click', function () {
+        var picked = {};
+        Array.prototype.forEach.call(boxes, function (box) {
+          picked[box.getAttribute('data-cookie-category')] = box.checked;
+        });
+        record(picked);
+      });
+
+      /* Reopening from the footer, so withdrawing is no harder than
+         consenting (DSGVO Art 7 Abs 3). Existing choices are read back in
+         rather than reset, so the panel shows what is actually stored. */
+      var reopen = function (event) {
+        event.preventDefault();
+        withPrivacy(function () {
+          var current = window.Shopify.customerPrivacy.currentVisitorConsent() || {};
+          Array.prototype.forEach.call(boxes, function (box) {
+            box.checked = current[box.getAttribute('data-cookie-category')] === 'yes';
+          });
+        });
+        options.hidden = false;
+        openBtn.hidden = true;
+        saveBtn.hidden = false;
+        show();
+      };
+
+      Array.prototype.forEach.call(
+        document.querySelectorAll('[data-cookie-settings]'),
+        function (link) { link.addEventListener('click', reopen); }
+      );
+
+      withPrivacy(function () {
+        if (window.Shopify.customerPrivacy.shouldShowBanner()) show();
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cookie banner",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Writes the visitor's choice into Shopify's Customer Privacy API, which is what actually holds back the tracking pixels. Switch Shopify's own banner off under Settings → Customer privacy, or two will appear."
+    },
+    { "type": "checkbox", "id": "enabled", "label": "Show cookie banner", "default": true },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Cookies" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Wir verwenden Cookies, die für den Betrieb des Shops notwendig sind. Weitere Cookies setzen wir nur mit Ihrer Einwilligung. Sie können Ihre Auswahl jederzeit ändern.</p>"
+    },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "label_reject", "label": "Reject", "default": "Alle ablehnen" },
+    { "type": "text", "id": "label_accept", "label": "Accept", "default": "Alle akzeptieren" },
+    { "type": "text", "id": "label_settings", "label": "Settings", "default": "Einstellungen" },
+    { "type": "text", "id": "label_save", "label": "Save selection", "default": "Auswahl speichern" },
+    { "type": "header", "content": "Categories" },
+    { "type": "text", "id": "cat_necessary", "label": "Necessary", "default": "Notwendig" },
+    { "type": "text", "id": "cat_necessary_note", "label": "Necessary note",
+      "default": "Warenkorb, Anmeldung, Sicherheit. Ohne diese funktioniert der Shop nicht." },
+    { "type": "text", "id": "cat_analytics", "label": "Analytics", "default": "Statistik" },
+    { "type": "text", "id": "cat_analytics_note", "label": "Analytics note",
+      "default": "Anonyme Auswertung, wie der Shop genutzt wird." },
+    { "type": "text", "id": "cat_marketing", "label": "Marketing", "default": "Marketing" },
+    { "type": "text", "id": "cat_marketing_note", "label": "Marketing note",
+      "default": "Werbung auf anderen Plattformen, etwa Meta und TikTok." },
+    { "type": "text", "id": "cat_preferences", "label": "Preferences", "default": "Komfort" },
+    { "type": "text", "id": "cat_preferences_note", "label": "Preferences note",
+      "default": "Merkt sich Einstellungen wie Sprache oder Region." },
+    { "type": "header", "content": "Links" },
+    {
+      "type": "richtext",
+      "id": "links",
+      "label": "Links under the buttons",
+      "default": "<p><a href=\"/pages/datenschutz\">Datenschutzerklärung</a> · <a href=\"/pages/cookies\">Cookie-Richtlinie</a></p>"
+    }
+  ]
+}
+{% endschema %}

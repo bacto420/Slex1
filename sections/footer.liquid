@@ -201,6 +201,12 @@
       <li><a href="{{ nav_blog }}">{{ 'general.nav.blog' | t }}</a></li>
       <li><a href="{{ nav_media }}">{{ 'general.nav.media' | t }}</a></li>
       <li><a href="{{ routes.cart_url }}">{{ 'general.nav.cart' | t }}</a></li>
+      {%- comment -%}
+        Withdrawing consent has to be as easy as giving it (DSGVO Art 7
+        Abs 3), so the panel is reachable from every page, not buried in a
+        text somewhere.
+      {%- endcomment -%}
+      <li><a href="#" data-cookie-settings>{{ section.settings.cookie_link_label | default: 'Cookie-Einstellungen' }}</a></li>
     </ul>
     {%- if section.settings.note != blank -%}
       <div>{{ section.settings.note }}</div>
@@ -259,6 +265,9 @@
 
     { "type": "header", "content": "Bottom bar" },
     { "type": "text", "id": "note", "label": "Footer note", "default": "ALL RIGHTS RESERVED" },
+    { "type": "text", "id": "cookie_link_label", "label": "Cookie settings link",
+      "info": "Reopens the cookie banner. Required so consent can be withdrawn as easily as it was given.",
+      "default": "Cookie-Einstellungen" },
     { "type": "text", "id": "price_note", "label": "Price note",
       "default": "Alle Preise inkl. gesetzlicher USt., zzgl. Versandkosten." }
   ],
