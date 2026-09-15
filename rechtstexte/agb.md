@@ -5,10 +5,9 @@ Stand: 15. September 2026
 ## 1. Geltungsbereich und Vertragspartner
 
 Diese Bedingungen gelten für alle Bestellungen über www.bacto-clothing.com.
-Vertragspartner ist
 
-**BACTO GesbR**, Josef-Pohler-Weg 5, 6600 Reutte, Österreich
-UID: ATU79119446, E-Mail: info@bacto-clothing.com
+Vertragspartner ist die **BACTO GesbR**, Josef-Pohler-Weg 5, 6600 Reutte,
+Österreich, UID ATU79119446, E-Mail info@bacto-clothing.com.
 
 Abweichende Bedingungen des Kunden gelten nur, wenn wir ihnen schriftlich
 zustimmen.
@@ -16,28 +15,36 @@ zustimmen.
 ## 2. Zustandekommen des Vertrags
 
 Die Darstellung der Produkte im Shop ist kein verbindliches Angebot, sondern
-eine Aufforderung zur Bestellung.
+eine Aufforderung an Sie, eine Bestellung abzugeben.
 
 Mit dem Absenden der Bestellung geben Sie ein verbindliches Angebot ab. Die
-automatische Eingangsbestätigung per E-Mail ist noch keine Annahme. Der
-Vertrag kommt zustande, sobald wir die Annahme erklären oder die Ware
+automatische Eingangsbestätigung per E-Mail bestätigt nur, dass Ihre
+Bestellung bei uns angekommen ist — sie ist noch keine Annahme. Der Vertrag
+kommt zustande, sobald wir die Annahme ausdrücklich erklären oder die Ware
 versenden.
 
-Der Vertragstext wird von uns gespeichert und Ihnen mit der Bestellung per
-E-Mail übermittelt. Die Bestellung ist in deutscher Sprache möglich.
+Ist ein Artikel entgegen unserer Anzeige nicht mehr verfügbar oder war ein
+Preis offensichtlich falsch ausgezeichnet, können wir die Bestellung
+ablehnen. Bereits geleistete Zahlungen erstatten wir in diesem Fall
+unverzüglich und vollständig.
 
-## 3. Preise und Versandkosten
+Den Vertragstext speichern wir und senden ihn Ihnen mit der Bestellung per
+E-Mail zu. Die Bestellung ist in deutscher Sprache möglich.
+
+## 3. Preise, Versandkosten und Zoll
 
 Alle Preise verstehen sich in Euro inklusive der gesetzlichen Umsatzsteuer.
 
 Die Versandkosten hängen vom Lieferland ab. Sie werden im Bestellvorgang
-berechnet und **vor dem verbindlichen Absenden der Bestellung** vollständig
+berechnet und vor dem verbindlichen Absenden der Bestellung vollständig
 ausgewiesen. Es entstehen keine Kosten, die Ihnen nicht vorher angezeigt
 wurden.
 
-Bei Lieferungen außerhalb der EU können Zoll, Einfuhrumsatzsteuer und
-Gebühren des Zustelldienstes anfallen. Diese trägt der Kunde und sie werden
-direkt vom Zustelldienst oder von der Zollbehörde eingehoben.
+Bei Lieferungen außerhalb der Europäischen Union können zusätzlich Zoll,
+Einfuhrumsatzsteuer und Bearbeitungsgebühren des Zustelldienstes anfallen.
+Diese Beträge trägt der Kunde. Sie werden nicht von uns, sondern direkt vom
+Zustelldienst oder von der Zollbehörde des Bestimmungslandes eingehoben, und
+ihre Höhe können wir vorab nicht beziffern.
 
 ## 4. Zahlung
 
@@ -51,7 +58,7 @@ Wir akzeptieren:
 - **PayPal**
 
 Die Zahlung ist mit Abschluss der Bestellung fällig. Welche Zahlungsarten im
-Einzelfall zur Verfügung stehen, wird Ihnen im Bestellvorgang angezeigt.
+Einzelfall zur Verfügung stehen, zeigt Ihnen der Bestellvorgang an.
 
 ## 5. Lieferung
 
@@ -61,54 +68,36 @@ weltweit. Der Versand erfolgt mit DPD.
 Ist ein Artikel nicht verfügbar, informieren wir Sie unverzüglich und
 erstatten bereits geleistete Zahlungen ohne Abzug.
 
-## 6. Eigentumsvorbehalt
+## 6. Rücktrittsrecht
 
-Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.
-
-## 7. Rücktrittsrecht
-
-Verbrauchern steht ein 14-tägiges Rücktrittsrecht zu. Einzelheiten und das
-Muster-Widerrufsformular stehen in der
+Verbrauchern steht ein Rücktrittsrecht von **14 Tagen** zu. Einzelheiten,
+die Fristen und das Muster-Widerrufsformular finden Sie in der
 [Widerrufsbelehrung](/pages/widerrufsbelehrung).
 
-## 8. Gewährleistung
+Auf jeder Seite unseres Shops finden Sie außerdem die Schaltfläche
+**„Vertrag widerrufen"**, über die Sie den Rücktritt direkt online erklären
+können.
+
+## 7. Gewährleistung
 
 Es gelten die gesetzlichen Gewährleistungsbestimmungen der §§ 922 ff. ABGB
 sowie des Verbrauchergewährleistungsgesetzes. Die Gewährleistungsfrist
-beträgt **zwei Jahre** ab Übergabe. Gegenüber Verbrauchern wird sie nicht
+beträgt **zwei Jahre** ab Übergabe und wird gegenüber Verbrauchern nicht
 eingeschränkt.
 
-Mängel melden Sie bitte an info@bacto-clothing.com. Normale Abnutzung,
-Schäden durch unsachgemäße Behandlung oder durch Nichtbeachtung der
-Pflegehinweise sind keine Mängel.
+Mängel melden Sie bitte an info@bacto-clothing.com — am besten mit Foto und
+Bestellnummer, dann geht es schneller.
 
-## 9. Haftung
+Keine Mängel sind normale Abnutzung sowie Schäden, die durch unsachgemäße
+Behandlung oder durch Nichtbeachtung der Pflegehinweise entstanden sind.
 
-Wir haften unbeschränkt bei Vorsatz und grober Fahrlässigkeit sowie bei
-Verletzung von Leben, Körper oder Gesundheit. Bei leichter Fahrlässigkeit
-haften wir nur für die Verletzung wesentlicher Vertragspflichten und der
-Höhe nach begrenzt auf den vertragstypischen, vorhersehbaren Schaden. Die
-Bestimmungen des Produkthaftungsgesetzes bleiben unberührt.
-
-## 10. Rechtswahl und Gerichtsstand
+## 8. Rechtswahl und Gerichtsstand
 
 Es gilt österreichisches Recht unter Ausschluss des UN-Kaufrechts.
 
-Diese Rechtswahl entzieht Verbrauchern nicht den Schutz zwingender
-Bestimmungen des Staates, in dem sie ihren gewöhnlichen Aufenthalt haben.
+Diese Rechtswahl entzieht Verbrauchern nicht den Schutz jener zwingenden
+Bestimmungen, die im Staat ihres gewöhnlichen Aufenthalts gelten.
 
-Für Klagen gegen Verbraucher ist ausschließlich das Gericht des Ortes
+Für Klagen gegen Verbraucher ist ausschließlich das Gericht jenes Ortes
 zuständig, an dem der Verbraucher seinen Wohnsitz, gewöhnlichen Aufenthalt
 oder Ort der Beschäftigung hat (§ 14 KSchG).
-
-## 11. Streitbeilegung
-
-Wir sind weder bereit noch verpflichtet, an einem Streitbeilegungsverfahren
-vor einer Verbraucherschlichtungsstelle teilzunehmen. Bei Beschwerden wenden
-Sie sich bitte zuerst an uns.
-
-## 12. Schlussbestimmungen
-
-Sollte eine Bestimmung unwirksam sein, bleibt die Wirksamkeit der übrigen
-Bestimmungen unberührt. An die Stelle der unwirksamen Bestimmung tritt die
-gesetzliche Regelung.
