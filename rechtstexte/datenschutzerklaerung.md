@@ -116,14 +116,32 @@ Bestellung, sonst Art. 6 Abs. 1 lit. f DSGVO.
 
 ### 3.8 Reichweitenmessung und Werbung
 
-Nur mit Ihrer Einwilligung. Details und die eingesetzten Cookies stehen in
-der [Cookie-Richtlinie](/pages/cookies).
+Unser Shop ist mit den Vertriebskanälen von Meta (Facebook, Instagram) und
+TikTok verbunden. Erlauben Sie Marketing-Cookies, können darüber Daten zu
+Ihrem Besuch — etwa aufgerufene Seiten, angesehene Produkte und getätigte
+Käufe — an diese Anbieter übermittelt werden. Sie dienen der Messung von
+Werbeerfolg und der Ausspielung von Werbung.
+
+**Ohne Ihre Einwilligung findet keine solche Übermittlung statt.** Bis Sie
+zustimmen, werden diese Dienste blockiert.
 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. a DSGVO. Sie können die Einwilligung
-jederzeit über den Link „Cookie-Einstellungen" im Fußbereich widerrufen. Die
-Rechtmäßigkeit der bis dahin erfolgten Verarbeitung bleibt unberührt.
+jederzeit über den Link „Cookie-Einstellungen" im Fußbereich widerrufen — mit
+Wirkung für die Zukunft und ohne Nachteile. Die Rechtmäßigkeit der bis dahin
+erfolgten Verarbeitung bleibt unberührt.
 
-⚠ BITTE PRÜFEN — Nur beibehalten, wenn Meta- und TikTok-Kanal aktiv sind.
+**Gemeinsame Verantwortlichkeit:** Für die Erhebung und Übermittlung der
+Daten sind wir gemeinsam mit Meta beziehungsweise TikTok verantwortlich
+(Art. 26 DSGVO). Die weitere Verarbeitung durch diese Anbieter erfolgt in
+deren alleiniger Verantwortung. Ihre Betroffenenrechte können Sie sowohl bei
+uns als auch direkt bei den Anbietern geltend machen.
+
+**Drittland:** Beide Anbieter haben ihren Sitz in Irland, verarbeiten Daten
+aber auch in den USA. Grundlage dafür sind der EU-US Data Privacy Framework
+beziehungsweise Standardvertragsklauseln der EU-Kommission.
+
+Einzelheiten zu den einzelnen Cookies stehen in der
+[Cookie-Richtlinie](/pages/cookies).
 
 ### 3.9 Newsletter
 
@@ -159,9 +177,9 @@ EU-Kommission.
 
 Mit allen Auftragsverarbeitern bestehen Verträge nach Art. 28 DSGVO.
 
-⚠ BITTE ERGÄNZEN — Diese Tabelle muss den tatsächlich installierten Apps
-entsprechen. Apps, die keine Kundendaten verarbeiten, müssen nicht genannt
-werden.
+Weitere von uns eingesetzte Anwendungen greifen nicht auf personenbezogene
+Kundendaten zu oder verarbeiten diese ausschließlich innerhalb der
+Shopify-Plattform; sie sind daher nicht gesondert aufgeführt.
 
 ## 6. Ihre Rechte
 

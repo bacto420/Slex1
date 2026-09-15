@@ -49,9 +49,6 @@ Technology Ltd.
 Typische Cookies: `_fbp`, `_ttp`.
 Laufzeit: bis 13 Monate.
 
-⚠ BITTE PRÜFEN — Diese Kategorie nur beibehalten, wenn die Meta- und
-TikTok-Vertriebskanäle tatsächlich aktiv sind. Sonst ersatzlos streichen.
-
 ### Komfort — nur mit Einwilligung
 
 Merkt sich Einstellungen wie Sprache oder Region über den Besuch hinaus.

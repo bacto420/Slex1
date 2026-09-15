@@ -15,7 +15,6 @@ Was noch offen ist:
 | Offen | Wo du es findest |
 | --- | --- |
 | Genaue WKO-Fachgruppe | Mitgliedsschreiben der Wirtschaftskammer Tirol, oder [firmen.wko.at](https://firmen.wko.at). Die Landeskammer selbst steht schon drin |
-| Feuern Meta- und TikTok-Pixel? | Inkognito-Fenster, F12 → Netzwerk, nach `facebook` filtern, Seite laden ohne Banner-Klick. Bleibt die Liste leer, sind die Pixel aus — dann Marketing-Abschnitte streichen |
 | Widerrufs-Ausnahmen | Nur aufzählen, was auf euer Sortiment zutrifft. Bei Custom-Prints greift die Ausnahme für Maßanfertigungen |
 
 Zur Kontrolle: Die Gewerbebehörde ist als Bezirkshauptmannschaft Reutte
@@ -23,6 +22,34 @@ eingetragen. Prüf einmal auf [gisa.gv.at](https://www.gisa.gv.at), ob das
 stimmt und auf welchen Namen die Gewerbeberechtigung läuft — bei einer GesbR
 hält sie in der Regel jeder Gesellschafter persönlich, nicht die
 Gesellschaft.
+
+## Meta- und TikTok-Pixel
+
+Die Rechtstexte beschreiben diese Verarbeitung, weil die Vertriebskanäle
+installiert sind. Das ist bewusst so gewählt: Eine Verarbeitung zu
+beschreiben, die nicht stattfindet, ist nur ungenau — eine zu verschweigen,
+die stattfindet, ist ein Verstoß.
+
+Der Cookie-Banner blockiert beide Dienste bis zur Einwilligung, unabhängig
+davon, ob sie eingerichtet sind.
+
+**Ohne Live-Shop prüfbar**, direkt im Adminbereich:
+
+1. Shopify → Vertriebskanäle → **Facebook & Instagram** → Einstellungen →
+   *Datenfreigabe*. Steht dort ein verbundener Pixel und eine Stufe
+   (Standard / Erweitert / Maximal), läuft er.
+2. Dasselbe unter **TikTok** → Einstellungen → *TikTok Pixel*.
+
+**Empfehlung:** Wenn ihr über Meta und TikTok keine bezahlte Werbung
+schaltet, deinstalliert die beiden Vertriebskanäle. Dann entfällt die
+Verarbeitung ganz, die Marketing-Kategorie im Banner wird gegenstandslos, und
+Datenschutzerklärung wie Cookie-Richtlinie werden deutlich kürzer. Sagt
+Bescheid, dann streiche ich die Abschnitte raus.
+
+Sobald die Domain wieder online ist, lässt sich das auch von außen
+kontrollieren: Inkognito-Fenster, F12 → Netzwerk, nach `facebook` filtern,
+Seite laden ohne den Banner anzuklicken. Erscheint nichts, ist alles korrekt
+blockiert.
 
 ## Auftragsverarbeitungsverträge
 
