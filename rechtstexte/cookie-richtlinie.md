@@ -14,10 +14,10 @@ nur, wenn Sie zustimmen.
 Beim ersten Besuch fragen wir Sie, welche Kategorien Sie erlauben. Bis Sie
 antworten, werden **ausschließlich technisch notwendige Cookies** gesetzt.
 
-Sie können Ihre Auswahl jederzeit ändern oder widerrufen: über den Link
-**Cookie-Einstellungen** im Fußbereich jeder Seite. Der Widerruf ist genauso
-einfach wie die Zustimmung und gilt ab sofort; bereits gesetzte Cookies
-löschen Sie über die Einstellungen Ihres Browsers.
+Sie können Ihre Auswahl jederzeit ändern oder widerrufen — über die
+Cookie-Einstellungen, die der Einwilligungsdialog dieser Website bereitstellt.
+Der Widerruf ist genauso einfach wie die Zustimmung und gilt ab sofort;
+bereits gesetzte Cookies löschen Sie über die Einstellungen Ihres Browsers.
 
 Rechtsgrundlage: § 165 Abs. 3 TKG 2021 und Art. 6 Abs. 1 lit. a DSGVO für
 einwilligungspflichtige Cookies, Art. 6 Abs. 1 lit. f DSGVO für technisch

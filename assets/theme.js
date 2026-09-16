@@ -18,6 +18,23 @@
   }
 
 
+
+  /* ------------------------------------------------------------------
+     The footer carries a "Cookie-Einstellungen" link that reopens our own
+     banner. With that banner switched off — Shopify's native one used
+     instead — the link would sit there doing nothing, so it is taken out.
+     Shopify's banner brings its own way back to the choice.
+     ------------------------------------------------------------------ */
+  if (!document.getElementById('CookieBanner')) {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-cookie-settings]'),
+      function (link) {
+        var row = link.closest ? link.closest('li') : null;
+        (row || link).hidden = true;
+      }
+    );
+  }
+
   /* ------------------------------------------------------------------
      Footer columns as an accordion.
 

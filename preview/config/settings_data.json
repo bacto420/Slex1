@@ -37,7 +37,7 @@
       "cookie-banner": {
         "type": "cookie-banner",
         "settings": {
-          "enabled": true
+          "enabled": false
         }
       }
     }
