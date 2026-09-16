@@ -5,10 +5,10 @@
       "settings": {
         "eyebrow": "BACTO",
         "title": "Coming soon",
-        "text": "<p>Der Shop \u00f6ffnet zum Drop. Bis dahin gibt es hier einen Vorgeschmack.</p>",
+        "text": "<p>Der Shop öffnet zum Drop. Bis dahin gibt es hier einen Vorgeschmack.</p>",
         "drop_date": "",
-        "link_label": "Media",
-        "link_url": "/pages/media"
+        "link_label": "Blog",
+        "link_url": "/pages/blog"
       }
     }
   },

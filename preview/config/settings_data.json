@@ -13,8 +13,8 @@
           "show_announcement": true,
           "announcement_text": "WORLDWIDE SHIPPING — BACTO",
           "show_shop": false,
-          "show_blog": false,
-          "show_media": true,
+          "show_blog": true,
+          "show_media": false,
           "show_cart": false
         }
       },

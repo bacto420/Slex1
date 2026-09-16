@@ -24,7 +24,9 @@
 {%- endcomment -%}
 
 {%- if section.settings.enabled -%}
-  <div class="cookie" id="CookieBanner" hidden data-cookie-root>
+  <div class="cookie" id="CookieBanner" hidden data-cookie-root
+       data-cookie-home="{% if template.name == 'index' %}true{% else %}false{% endif %}"
+       data-cookie-home-only="{% if section.settings.home_only %}true{% else %}false{% endif %}">
     <div class="cookie__panel" role="dialog" aria-modal="false"
          aria-labelledby="CookieTitle" aria-describedby="CookieText">
 
@@ -109,6 +111,25 @@
       var show = function () { root.hidden = false; };
       var hide = function () { root.hidden = true; };
 
+      /* A local note that this visitor has answered.
+
+         The answer itself belongs in Shopify's Consent API — that is what
+         the pixels read. But if that call never lands (the feature fails to
+         load, a browser blocks the cookie), shouldShowBanner() keeps saying
+         yes and the banner reappears on every page. That is the bug this
+         guards against. Nothing consented to is stored here: with no
+         recorded consent the pixels stay blocked either way, so remembering
+         the answer locally can only spare the visitor, never expose them. */
+      var ANSWERED = 'bacto_cookie_answered';
+
+      var remember = function () {
+        try { localStorage.setItem(ANSWERED, '1'); } catch (e) {}
+      };
+
+      var answered = function () {
+        try { return localStorage.getItem(ANSWERED) === '1'; } catch (e) { return false; }
+      };
+
       /* The Consent API lives behind a feature flag that has to be pulled in
          first. Without it there is no way to record a decision, so the
          banner stays hidden rather than pretending to do something. */
@@ -122,6 +143,8 @@
       };
 
       var record = function (consent) {
+        remember();
+        hide();
         withPrivacy(function () {
           window.Shopify.customerPrivacy.setTrackingConsent(
             {
@@ -134,7 +157,6 @@
             hide
           );
         });
-        hide();
       };
 
       root.querySelector('[data-cookie-accept]').addEventListener('click', function () {
@@ -181,9 +203,18 @@
         function (link) { link.addEventListener('click', reopen); }
       );
 
-      withPrivacy(function () {
-        if (window.Shopify.customerPrivacy.shouldShowBanner()) show();
-      });
+      /* The footer link opens this panel on every page; only the automatic
+         appearance is limited. A visitor who lands straight on a deep link
+         is therefore never asked — which is safe, because without a
+         recorded answer nothing but the necessary cookies runs. */
+      var homeOnly = root.getAttribute('data-cookie-home-only') === 'true';
+      var isHome   = root.getAttribute('data-cookie-home') === 'true';
+
+      if (!answered() && (!homeOnly || isHome)) {
+        withPrivacy(function () {
+          if (window.Shopify.customerPrivacy.shouldShowBanner()) show();
+        });
+      }
     })();
   </script>
 {%- endif -%}
@@ -197,6 +228,13 @@
       "content": "Writes the visitor's choice into Shopify's Customer Privacy API, which is what actually holds back the tracking pixels. Switch Shopify's own banner off under Settings → Customer privacy, or two will appear."
     },
     { "type": "checkbox", "id": "enabled", "label": "Show cookie banner", "default": true },
+    {
+      "type": "checkbox",
+      "id": "home_only",
+      "label": "Ask on the home page only",
+      "info": "The footer link still opens the panel on every page. Visitors arriving straight on another page are simply not asked — nothing beyond the necessary cookies runs until someone answers.",
+      "default": true
+    },
     { "type": "text", "id": "title", "label": "Heading", "default": "Cookies" },
     {
       "type": "richtext",
