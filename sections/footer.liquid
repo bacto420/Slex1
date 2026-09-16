@@ -199,10 +199,18 @@
     <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
     <ul class="footer__nav">
       <li><a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a></li>
-      <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.nav.shop' | t }}</a></li>
-      <li><a href="{{ nav_blog }}">{{ 'general.nav.blog' | t }}</a></li>
-      <li><a href="{{ nav_media }}">{{ 'general.nav.media' | t }}</a></li>
-      <li><a href="{{ routes.cart_url }}">{{ 'general.nav.cart' | t }}</a></li>
+      {%- if settings.show_shop -%}
+        <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.nav.shop' | t }}</a></li>
+      {%- endif -%}
+      {%- if settings.show_blog -%}
+        <li><a href="{{ nav_blog }}">{{ 'general.nav.blog' | t }}</a></li>
+      {%- endif -%}
+      {%- if settings.show_media -%}
+        <li><a href="{{ nav_media }}">{{ 'general.nav.media' | t }}</a></li>
+      {%- endif -%}
+      {%- if settings.show_cart -%}
+        <li><a href="{{ routes.cart_url }}">{{ 'general.nav.cart' | t }}</a></li>
+      {%- endif -%}
       {%- comment -%}
         Withdrawing consent has to be as easy as giving it (DSGVO Art 7
         Abs 3), so the panel is reachable from every page, not buried in a

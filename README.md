@@ -121,9 +121,10 @@ preview/config/settings_data.json     Navigation, Footer
 preview/preview.css                   wird an base.css angehängt
 ```
 
-Die Navigationspunkte sind im Haupt-Theme Schalter (Header → Navigation
-links). Die Vorschau schaltet Shop, Blog und Warenkorb ab; wer statt Media
-den Blog zeigen will, dreht die zwei Häkchen um.
+Welche Navigationspunkte erscheinen, steht in den **Theme-Einstellungen →
+Navigation** — einmal für Header und Footer-Leiste gemeinsam, damit die
+beiden nie auseinanderlaufen. Home steht immer da. Die Vorschau schaltet
+Shop, Blog, Media und Warenkorb ab, zeigt also nur die Startseite.
 
 ## Aufbau
 ```

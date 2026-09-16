@@ -8,6 +8,39 @@
     "theme_support_url": "https://shopify.dev"
   },
   {
+    "name": "Navigation",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Switches for the menu in the header and the row at the bottom of the footer. Home is always shown. The preview site turns everything else off."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_shop",
+        "label": "Show Shop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_blog",
+        "label": "Show Blog",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_media",
+        "label": "Show Media",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart",
+        "label": "Show Cart",
+        "default": true
+      }
+    ]
+  },
+  {
     "name": "Appearance",
     "settings": [
       {

@@ -11,11 +11,7 @@
           "logo_text": "BACTO",
           "logo_height": 130,
           "show_announcement": true,
-          "announcement_text": "WORLDWIDE SHIPPING — BACTO",
-          "show_shop": false,
-          "show_blog": true,
-          "show_media": false,
-          "show_cart": false
+          "announcement_text": "WORLDWIDE SHIPPING — BACTO"
         }
       },
       "footer": {
@@ -40,7 +36,11 @@
           "enabled": false
         }
       }
-    }
+    },
+    "show_shop": false,
+    "show_blog": false,
+    "show_media": false,
+    "show_cart": false
   },
   "presets": {
     "Default": {

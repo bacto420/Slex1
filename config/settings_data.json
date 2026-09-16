@@ -35,7 +35,11 @@
           "enabled": false
         }
       }
-    }
+    },
+    "show_shop": true,
+    "show_blog": true,
+    "show_media": true,
+    "show_cart": true
   },
   "presets": {
     "Default": {

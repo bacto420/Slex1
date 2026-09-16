@@ -7,8 +7,8 @@
         "title": "Coming soon",
         "text": "<p>Der Shop öffnet zum Drop. Bis dahin gibt es hier einen Vorgeschmack.</p>",
         "drop_date": "",
-        "link_label": "Blog",
-        "link_url": "/pages/blog"
+        "link_label": "",
+        "link_url": ""
       }
     }
   },
