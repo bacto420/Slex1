@@ -1,0 +1,52 @@
+{
+  "current": {
+    "color_background": "#000000",
+    "color_text": "#ffffff",
+    "color_muted": "#8a8a8a",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "use_text_logo": false,
+          "logo_text": "BACTO",
+          "logo_height": 130,
+          "show_announcement": true,
+          "announcement_text": "WORLDWIDE SHIPPING — BACTO",
+          "show_shop": false,
+          "show_blog": false,
+          "show_media": true,
+          "show_cart": false
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "note": "ALL RIGHTS RESERVED",
+          "identity_heading": "Company",
+          "identity_text": "<p>BACTO GesbR<br/>Gesellschafter: Alexander Seitz, Thomas Cytryn<br/>Josef-Pohler-Weg 5, 6600 Reutte, Österreich<br/>UID: ATU79119446<br/>Nicht im Firmenbuch eingetragen<br/>Gewerbebehörde: Bezirkshauptmannschaft Reutte<br/>Mitglied der Wirtschaftskammer Tirol, Sparte Handel<br/>Gewerbeordnung: <a href=\"https://www.ris.bka.gv.at\" rel=\"noopener\">ris.bka.gv.at</a><br/>Blattlinie: Information über das Angebot von BACTO</p>",
+          "contact_heading": "Contact",
+          "contact_text": "<p>E-Mail: <a href=\"mailto:info@bacto-clothing.com\">info@bacto-clothing.com</a><br/>Telefon: <a href=\"tel:+436767860882\">+43 676 7860882</a></p>",
+          "shipping_heading": "Shipping & Returns",
+          "shipping_text": "<p>Der Versand startet mit dem Drop.<br/>Lieferzeit 3–12 Werktage<br/>Versand weltweit mit DPD<br/>Rücksendeadresse: BACTO GesbR, Josef-Pohler-Weg 5, 6600 Reutte, Österreich</p>",
+          "price_note": "",
+          "cookie_link_label": "Cookie-Einstellungen",
+          "legal_heading": "Legal",
+          "show_withdrawal": false
+        }
+      },
+      "cookie-banner": {
+        "type": "cookie-banner",
+        "settings": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "color_background": "#000000",
+      "color_text": "#ffffff",
+      "color_muted": "#8a8a8a"
+    }
+  }
+}

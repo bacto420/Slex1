@@ -55,24 +55,30 @@
             {{ 'general.nav.home' | t }}
           </a>
         </li>
-        <li>
-          <a href="{{ section.settings.shop_url | default: routes.all_products_collection_url }}"
-             {% if template.name == 'collection' or template.name == 'product' %}aria-current="page"{% endif %}>
-            {{ 'general.nav.shop' | t }}
-          </a>
-        </li>
-        <li>
-          <a href="{{ nav_blog }}"
-             {% if template.name == 'blog' or template.name == 'article' or template.suffix == 'blog' %}aria-current="page"{% endif %}>
-            {{ 'general.nav.blog' | t }}
-          </a>
-        </li>
-        <li>
-          <a href="{{ nav_media }}"
-             {% if template.suffix == 'media' %}aria-current="page"{% endif %}>
-            {{ 'general.nav.media' | t }}
-          </a>
-        </li>
+        {%- if section.settings.show_shop -%}
+          <li>
+            <a href="{{ section.settings.shop_url | default: routes.all_products_collection_url }}"
+               {% if template.name == 'collection' or template.name == 'product' %}aria-current="page"{% endif %}>
+              {{ 'general.nav.shop' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if section.settings.show_blog -%}
+          <li>
+            <a href="{{ nav_blog }}"
+               {% if template.name == 'blog' or template.name == 'article' or template.suffix == 'blog' %}aria-current="page"{% endif %}>
+              {{ 'general.nav.blog' | t }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- if section.settings.show_media -%}
+          <li>
+            <a href="{{ nav_media }}"
+               {% if template.suffix == 'media' %}aria-current="page"{% endif %}>
+              {{ 'general.nav.media' | t }}
+            </a>
+          </li>
+        {%- endif -%}
       </ul>
     </nav>
 
@@ -115,11 +121,13 @@
 
     <nav class="header__nav--right" aria-label="{{ 'general.nav.secondary' | t }}">
       <ul class="nav-list">
-        <li class="nav-list__cart">
-          <a href="{{ routes.cart_url }}" {% if template.name == 'cart' %}aria-current="page"{% endif %}>
-            {{ 'general.nav.cart' | t }} <span class="cart-count">({{ cart.item_count }})</span>
-          </a>
-        </li>
+        {%- if section.settings.show_cart -%}
+          <li class="nav-list__cart">
+            <a href="{{ routes.cart_url }}" {% if template.name == 'cart' %}aria-current="page"{% endif %}>
+              {{ 'general.nav.cart' | t }} <span class="cart-count">({{ cart.item_count }})</span>
+            </a>
+          </li>
+        {%- endif -%}
       </ul>
     </nav>
   </div>
@@ -172,6 +180,14 @@
       "type": "header",
       "content": "Navigation links"
     },
+    {
+      "type": "paragraph",
+      "content": "Switch an entry off to take it out of the menu — used by the preview site, where the shop is not open yet."
+    },
+    { "type": "checkbox", "id": "show_shop", "label": "Show Shop", "default": true },
+    { "type": "checkbox", "id": "show_blog", "label": "Show Blog", "default": true },
+    { "type": "checkbox", "id": "show_media", "label": "Show Media", "default": true },
+    { "type": "checkbox", "id": "show_cart", "label": "Show Cart", "default": true },
     {
       "type": "url",
       "id": "shop_url",

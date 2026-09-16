@@ -1,0 +1,90 @@
+
+/* ==========================================================================
+   Preview site — coming soon
+   ========================================================================== */
+
+.soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52vh;
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+}
+
+.soon__inner {
+  max-width: 56ch;
+}
+
+.soon__eyebrow {
+  margin: 0 0 var(--space-md);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.soon__title {
+  margin: 0 0 var(--space-md);
+  font-size: 22px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.soon__text {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.soon__date {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: var(--tracking);
+  color: var(--color-muted);
+}
+
+.soon__countdown {
+  margin: var(--space-lg) 0 0;
+}
+
+.soon__clock {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.soon__clock li {
+  min-width: 64px;
+}
+
+.soon__clock strong {
+  display: block;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.soon__clock span {
+  display: block;
+  margin-top: 6px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.soon__action {
+  margin: var(--space-lg) 0 0;
+}
+
+@media screen and (max-width: 749px) {
+  .soon { min-height: 40vh; padding: var(--space-lg) var(--space-md); }
+  .soon__title { font-size: 18px; }
+  .soon__clock { gap: var(--space-sm); }
+  .soon__clock li { min-width: 52px; }
+  .soon__clock strong { font-size: 20px; }
+}

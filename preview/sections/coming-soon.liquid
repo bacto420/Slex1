@@ -1,0 +1,124 @@
+{%- comment -%}
+  Coming soon — the whole of the preview site's commerce surface.
+
+  Every route that would sell something (product, collection, cart, search,
+  blog) points here while the shop is closed. That is deliberate: a store
+  with no products still answers on /products/... and /cart, and a bare
+  Shopify error page there reads as a broken site rather than one that has
+  not opened yet.
+
+  The countdown only appears once a date is set, and it degrades to the
+  plain date without JavaScript.
+{%- endcomment -%}
+
+<div class="soon">
+  <div class="soon__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="soon__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <h1 class="soon__title">{{ section.settings.title }}</h1>
+
+    {%- if section.settings.text != blank -%}
+      <div class="soon__text rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.drop_date != blank -%}
+      <div class="soon__countdown" data-countdown="{{ section.settings.drop_date }}">
+        <p class="soon__date">{{ section.settings.drop_date }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+      <p class="soon__action">
+        <a class="btn btn--ghost btn--inline" href="{{ section.settings.link_url }}">
+          {{ section.settings.link_label }}
+        </a>
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Coming soon",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kicker", "default": "BACTO" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Coming soon" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Der Shop öffnet zum Drop. Bis dahin gibt es hier einen Vorgeschmack.</p>"
+    },
+    {
+      "type": "text",
+      "id": "drop_date",
+      "label": "Drop date",
+      "info": "Format: 2026-10-31 18:00. Leer lassen, wenn kein Countdown erscheinen soll.",
+      "default": ""
+    },
+    { "type": "text", "id": "link_label", "label": "Button label", "default": "Media" },
+    { "type": "url", "id": "link_url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Coming soon" }]
+}
+{% endschema %}
+
+<script>
+  (function () {
+    'use strict';
+
+    var box = document.querySelector('[data-countdown]');
+    if (!box) return;
+
+    /* "2026-10-31 18:00" is not a format every browser parses, so it is
+       taken apart by hand and read as local time. An unparseable value
+       leaves the plain date standing rather than printing NaN. */
+    var raw = box.getAttribute('data-countdown').trim();
+    var m = raw.match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2}))?$/);
+    if (!m) return;
+
+    var target = new Date(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0));
+    if (isNaN(target.getTime())) return;
+
+    var units = [
+      ['Tage', 86400000],
+      ['Stunden', 3600000],
+      ['Minuten', 60000],
+      ['Sekunden', 1000]
+    ];
+
+    var list = document.createElement('ul');
+    list.className = 'soon__clock';
+    var cells = units.map(function (unit) {
+      var li = document.createElement('li');
+      var num = document.createElement('strong');
+      var lab = document.createElement('span');
+      lab.textContent = unit[0];
+      li.appendChild(num);
+      li.appendChild(lab);
+      list.appendChild(li);
+      return num;
+    });
+
+    var tick = function () {
+      var left = target - new Date();
+      if (left <= 0) {
+        box.textContent = '';
+        return;
+      }
+      units.forEach(function (unit, i) {
+        var value = Math.floor(left / unit[1]);
+        left -= value * unit[1];
+        cells[i].textContent = value < 10 ? '0' + value : String(value);
+      });
+    };
+
+    tick();
+    box.textContent = '';
+    box.appendChild(list);
+    setInterval(tick, 1000);
+  })();
+</script>

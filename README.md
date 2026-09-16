@@ -98,8 +98,34 @@ exakt abbilden; am nächsten kommt „Kauf X, erhalte Y". Für einen echten
 Bundle-Rabatt auf die Gesamtsumme braucht es eine Bundle-App oder Shopify
 Functions.
 
-## Aufbau
+## Preview-Theme für die Zeit vor dem Drop
 
+`python3 tools/build-preview.py` erzeugt aus diesem Theme eine zweite
+Fassung, bei der der Shop geschlossen ist: keine Produkte, keine
+Kollektionen, kein Warenkorb, kein Blog. Übrig bleiben Startseite, Media,
+die Rechtstexte und der Cookie-Banner.
+
+Jede Route, die etwas verkaufen würde, beantwortet der Abschnitt
+**Coming soon**. Das ist Absicht: Ein Shop ohne Produkte antwortet trotzdem
+auf `/products/...` und `/cart`, und eine nackte Shopify-Fehlerseite dort
+wirkt kaputt statt „noch nicht offen". Optional zeigt der Abschnitt einen
+Countdown, sobald ein Datum gesetzt ist.
+
+Die Vorschau wird **abgeleitet statt kopiert**. Damit driften die beiden
+Fassungen nicht auseinander: Eine Korrektur am Footer landet in beiden.
+
+```
+preview/sections/coming-soon.liquid   die Teaser-Section
+preview/templates/*.json              welche Route worauf zeigt
+preview/config/settings_data.json     Navigation, Footer
+preview/preview.css                   wird an base.css angehängt
+```
+
+Die Navigationspunkte sind im Haupt-Theme Schalter (Header → Navigation
+links). Die Vorschau schaltet Shop, Blog und Warenkorb ab; wer statt Media
+den Blog zeigen will, dreht die zwei Häkchen um.
+
+## Aufbau
 ```
 assets/     CSS, JS, Logo, Platzhaltergrafiken
 config/     Theme-Einstellungen

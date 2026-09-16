@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "coming-soon",
+      "settings": {
+        "eyebrow": "BACTO",
+        "title": "Coming soon",
+        "text": "<p>Der Shop \u00f6ffnet zum Drop. Bis dahin gibt es hier einen Vorgeschmack.</p>",
+        "drop_date": "",
+        "link_label": "Media",
+        "link_url": "/pages/media"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
