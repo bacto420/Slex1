@@ -19,6 +19,196 @@
 
 
 
+
+  /* ------------------------------------------------------------------
+     Bundle deal — choosing between products, picking a size, and keeping
+     the totals honest while the customer switches.
+
+     Liquid has already printed a correct, complete bundle for the default
+     selection, hidden inputs included. This only takes over once a choice
+     is made, so the section works with the script blocked: one product and
+     one size per slot, exactly what was rendered.
+     ------------------------------------------------------------------ */
+  var formatMoney = function (cents, format) {
+    var value = (cents || 0) / 100;
+
+    var withSeparators = function (decimals, thousands, decimalMark) {
+      var fixed = value.toFixed(decimals);
+      var parts = fixed.split('.');
+      var whole = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands);
+      return decimals ? whole + decimalMark + parts[1] : whole;
+    };
+
+    return String(format).replace(/\{\{\s*(\w+)\s*\}\}/g, function (_, token) {
+      switch (token) {
+        case 'amount_no_decimals':                      return withSeparators(0, ',', '.');
+        case 'amount_with_comma_separator':             return withSeparators(2, '.', ',');
+        case 'amount_no_decimals_with_comma_separator': return withSeparators(0, '.', ',');
+        case 'amount_with_apostrophe_separator':        return withSeparators(2, "'", '.');
+        default:                                        return withSeparators(2, ',', '.');
+      }
+    });
+  };
+
+  var setupBundle = function (root) {
+    var pct    = parseInt(root.getAttribute('data-bundle-pct'), 10) || 0;
+    var scope  = root.getAttribute('data-bundle-scope') || 'total';
+    var format = root.getAttribute('data-money-format') || '{{amount}}';
+
+    var money = function (cents) { return formatMoney(cents, format); };
+
+    var totalRegular = root.querySelector('[data-total-regular]');
+    var totalBundle  = root.querySelector('[data-total-bundle]');
+    var totalSaving  = root.querySelector('[data-total-saving]');
+    var form         = root.querySelector('[data-bundle-form]');
+    var submit       = form ? form.querySelector('button[type="submit"]') : null;
+
+    var slots = [];
+
+    Array.prototype.forEach.call(root.querySelectorAll('[data-slot]'), function (el) {
+      var json = el.querySelector('[data-slot-json]');
+      if (!json) return;
+
+      var data;
+      try { data = JSON.parse(json.textContent); } catch (e) { return; }
+      if (!data.products || !data.products.length) return;
+
+      var slot = {
+        el: el,
+        products: data.products,
+        chosen: data.products[0],
+        variant: null,
+        priceEl: el.querySelector('[data-slot-price]'),
+        select: el.querySelector('[data-slot-variant]'),
+        sizeBox: el.querySelector('.bundle__size'),
+        sizeLabel: el.querySelector('.bundle__size-label')
+      };
+      slot.variant = pickVariant(slot.chosen, null);
+      slots.push(slot);
+
+      Array.prototype.forEach.call(el.querySelectorAll('[data-switch]'), function (button) {
+        button.addEventListener('click', function () {
+          choose(slot, button.getAttribute('data-switch'));
+        });
+      });
+
+      if (slot.select) {
+        slot.select.addEventListener('change', function () {
+          slot.variant = byId(slot.chosen, slot.select.value) || slot.variant;
+          render();
+        });
+      }
+    });
+
+    if (!slots.length) return;
+
+    function byId(product, id) {
+      var found = null;
+      product.variants.forEach(function (v) {
+        if (String(v.id) === String(id)) found = v;
+      });
+      return found;
+    }
+
+    /* Keep the size across a product switch where it exists — someone who
+       picked L for one jacket means L for the other. Otherwise fall to the
+       first size actually in stock. */
+    function pickVariant(product, keepTitle) {
+      var match = null;
+      if (keepTitle) {
+        product.variants.forEach(function (v) {
+          if (!match && v.title === keepTitle && v.available) match = v;
+        });
+      }
+      if (!match) {
+        product.variants.forEach(function (v) {
+          if (!match && v.available) match = v;
+        });
+      }
+      return match || product.variants[0] || null;
+    }
+
+    function choose(slot, productId) {
+      var next = null;
+      slot.products.forEach(function (p) {
+        if (String(p.id) === String(productId)) next = p;
+      });
+      if (!next || next === slot.chosen) return;
+
+      var keep = slot.variant ? slot.variant.title : null;
+      slot.chosen = next;
+      slot.variant = pickVariant(next, keep);
+      render();
+    }
+
+    function renderSlot(slot) {
+      Array.prototype.forEach.call(slot.el.querySelectorAll('[data-option]'), function (tile) {
+        var on = String(tile.getAttribute('data-option')) === String(slot.chosen.id);
+        tile.classList.toggle('is-hidden', !on);
+        tile.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+
+      Array.prototype.forEach.call(slot.el.querySelectorAll('[data-switch]'), function (button) {
+        var on = String(button.getAttribute('data-switch')) === String(slot.chosen.id);
+        button.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+
+      if (slot.select) {
+        var single = slot.chosen.hasOneVariant || slot.chosen.variants.length < 2;
+        if (slot.sizeBox) slot.sizeBox.hidden = single;
+        if (slot.sizeLabel) slot.sizeLabel.textContent = slot.chosen.optionName || '';
+
+        slot.select.innerHTML = '';
+        slot.chosen.variants.forEach(function (v) {
+          var option = document.createElement('option');
+          option.value = v.id;
+          option.textContent = v.title;
+          option.disabled = !v.available;
+          if (slot.variant && v.id === slot.variant.id) option.selected = true;
+          slot.select.appendChild(option);
+        });
+      }
+
+      if (slot.priceEl && slot.variant) {
+        slot.priceEl.textContent = money(slot.variant.price);
+      }
+    }
+
+    function render() {
+      var regular = 0;
+      var cheapest = 0;
+      var sellable = true;
+
+      slots.forEach(function (slot) {
+        renderSlot(slot);
+        if (!slot.variant) { sellable = false; return; }
+        if (!slot.variant.available) sellable = false;
+        regular += slot.variant.price;
+        if (!cheapest || slot.variant.price < cheapest) cheapest = slot.variant.price;
+      });
+
+      var base = scope === 'cheapest' ? cheapest : regular;
+      var saving = Math.round(base * pct / 100);
+
+      if (totalRegular) totalRegular.textContent = money(regular);
+      if (totalBundle)  totalBundle.textContent  = money(regular - saving);
+      if (totalSaving)  totalSaving.textContent  = money(saving);
+
+      if (form) {
+        slots.forEach(function (slot, i) {
+          var input = form.querySelector('[data-line="' + i + '"]');
+          if (input && slot.variant) input.value = slot.variant.id;
+        });
+      }
+
+      if (submit) submit.disabled = !sellable;
+    }
+
+    render();
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-bundle]'), setupBundle);
+
   /* ------------------------------------------------------------------
      The footer carries a "Cookie-Einstellungen" link that reopens our own
      banner. With that banner switched off — Shopify's native one used

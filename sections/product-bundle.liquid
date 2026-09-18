@@ -1,47 +1,68 @@
 {%- comment -%}
-  Bundle deal — shown under the product page.
+  Bundle deal.
 
-  Two (or more) products side by side with a plus between them, the regular
-  total struck through and the bundle price next to it, plus a button that
-  drops the whole set into the cart at once.
+  A bundle is a row of slots. A slot is either one fixed product, or a
+  choice between several — two jackets, say, of which the customer takes
+  one. Each slot also carries its own size picker when the chosen product
+  has variants.
 
-  IMPORTANT: a theme can only show a deal, it cannot grant one. The saving
-  has to exist as an automatic discount in the Shopify admin, otherwise the
-  cart charges full price and the page has advertised a price the customer
-  never gets. "Discount applies to" must match how that discount is set up:
+  Why the size picker matters: without it the form can only send
+  selected_or_first_available_variant, so every bundle lands in the cart in
+  whatever size happens to come first. The customer notices at the cart, or
+  worse, on delivery.
 
-    Whole bundle  → the percentage comes off every product in the set.
-    Second item   → the percentage comes off the cheapest product only,
-                    which is what a "Buy X get Y" automatic discount does.
+  Prices are rendered by Liquid for the default selection and recomputed in
+  the browser as the customer switches. Without JavaScript the defaults
+  stand and the form still posts a valid, complete bundle — one size and one
+  product per slot, exactly what Liquid printed.
 
-  A half-filled section never reaches a customer: with fewer than two
-  products picked nothing goes out to the shop. In the theme editor it does
-  show — as an outline with a line saying what is missing — otherwise the
-  section would be invisible exactly while it is being set up.
+  IMPORTANT: the theme only shows the deal. The saving has to exist as an
+  automatic discount in the admin, or the cart charges full price against a
+  page that promised less.
 {%- endcomment -%}
 
 {%- liquid
-  assign count = 0
+  assign pct = section.settings.discount_percent | default: 15
+  assign default_ids = ''
+
+  assign slots = 0
   assign regular = 0
   assign cheapest = 0
   assign all_available = true
 
   for block in section.blocks
-    assign p = block.settings.product
-    if p == blank
+    assign first = blank
+    if block.type == 'bundle_item'
+      assign first = block.settings.product
+    else
+      for n in (1..4)
+        assign key = 'product_' | append: n
+        assign candidate = block.settings[key]
+        if candidate != blank and first == blank
+          assign first = candidate
+        endif
+      endfor
+    endif
+
+    if first == blank
       continue
     endif
-    assign count = count | plus: 1
-    assign regular = regular | plus: p.price
-    if cheapest == 0 or p.price < cheapest
-      assign cheapest = p.price
+
+    assign slots = slots | plus: 1
+    assign variant = first.selected_or_first_available_variant
+    if default_ids == blank
+      assign default_ids = variant.id | append: ''
+    else
+      assign default_ids = default_ids | append: ',' | append: variant.id
     endif
-    unless p.available
+    assign regular = regular | plus: variant.price
+    if cheapest == 0 or variant.price < cheapest
+      assign cheapest = variant.price
+    endif
+    unless first.available
       assign all_available = false
     endunless
   endfor
-
-  assign pct = section.settings.discount_percent | default: 15
 
   if section.settings.discount_scope == 'cheapest'
     assign saving = cheapest | times: pct | divided_by: 100.0 | round
@@ -49,17 +70,20 @@
     assign saving = regular | times: pct | divided_by: 100.0 | round
   endif
   assign bundle_total = regular | minus: saving
--%}
 
-{%- liquid
   assign wrap = 'page-width section bundle'
   if section.settings.layout == 'centered'
     assign wrap = 'section bundle bundle--centered'
   endif
 -%}
 
-{%- if count > 1 -%}
-  <div class="{{ wrap }}">
+{%- if slots > 1 -%}
+  <div class="{{ wrap }}"
+       data-bundle
+       data-bundle-pct="{{ pct }}"
+       data-bundle-scope="{{ section.settings.discount_scope | default: 'total' }}"
+       data-money-format="{{ shop.money_format | escape }}">
+
     <div class="bundle__head">
       <h2 class="section__title bundle__title">{{ section.settings.title }}</h2>
       <span class="bundle__badge">−{{ pct }}%</span>
@@ -73,29 +97,156 @@
       <ul class="bundle__set">
         {%- assign shown = 0 -%}
         {%- for block in section.blocks -%}
-          {%- assign p = block.settings.product -%}
-          {%- if p == blank -%}{%- continue -%}{%- endif -%}
+          {%- comment -%}
+            A slot offers one product or a choice of up to four. Both kinds
+            are walked with the same loop, so the markup below is written
+            once: for a fixed block only the first pass yields a product.
+          {%- endcomment -%}
+          {%- assign p0 = blank -%}
+          {%- assign option_count = 0 -%}
+          {%- for n in (1..4) -%}
+            {%- if block.type == 'bundle_item' -%}
+              {%- assign candidate = block.settings.product -%}
+              {%- if n > 1 -%}{%- assign candidate = blank -%}{%- endif -%}
+            {%- else -%}
+              {%- assign key = 'product_' | append: n -%}
+              {%- assign candidate = block.settings[key] -%}
+            {%- endif -%}
+            {%- if candidate == blank -%}{%- continue -%}{%- endif -%}
+            {%- assign option_count = option_count | plus: 1 -%}
+            {%- if p0 == blank -%}{%- assign p0 = candidate -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if option_count == 0 -%}{%- continue -%}{%- endif -%}
+
           {%- assign shown = shown | plus: 1 -%}
           {%- if shown > 1 -%}
             <li class="bundle__plus" aria-hidden="true">+</li>
           {%- endif -%}
-          <li class="bundle__item" {{ block.shopify_attributes }}>
-            <a href="{{ p.url }}">
-              <span class="bundle__media">
-                {%- if p.featured_image -%}
-                  {{ p.featured_image | image_url: width: 800 | image_tag:
-                     widths: '200,300,400,600,800',
-                     sizes: '(max-width: 749px) 40vw, 220px',
-                     alt: p.title,
-                     loading: 'lazy' }}
+
+          <li class="bundle__item" data-slot="{{ shown | minus: 1 }}" {{ block.shopify_attributes }}>
+            {%- comment -%}
+              Every product the slot offers is rendered. All but the first
+              are hidden, and the script swaps which one shows; with the
+              script blocked the first one stands, and it is the one the
+              form posts.
+            {%- endcomment -%}
+            <div class="bundle__options">
+              {%- assign seen = 0 -%}
+              {%- for n in (1..4) -%}
+                {%- if block.type == 'bundle_item' -%}
+                  {%- assign p = block.settings.product -%}
+                  {%- if n > 1 -%}{%- assign p = blank -%}{%- endif -%}
                 {%- else -%}
-                  <img src="{{ 'placeholder-product-1.svg' | asset_url }}" alt="{{ p.title | escape }}"
-                       width="1200" height="1500" loading="lazy">
+                  {%- assign key = 'product_' | append: n -%}
+                  {%- assign p = block.settings[key] -%}
                 {%- endif -%}
-              </span>
-              <span class="bundle__name">{{ block.settings.label | default: p.title }}</span>
-              <span class="bundle__price">{{ p.price | money }}</span>
-            </a>
+                {%- if p == blank -%}{%- continue -%}{%- endif -%}
+                {%- assign seen = seen | plus: 1 -%}
+
+                <button type="button"
+                        class="bundle__option{% if seen > 1 %} is-hidden{% endif %}"
+                        data-option="{{ p.id }}"
+                        aria-pressed="{% if seen == 1 %}true{% else %}false{% endif %}"
+                        {% if option_count == 1 %}data-single{% endif %}>
+                  <span class="bundle__media">
+                    {%- if p.featured_image -%}
+                      {{ p.featured_image | image_url: width: 800 | image_tag:
+                         widths: '200,300,400,600,800',
+                         sizes: '(max-width: 749px) 45vw, 260px',
+                         alt: p.title,
+                         loading: 'lazy' }}
+                    {%- else -%}
+                      <img src="{{ 'placeholder-product-1.svg' | asset_url }}" alt="{{ p.title | escape }}"
+                           width="1200" height="1500" loading="lazy">
+                    {%- endif -%}
+                  </span>
+                  <span class="bundle__name">{{ p.title }}</span>
+                </button>
+              {%- endfor -%}
+            </div>
+
+            {%- comment -%}
+              Switching between the products of a choice slot sits apart from
+              the thumbnails, so a tap meant for the size picker cannot land
+              on a product instead.
+            {%- endcomment -%}
+            {%- if option_count > 1 -%}
+              <div class="bundle__switch" role="group"
+                   aria-label="{{ section.settings.label_choose | default: 'Auswahl' }}">
+                {%- assign seen = 0 -%}
+                {%- for n in (1..4) -%}
+                  {%- assign key = 'product_' | append: n -%}
+                  {%- assign p = block.settings[key] -%}
+                  {%- if p == blank -%}{%- continue -%}{%- endif -%}
+                  {%- assign seen = seen | plus: 1 -%}
+                  <button type="button" class="bundle__swatch"
+                          data-switch="{{ p.id }}"
+                          aria-pressed="{% if seen == 1 %}true{% else %}false{% endif %}">
+                    {{ p.title }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            <p class="bundle__price" data-slot-price>
+              {{ p0.selected_or_first_available_variant.price | money }}
+            </p>
+
+            {%- comment -%}
+              One size picker per slot, refilled by the script when the
+              product changes. It is rendered from the first product so it is
+              already right before any script runs, and hidden rather than
+              skipped when that product has a single variant — another
+              product in the same slot may well have sizes.
+            {%- endcomment -%}
+            <label class="bundle__size"{% if p0.has_only_default_variant %} hidden{% endif %}>
+              <span class="bundle__size-label">{{ p0.options.first }}</span>
+              <select data-slot-variant>
+                {%- for v in p0.variants -%}
+                  <option value="{{ v.id }}" data-price="{{ v.price }}"
+                          {% unless v.available %}disabled{% endunless %}
+                          {% if v.id == p0.selected_or_first_available_variant.id %}selected{% endif %}>
+                    {{ v.title }}{% unless v.available %} — {{ section.settings.label_sold_out }}{% endunless %}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </label>
+
+            {%- comment -%}
+              What the script needs about this slot, handed over as data
+              rather than as markup it would have to read back out.
+            {%- endcomment -%}
+            <script type="application/json" data-slot-json>
+              {
+                "products": [
+                  {%- assign seen = 0 -%}
+                  {%- for n in (1..4) -%}
+                    {%- if block.type == 'bundle_item' -%}
+                      {%- assign p = block.settings.product -%}
+                      {%- if n > 1 -%}{%- assign p = blank -%}{%- endif -%}
+                    {%- else -%}
+                      {%- assign key = 'product_' | append: n -%}
+                      {%- assign p = block.settings[key] -%}
+                    {%- endif -%}
+                    {%- if p == blank -%}{%- continue -%}{%- endif -%}
+                    {%- assign seen = seen | plus: 1 -%}
+                    {%- if seen > 1 -%},{%- endif -%}
+                    {
+                      "id": {{ p.id }},
+                      "optionName": {{ p.options.first | default: '' | json }},
+                      "hasOneVariant": {{ p.has_only_default_variant }},
+                      "variants": [
+                        {%- for v in p.variants -%}
+                          { "id": {{ v.id }}, "title": {{ v.title | json }},
+                            "price": {{ v.price }}, "available": {{ v.available }} }
+                          {%- unless forloop.last -%},{%- endunless -%}
+                        {%- endfor -%}
+                      ]
+                    }
+                  {%- endfor -%}
+                ]
+              }
+            </script>
           </li>
         {%- endfor -%}
       </ul>
@@ -104,27 +255,26 @@
         <dl class="bundle__totals">
           <div>
             <dt>{{ section.settings.label_regular }}</dt>
-            <dd><s>{{ regular | money }}</s></dd>
+            <dd><s data-total-regular>{{ regular | money }}</s></dd>
           </div>
           <div class="bundle__totals-row--deal">
             <dt>{{ section.settings.label_bundle }}</dt>
-            <dd>{{ bundle_total | money }}</dd>
+            <dd data-total-bundle>{{ bundle_total | money }}</dd>
           </div>
         </dl>
 
-        <p class="bundle__saving">{{ section.settings.label_saving }} {{ saving | money }}</p>
+        <p class="bundle__saving">
+          {{ section.settings.label_saving }} <span data-total-saving>{{ saving | money }}</span>
+        </p>
 
         {%- if all_available -%}
           <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data"
-                class="bundle__form">
-            {%- assign line = 0 -%}
-            {%- for block in section.blocks -%}
-              {%- assign p = block.settings.product -%}
-              {%- if p == blank -%}{%- continue -%}{%- endif -%}
-              <input type="hidden" name="items[{{ line }}][id]"
-                     value="{{ p.selected_or_first_available_variant.id }}">
+                class="bundle__form" data-bundle-form>
+            {%- assign default_list = default_ids | split: ',' -%}
+            {%- for id in default_list -%}
+              {%- assign line = forloop.index0 -%}
+              <input type="hidden" name="items[{{ line }}][id]" value="{{ id }}" data-line="{{ line }}">
               <input type="hidden" name="items[{{ line }}][quantity]" value="1">
-              {%- assign line = line | plus: 1 -%}
             {%- endfor -%}
             <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
             <button type="submit" class="btn bundle__btn">{{ section.settings.button_label }}</button>
@@ -142,7 +292,7 @@
 
 {%- elsif request.design_mode -%}
   {%- comment -%}
-    Editor only — so the section can be found and filled in. Never shown in
+    Editor only, so the section can be found and filled in. Never shown in
     the shop, and it carries no prices: an example price is a promise the
     checkout would not keep.
   {%- endcomment -%}
@@ -163,15 +313,16 @@
                  width="1200" height="1500" loading="lazy">
           </span>
           <span class="bundle__name">
-            {{ block.settings.label | default: block.settings.product.title | default: 'Product' }}
+            {%- if block.type == 'bundle_choice' -%}Auswahl{%- else -%}Produkt{%- endif -%}
           </span>
         </li>
       {%- endfor -%}
     </ul>
 
     <p class="bundle__setup-note">
-      Pick a product in each block on the left. The bundle appears in the shop
-      as soon as two are set — until then customers see nothing here.
+      Pick a product in each block on the left. A “Bundle choice” block can
+      hold several — the customer takes one of them. The bundle appears in
+      the shop as soon as two slots are filled.
     </p>
   </div>
 {%- endif -%}
@@ -245,8 +396,9 @@
     { "type": "text", "id": "label_regular", "label": "Regular total", "default": "Separately" },
     { "type": "text", "id": "label_bundle", "label": "Bundle total", "default": "Together" },
     { "type": "text", "id": "label_saving", "label": "Saving", "default": "You save" },
+    { "type": "text", "id": "label_choose", "label": "Choice group label", "default": "Auswahl" },
     { "type": "text", "id": "button_label", "label": "Button", "default": "Add bundle to cart" },
-    { "type": "text", "id": "label_sold_out", "label": "Unavailable", "default": "Currently unavailable" },
+    { "type": "text", "id": "label_sold_out", "label": "Unavailable", "default": "ausverkauft" },
     {
       "type": "text",
       "id": "note",
@@ -259,8 +411,21 @@
       "type": "bundle_item",
       "name": "Bundle product",
       "settings": [
-        { "type": "product", "id": "product", "label": "Product" },
-        { "type": "text", "id": "label", "label": "Name shown", "info": "Optional. Defaults to the product title." }
+        { "type": "product", "id": "product", "label": "Product" }
+      ]
+    },
+    {
+      "type": "bundle_choice",
+      "name": "Bundle choice",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "The customer takes one of these. Leave a slot empty to offer fewer."
+        },
+        { "type": "product", "id": "product_1", "label": "Option 1" },
+        { "type": "product", "id": "product_2", "label": "Option 2" },
+        { "type": "product", "id": "product_3", "label": "Option 3" },
+        { "type": "product", "id": "product_4", "label": "Option 4" }
       ]
     }
   ],
@@ -269,7 +434,7 @@
     {
       "name": "Bundle deal",
       "blocks": [
-        { "type": "bundle_item" },
+        { "type": "bundle_choice" },
         { "type": "bundle_item" }
       ]
     }

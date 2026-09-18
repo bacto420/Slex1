@@ -72,8 +72,21 @@ dazwischen, daneben der Einzelpreis-Gesamtbetrag durchgestrichen, der
 Bundle-Preis, die Ersparnis und ein Button, der beide Artikel auf einmal in den
 Warenkorb legt.
 
+Ein Bundle besteht aus **Slots**. Ein Slot ist entweder ein festes Produkt
+(Block *Bundle product*) oder eine **Auswahl** (Block *Bundle choice*) mit bis
+zu vier Produkten, von denen der Kunde eines nimmt — etwa zwei Jacken.
+
+Hat das gewählte Produkt Varianten, erscheint im Slot zusätzlich ein
+**Größen-Auswahlfeld**. Ohne das könnte das Formular nur die erste verfügbare
+Variante senden, und jedes Bundle landete in irgendeiner Größe im Warenkorb.
+
+Preise, Ersparnis und Gesamtsumme rechnen beim Umschalten live mit. Liquid
+rendert die Ausgangsauswahl fertig samt Formularfeldern, das Skript übernimmt
+erst ab der ersten Änderung — ohne JavaScript bleibt also eine gültige,
+vollständige Bestellung stehen.
+
 Einstellbar im Theme-Editor (Produkte → Bundle deal): Überschrift, Untertitel,
-Rabattsatz, Wortlaut der Zeilen und pro Block ein Produkt.
+Rabattsatz, Layout, Produktgröße und Wortlaut der Zeilen.
 
 Ausgeliefert wird der Abschnitt mit zwei **leeren** Produkt-Blöcken. Solange
 weniger als zwei Produkte gewählt sind, gibt er im Shop nichts aus — im

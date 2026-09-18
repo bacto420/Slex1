@@ -1398,6 +1398,80 @@ textarea:focus {
   text-transform: uppercase;
 }
 
+/* One slot of the bundle: the chosen product's tile, the switch between
+   the products on offer, and the size picker. */
+.bundle__options {
+  display: block;
+}
+
+.bundle__option {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.bundle__option[data-single] {
+  cursor: default;
+}
+
+.bundle__option.is-hidden {
+  display: none;
+}
+
+.bundle__switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--space-sm);
+}
+
+.bundle__swatch {
+  flex: 1 1 auto;
+  padding: 7px 10px;
+  background: none;
+  border: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.bundle__swatch:hover {
+  color: var(--color-text);
+}
+
+.bundle__swatch[aria-pressed="true"] {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.bundle__size {
+  display: block;
+  margin-top: var(--space-sm);
+}
+
+.bundle__size-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.bundle__size select {
+  width: 100%;
+}
+
 /* Full width and centred — the home page variant. A band of its own under
    the product grid: the whole width of the screen, everything stacked on one
    axis, and the tiles large enough to carry the block on a desktop. The
