@@ -5,7 +5,8 @@
       "settings": {
         "product_name_1": "Product 01",
         "product_name_2": "Product 02",
-        "product_name_3": "Product 03"
+        "product_name_3": "Product 03",
+        "product_scale": 81
       }
     },
     "bundle": {

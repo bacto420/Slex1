@@ -81,6 +81,17 @@
     { "type": "image_picker", "id": "image_2", "label": "Image 2" },
     { "type": "image_picker", "id": "image_3", "label": "Image 3" },
     { "type": "header", "content": "Right column — products" },
+    {
+      "type": "range",
+      "id": "product_scale",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Product size",
+      "info": "Share of the column width, on screens from 750px up. Phones keep their own size.",
+      "default": 81
+    },
     { "type": "product", "id": "product_1", "label": "Product 1" },
     { "type": "text", "id": "product_name_1", "label": "Fallback name 1", "default": "Product 01" },
     { "type": "product", "id": "product_2", "label": "Product 2" },
@@ -93,3 +104,16 @@
   ]
 }
 {% endschema %}
+
+<style>
+  {%- comment -%}
+    Desktop only. The phone size lives in base.css, and an unconditional
+    custom property here would outrank it — a section style is more specific
+    than the media query that sets it.
+  {%- endcomment -%}
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .split {
+      --product-scale: {{ section.settings.product_scale | default: 81 }}%;
+    }
+  }
+</style>
