@@ -32,6 +32,11 @@
   var formatMoney = function (cents, format) {
     var value = (cents || 0) / 100;
 
+    /* Shopify's money format may carry markup — merchants wrap the amount
+       in a span often enough. This lands in textContent, so any tags would
+       show up as literal angle brackets in the totals. */
+    format = String(format).replace(/<[^>]*>/g, '');
+
     var withSeparators = function (decimals, thousands, decimalMark) {
       var fixed = value.toFixed(decimals);
       var parts = fixed.split('.');
@@ -39,7 +44,7 @@
       return decimals ? whole + decimalMark + parts[1] : whole;
     };
 
-    return String(format).replace(/\{\{\s*(\w+)\s*\}\}/g, function (_, token) {
+    return format.replace(/\{\{\s*(\w+)\s*\}\}/g, function (_, token) {
       switch (token) {
         case 'amount_no_decimals':                      return withSeparators(0, ',', '.');
         case 'amount_with_comma_separator':             return withSeparators(2, '.', ',');
