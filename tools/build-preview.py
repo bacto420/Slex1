@@ -27,6 +27,13 @@ THEME_DIRS = ('assets', 'config', 'layout', 'locales', 'sections', 'snippets', '
 
 # Sections that only exist to sell. Their templates point at coming-soon, so
 # nothing references them any more.
+# Templates that only make sense with a shop behind them. product.json
+# itself is replaced by the Coming soon override; its alternates — one per
+# garment, each carrying a size chart — have nothing to sit on.
+DROP_TEMPLATE_GLOBS = (
+    'product.*.json',
+)
+
 DROP_SECTIONS = (
     'home-split.liquid',
     'main-product.liquid',
@@ -50,6 +57,10 @@ def build(out_zip: pathlib.Path) -> None:
 
         for name in DROP_SECTIONS:
             (stage / 'sections' / name).unlink(missing_ok=True)
+
+        for pattern in DROP_TEMPLATE_GLOBS:
+            for stale in (stage / 'templates').glob(pattern):
+                stale.unlink()
 
         shutil.copy(PREVIEW / 'sections' / 'coming-soon.liquid', stage / 'sections')
 
