@@ -40,6 +40,10 @@
         {%- endfor -%}
       {%- endunless -%}
 
+      {%- if section.settings.show_size_link -%}
+        <a class="product__sizelink" href="#SizeChart">{{ section.settings.size_link_label }}</a>
+      {%- endif -%}
+
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
       <label class="field-label" for="Quantity">{{ 'products.quantity' | t }}</label>
@@ -59,6 +63,15 @@
 {% schema %}
 {
   "name": "Product",
-  "settings": []
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_size_link",
+      "label": "Link to the size chart",
+      "info": "Jumps to the Size chart section further down the page. Switch off on templates that have no size chart.",
+      "default": true
+    },
+    { "type": "text", "id": "size_link_label", "label": "Link label", "default": "Größentabelle" }
+  ]
 }
 {% endschema %}

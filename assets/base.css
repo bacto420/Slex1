@@ -1398,6 +1398,118 @@ textarea:focus {
   text-transform: uppercase;
 }
 
+/* ==========================================================================
+   Size chart
+   ========================================================================== */
+
+.sizechart {
+  border-top: 1px solid var(--color-line);
+}
+
+.sizechart__title {
+  margin-bottom: var(--space-sm);
+}
+
+.sizechart__intro {
+  margin: 0 0 var(--space-lg);
+  max-width: 60ch;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #cfcfcf;
+}
+
+.sizechart__body {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.sizechart__figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--color-text);
+}
+
+/* The garment reads as the subject, the measuring lines as annotation. */
+.sizechart__marks {
+  opacity: 0.55;
+}
+
+.sizechart__letters text {
+  font-size: 19px;
+  letter-spacing: 0.04em;
+}
+
+/* A table is the one thing allowed to be wider than the screen, inside its
+   own scroller, rather than squeezing the columns to nothing. */
+.sizechart__table-wrap {
+  overflow-x: auto;
+}
+
+.sizechart__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.sizechart__table th,
+.sizechart__table td {
+  padding: 12px var(--space-sm);
+  text-align: left;
+  border-bottom: 1px solid var(--color-line);
+  white-space: nowrap;
+}
+
+.sizechart__table thead th {
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.sizechart__table tbody th {
+  font-weight: 400;
+  white-space: normal;
+}
+
+.sizechart__table tbody td {
+  font-variant-numeric: tabular-nums;
+}
+
+.sizechart__letter {
+  display: inline-block;
+  min-width: 1.6em;
+  margin-right: 6px;
+  color: var(--color-muted);
+}
+
+.sizechart__note {
+  margin: var(--space-lg) 0 0;
+  max-width: 60ch;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+/* The size chart sits under the product; a link by the size picker takes
+   you there without hunting for it. */
+.product__sizelink {
+  display: inline-block;
+  margin: var(--space-sm) 0 0;
+  font-size: 11px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-decoration: underline;
+}
+
+.product__sizelink:hover {
+  color: var(--color-text);
+}
+
 /* A price, with the former one beside it when there is a Vergleichspreis. */
 .price {
   display: inline-flex;
@@ -1844,6 +1956,16 @@ textarea:focus {
   .bundle--centered {
     padding-top: var(--space-lg);
     padding-bottom: var(--space-lg);
+  }
+
+  .sizechart__body {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .sizechart__figure {
+    max-width: 260px;
+    margin: 0 auto;
   }
   .cookie__text { font-size: 11px; }
 

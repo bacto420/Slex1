@@ -1,0 +1,163 @@
+{%- comment -%}
+  Size chart — a drawing with lettered measuring points and a table that
+  uses the same letters.
+
+  Rows are blocks, so a garment with more or fewer measurements needs no
+  code change, and the size columns come from one comma-separated setting.
+  A row prints only the columns that exist, so switching from four sizes to
+  three never leaves a stray cell behind.
+
+  The drawing is inline SVG rather than an uploaded image: it inherits the
+  text colour, stays sharp at any size, and has no second file to keep in
+  step with the theme.
+{%- endcomment -%}
+
+{%- assign sizes = section.settings.sizes | default: 'S,M,L,XL' | split: ',' -%}
+
+<div class="page-width section sizechart" id="SizeChart">
+  <div class="sizechart__head">
+    <h2 class="section__title sizechart__title">{{ section.settings.title }}</h2>
+    {%- if section.settings.intro != blank -%}
+      <p class="sizechart__intro">{{ section.settings.intro }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="sizechart__body">
+    <div class="sizechart__figure">
+      {%- comment -%}
+        Flat lay of a long-sleeved top. The letters sit on the measurement
+        lines, not on the garment, so it stays readable at thumbnail size.
+      {%- endcomment -%}
+      <svg viewBox="0 0 400 330" role="img" aria-labelledby="SizeChartFigureTitle">
+        <title id="SizeChartFigureTitle">{{ section.settings.figure_alt }}</title>
+
+        <g class="sizechart__garment" fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linejoin="round" stroke-linecap="round">
+          <path d="M120 72 L170 72 Q200 96 230 72 L280 72
+                   L346 214 L306 234 L276 132 L279 256
+                   L121 256 L124 132 L94 234 L54 214 Z"/>
+        </g>
+
+        <g class="sizechart__marks" fill="none" stroke="currentColor" stroke-width="1.2">
+          {%- comment -%} A — across the shoulders {%- endcomment -%}
+          <path d="M120 44 L280 44 M120 38 L120 50 M280 38 L280 50"/>
+
+          {%- comment -%} D — across the hem {%- endcomment -%}
+          <path d="M121 286 L279 286 M121 280 L121 292 M279 280 L279 292"/>
+
+          {%- comment -%} B — down the body {%- endcomment -%}
+          <path d="M250 104 L250 250 M244 104 L256 104 M244 250 L256 250"/>
+
+          {%- comment -%} C — along the outer sleeve {%- endcomment -%}
+          <path d="M292 78 L356 218 M287 80 L297 76 M351 220 L361 216"/>
+        </g>
+
+        <g class="sizechart__letters" fill="currentColor">
+          <text x="200" y="32"  text-anchor="middle">A</text>
+          <text x="200" y="310" text-anchor="middle">D</text>
+          <text x="236" y="182" text-anchor="end">B</text>
+          <text x="338" y="140" text-anchor="start">C</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="sizechart__table-wrap">
+      <table class="sizechart__table">
+        <thead>
+          <tr>
+            <th scope="col">{{ section.settings.label_measure }}</th>
+            {%- for size in sizes -%}
+              <th scope="col">{{ size | strip }}</th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            {%- assign values = block.settings.values | default: '' | split: ',' -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row">
+                <span class="sizechart__letter">{{ block.settings.letter }}</span>
+                {{ block.settings.label }}
+              </th>
+              {%- for size in sizes -%}
+                {%- assign v = values[forloop.index0] | strip -%}
+                <td>{% if v != blank %}{{ v }}{% if section.settings.unit != blank %} {{ section.settings.unit }}{% endif %}{% else %}—{% endif %}</td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {%- if section.settings.note != blank -%}
+    <p class="sizechart__note">{{ section.settings.note }}</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Size chart",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Größentabelle" },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Alle Angaben sind Maße des flach ausgelegten Kleidungsstücks, nicht Körpermaße."
+    },
+    {
+      "type": "text",
+      "id": "sizes",
+      "label": "Sizes",
+      "info": "Comma separated. These become the table columns.",
+      "default": "S, M, L, XL"
+    },
+    { "type": "text", "id": "unit", "label": "Unit", "default": "cm" },
+    { "type": "text", "id": "label_measure", "label": "First column heading", "default": "Maß" },
+    {
+      "type": "text",
+      "id": "figure_alt",
+      "label": "Drawing description",
+      "info": "Read aloud by screen readers.",
+      "default": "Flach ausgelegtes Oberteil mit den Messpunkten A bis D"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Gemessen mit einer Toleranz von ±2 cm. Im Zweifel die größere Größe wählen."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Measurement",
+      "settings": [
+        { "type": "text", "id": "letter", "label": "Letter", "default": "A" },
+        { "type": "text", "id": "label", "label": "Name", "default": "Schulterbreite" },
+        {
+          "type": "text",
+          "id": "values",
+          "label": "Values",
+          "info": "Comma separated, in the order of the sizes above. Numbers only — the unit is added on its own.",
+          "default": "53, 55, 57, 59"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Size chart",
+      "blocks": [
+        { "type": "row", "settings": { "letter": "A", "label": "Schulterbreite", "values": "53, 55, 57, 59" } },
+        { "type": "row", "settings": { "letter": "B", "label": "Länge ab Achsel", "values": "39, 40, 41, 43" } },
+        { "type": "row", "settings": { "letter": "C", "label": "Ärmellänge ab Schulter", "values": "67, 68, 69, 70" } },
+        { "type": "row", "settings": { "letter": "D", "label": "Saumbreite", "values": "55, 57, 60, 63" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
