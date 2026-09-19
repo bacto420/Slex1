@@ -64,8 +64,43 @@ zwei Fallback-Templates fehlten ursprünglich; ohne sie liefert Shopify für
 beide Menüpunkte zeigten also auf ein und dieselbe Seite. Das war der zweite
 Teil der „Blog und Media hängen zusammen"-Ursache.
 
-## Bundle-Deal auf der Produktseite
+## Größentabelle
 
+Der Abschnitt **Size chart** zeigt eine Zeichnung mit den Messpunkten A bis D
+und daneben die Tabelle. Zeichnung ist Inline-SVG, also kein Bild, das
+mitgepflegt werden muss.
+
+Alles ist im Theme-Editor einstellbar: die Spalten über das kommagetrennte
+Feld *Sizes*, und pro Block ein Maß mit Buchstabe, Name und den Werten in
+derselben Reihenfolge. Eine Zeile gibt nur so viele Spalten aus, wie es
+Größen gibt.
+
+### Eigene Maße je Kleidungsstück
+
+Ein Abschnitt gehört zur **Vorlage**, nicht zum einzelnen Produkt. Damit
+Jacke, Hoodie und Longsleeve eigene Maße haben können, gibt es drei
+zusätzliche Produktvorlagen:
+
+| Vorlage | Datei |
+| --- | --- |
+| `jacke` | `templates/product.jacke.json` |
+| `hoodie` | `templates/product.hoodie.json` |
+| `longsleeve` | `templates/product.longsleeve.json` |
+| Standard | `templates/product.json` |
+
+Zuweisen: **Produkte → das Produkt → rechts unter *Theme-Vorlage*** die
+passende wählen. Danach im Theme-Editor oben im Dropdown **Produkte → jacke**
+(bzw. hoodie, longsleeve) öffnen und dort die Maße eintragen — sie gelten
+dann nur für Produkte mit dieser Vorlage.
+
+Alle drei starten mit denselben Werten aus der ersten Skizze. Die gehören je
+Kleidungsstück korrigiert; ein falscher sichtbarer Wert wird eher bemerkt als
+eine leere Tabelle.
+
+Braucht ein weiteres Kleidungsstück eigene Maße, eine der Dateien kopieren
+und umbenennen — der Name nach `product.` ist der, der im Dropdown steht.
+
+## Bundle-Deal auf der Produktseite
 Unter jeder Produktseite sitzt der Abschnitt **Bundle deal**
 (`sections/product-bundle.liquid`): zwei Produkte nebeneinander mit einem Plus
 dazwischen, daneben der Einzelpreis-Gesamtbetrag durchgestrichen, der

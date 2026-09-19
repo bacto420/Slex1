@@ -1,0 +1,99 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_size_link": true,
+        "size_link_label": "Größentabelle"
+      }
+    },
+    "bundle": {
+      "type": "product-bundle",
+      "blocks": {
+        "choice": {
+          "type": "bundle_choice",
+          "settings": {}
+        },
+        "fixed": {
+          "type": "bundle_item",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "choice",
+        "fixed"
+      ],
+      "settings": {
+        "title": "Bundle deal",
+        "subtitle": "Jacke nach Wahl plus Longsleeve — 15% gespart.",
+        "layout": "split",
+        "discount_percent": 15,
+        "discount_scope": "total",
+        "label_regular": "Separately",
+        "label_bundle": "Together",
+        "label_saving": "You save",
+        "label_choose": "Auswahl",
+        "button_label": "Add bundle to cart",
+        "label_sold_out": "ausverkauft",
+        "note": "The saving is applied automatically at checkout."
+      }
+    },
+    "size_chart": {
+      "type": "size-chart",
+      "blocks": {
+        "a": {
+          "type": "row",
+          "settings": {
+            "letter": "A",
+            "label": "Schulterbreite",
+            "values": "53, 55, 57, 59"
+          }
+        },
+        "b": {
+          "type": "row",
+          "settings": {
+            "letter": "B",
+            "label": "Länge ab Achsel",
+            "values": "39, 40, 41, 43"
+          }
+        },
+        "c": {
+          "type": "row",
+          "settings": {
+            "letter": "C",
+            "label": "Ärmellänge ab Schulter",
+            "values": "67, 68, 69, 70"
+          }
+        },
+        "d": {
+          "type": "row",
+          "settings": {
+            "letter": "D",
+            "label": "Saumbreite",
+            "values": "55, 57, 60, 63"
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "settings": {
+        "title": "Größentabelle",
+        "intro": "Alle Angaben sind Maße des flach ausgelegten Kleidungsstücks, nicht Körpermaße.",
+        "sizes": "S, M, L, XL",
+        "unit": "cm",
+        "label_measure": "Maß",
+        "figure_alt": "Flach ausgelegtes Oberteil mit den Messpunkten A bis D",
+        "note": "Gemessen mit einer Toleranz von ±2 cm. Im Zweifel die größere Größe wählen."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "size_chart",
+    "bundle"
+  ]
+}
