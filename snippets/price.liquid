@@ -1,0 +1,29 @@
+{%- comment -%}
+  One price, with the former one struck through beside it when Shopify has
+  a Vergleichspreis on the variant and it is genuinely higher.
+
+  Usage:
+    {% render 'price', product: product %}
+    {% render 'price', product: product, variant: some_variant %}
+
+  The comparison is drawn from the variant rather than from the product, so
+  a product whose sizes carry different compare-at prices shows the one that
+  belongs to the price next to it.
+{%- endcomment -%}
+
+{%- liquid
+  assign v = variant
+  if v == blank
+    assign v = product.selected_or_first_available_variant
+  endif
+
+  assign now = v.price
+  assign was = v.compare_at_price
+-%}
+
+<span class="price{% if was > now %} price--reduced{% endif %}">
+  <span class="price__now">{{ now | money }}</span>
+  {%- if was > now -%}
+    <s class="price__was">{{ was | money }}</s>
+  {%- endif -%}
+</span>

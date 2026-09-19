@@ -31,7 +31,7 @@
             <div class="product-card__meta">
               <span>{{ product.title }}</span>
               {%- if section.settings.show_price -%}
-                <span class="product-card__price">{{ product.price | money }}</span>
+                <span class="product-card__price">{%- render 'price', product: product -%}</span>
               {%- endif -%}
             </div>
           </a>

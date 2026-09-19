@@ -1398,6 +1398,19 @@ textarea:focus {
   text-transform: uppercase;
 }
 
+/* A price, with the former one beside it when there is a Vergleichspreis. */
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.price__was {
+  color: var(--color-muted);
+  text-decoration: line-through;
+}
+
 /* One slot of the bundle: the chosen product's tile, the switch between
    the products on offer, and the size picker. */
 .bundle__options {
