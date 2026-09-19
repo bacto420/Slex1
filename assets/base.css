@@ -1761,18 +1761,41 @@ textarea:focus {
     padding: var(--space-md);
   }
 
-  /* Keep the two columns on mobile so the products are visible right away.
-     Only the gutters tighten up. */
+  /* One column on a phone. Two columns meant every image and every product
+     sat at roughly a third of the screen — too small to read a garment by,
+     which is the one thing the home page is for. Stacked, each takes the
+     full width.
+
+     The order in the markup is image, product, image, product, so the
+     stack alternates on its own and each product still follows the picture
+     it belongs to. */
   .split {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 6px;
     padding: 10px;
-    /* Half-size would be unreadably small on a phone. */
-    --product-scale: 86%;
+    --product-scale: 100%;
+  }
+
+  /* The pair belongs together, the next pair does not: a tight gap inside,
+     a clear break after. */
+  .split__cell.product-tile {
+    margin-bottom: 26px;
+  }
+
+  .split__cell.product-tile:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Back into the flow. Hanging the name below an absolutely positioned
+     box reserves no height, and at full width the next image would run
+     into it. */
+  .split__cell.product-tile .product-tile__name {
+    position: static;
+    margin-top: 10px;
   }
 
   .product-tile__name {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.1em;
     margin-top: 8px;
   }
