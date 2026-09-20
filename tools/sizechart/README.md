@@ -1,30 +1,45 @@
-# Größentabelle als Grafik
+# Größentabellen als Grafik
 
-Zwei Bilder, gerendert aus HTML mit der Michroma-Schrift des Shops:
+Vier Bilder, gerendert aus HTML mit der Michroma-Schrift des Shops:
 
-| Datei | Größe | wofür |
+| Kleidungsstück | Format | Datei |
 | --- | --- | --- |
-| `bacto-sizechart-portrait.png` | 2400 × 3000 | Produktbild in der Galerie — dasselbe Hochformat wie die anderen Produktbilder |
-| `bacto-sizechart-wide.png` | 3200 × 1800 | Produktbeschreibung, Banner, Instagram |
+| Longsleeve | 2400 × 3000 | `bacto-size-chart-longsleeve-portrait.png` |
+| Longsleeve | 3200 × 1800 | `bacto-size-chart-longsleeve-wide.png` |
+| Jacke | 2400 × 3000 | `bacto-size-chart-jacket-portrait.png` |
+| Jacke | 3200 × 1800 | `bacto-size-chart-jacket-wide.png` |
 
-## Zahlen ändern
+Hochformat passt ins Produktbild-Raster (dasselbe 4:5 wie die Produktfotos),
+Querformat in Beschreibung, Banner oder Instagram.
 
-Die Werte stehen als Text in `portrait.html` und `wide.html`, jeweils in der
-Tabelle am Ende der Datei. Ändern, dann:
+## Ändern
+
+Alles steht in `build.py`: die Zeichnungen als SVG, die Maße in `GARMENTS`.
+Danach:
 
 ```
 tools/sizechart/render.sh
 ```
 
-Beide Dateien müssen einzeln gepflegt werden — sie teilen sich bewusst keine
-gemeinsame Quelle, weil sie unterschiedliche Schriftgrade und Abstände
-brauchen, damit der Inhalt in die jeweilige Fläche passt.
+Das Skript baut die HTML-Dateien neu und rendert sie. **Die HTML-Dateien
+nicht direkt bearbeiten** — sie werden bei jedem Lauf überschrieben.
+
+Ein weiteres Kleidungsstück braucht einen Eintrag in `GARMENTS` und seinen
+Namen in der Schleife in `render.sh`.
 
 ## Auf den Rand achten
 
-Was über die Fläche hinausragt, wird beim Rendern abgeschnitten, ohne
-Warnung. Nach jeder Änderung die untere Zeile des Bildes prüfen: Steht der
-Hinweis „Gemessen mit einer Toleranz…" noch da, ist alles drin.
+Was über die Fläche hinausragt, wird beim Rendern kommentarlos
+abgeschnitten. Nach jeder Änderung die untere Zeile des Bildes prüfen: Steht
+der Hinweis zur Toleranz noch da, ist alles drin.
 
-Die Schrift liegt als base64 in der HTML-Datei. Wird `assets/michroma-latin.woff2`
-im Theme getauscht, muss sie hier neu eingebettet werden.
+## Verhältnis zum Theme
+
+`sections/size-chart.liquid` enthält dieselben zwei Zeichnungen und zeigt
+über die Einstellung *Drawing*, welche. Wird hier eine Zeichnung geändert,
+gehört sie auch dort ersetzt, sonst zeigen Bild und Shop verschiedene
+Silhouetten.
+
+Die Schrift liegt als base64 in den erzeugten HTML-Dateien. Wird
+`assets/michroma-latin.woff2` getauscht, erledigt `build.py` das Einbetten
+beim nächsten Lauf von selbst.

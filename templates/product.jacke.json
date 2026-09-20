@@ -45,49 +45,41 @@
           "type": "row",
           "settings": {
             "letter": "A",
-            "label": "Shoulder width",
-            "values": "53, 55, 57, 59"
+            "label": "Length",
+            "values": "70, 73, 76, 79, 82"
           }
         },
         "b": {
           "type": "row",
           "settings": {
             "letter": "B",
-            "label": "Length from armpit",
-            "values": "39, 40, 41, 43"
+            "label": "Half chest",
+            "values": "55, 57, 59, 61, 63"
           }
         },
         "c": {
           "type": "row",
           "settings": {
             "letter": "C",
-            "label": "Sleeve length from shoulder",
-            "values": "67, 68, 69, 70"
-          }
-        },
-        "d": {
-          "type": "row",
-          "settings": {
-            "letter": "D",
-            "label": "Hem width",
-            "values": "55, 57, 60, 63"
+            "label": "Sleeve length",
+            "values": "76, 78, 80, 82, 84"
           }
         }
       },
       "block_order": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
       ],
       "settings": {
         "title": "Size chart",
         "intro": "All measurements are taken from the garment laid flat, not from the body.",
-        "sizes": "S, M, L, XL",
+        "sizes": "XS, S, M, L, XL",
         "unit": "cm",
         "label_measure": "Measurement",
-        "figure_alt": "Garment laid flat with measuring points A to D",
-        "note": "Measured with a tolerance of ±2 cm. If in doubt, take the larger size."
+        "figure_alt": "Hooded jacket laid flat with measuring points A to C",
+        "note": "Half chest is measured flat from seam to seam — double it for the full circumference. Tolerance ±2 cm. If in doubt, take the larger size.",
+        "garment": "jacket"
       }
     }
   },
