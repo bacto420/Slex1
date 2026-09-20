@@ -105,11 +105,29 @@ kann.
 | Alles, was im Theme-Editor eingetippt ist (Footer-Spalten, Widerrufs-Texte, Überschriften) | Abschnitts-Einstellungen | Translate & Adapt → *Theme* |
 | Produkte, Seiten, Blogbeiträge, Rechtstexte, Navigation | Shopify-Inhalte | Translate & Adapt → jeweilige Rubrik |
 
-Zwei Stellen laufen bewusst noch nicht über Schlüssel: das Widerrufsformular
-im Footer (fest auf Deutsch) und die Kontoseiten unter `templates/customers/`
-(fest auf Englisch). Das sind die einzigen Texte, die beim Umschalten stehen
-bleiben. Sie umzustellen wäre ein eigener Schritt — hier ist absichtlich nur
-die Sprachauswahl dazugekommen und sonst nichts.
+### Widerrufsformular
+
+Das Formular — der Dialog im Footer und die eigene Seite — wechselt die
+Sprache mit. Dafür gilt dort eine Regel, die sonst nirgends im Theme gilt:
+
+**Ein leeres Feld im Theme-Editor ist kein Fehler, sondern die Voreinstellung.**
+Bleibt es leer, kommt der Text aus `de.json` bzw. `en.default.json` und
+folgt damit der Sprache. Wird etwas eingetippt, gewinnt das — aber für alle
+Sprachen gleichzeitig, weil eine Einstellung nur einen Wert hat. Wer also die
+Beschriftungen selbst schreiben will, übersetzt sie danach in Translate &
+Adapt.
+
+Deshalb sind die deutschen Vorbelegungen aus dem Abschnitts-Schema entfernt:
+solange sie dort standen, war das Feld nie leer und die Sprachdatei kam nie
+zum Zug.
+
+Der Link in der Datenschutz-Zeile wird nicht fest eingetragen, sondern beim
+Rendern eingesetzt — sonst landet ein englischsprachiger Besucher auf der
+deutschen Datenschutzseite.
+
+Nicht übersetzt sind noch die Kontoseiten unter `templates/customers/` (fest
+auf Englisch). Login, Registrierung und Kontoübersicht sind die einzigen
+Seiten, die beim Umschalten stehen bleiben.
 
 Beide Sprachdateien sind Schlüssel für Schlüssel gleich. Kommt ein Text dazu,
 gehört er in **beide** — fehlt er in `de.json`, zeigt Shopify still die

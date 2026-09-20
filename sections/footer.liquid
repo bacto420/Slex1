@@ -1,3 +1,28 @@
+{%- liquid
+  # The withdrawal form falls back to the language files when a field is left
+  # empty in the editor, which is how it changes language with the rest of the
+  # shop. A merchant who types their own wording still wins — that is what
+  # `default` means here.
+  #
+  # The privacy note carries a link, so the locale string takes the address as
+  # a placeholder rather than baking in a path that would drop an English
+  # visitor back into the German page.
+  if routes.root_url == '/'
+    assign privacy_url = '/pages/datenschutz'
+  else
+    assign privacy_url = routes.root_url | append: '/pages/datenschutz'
+  endif
+
+  assign t_button = 'widerruf.button' | t
+  assign t_note = 'widerruf.note' | t
+  assign t_intro = 'widerruf.intro_dialog' | t
+  assign t_confirm = 'widerruf.confirm' | t
+  assign t_confirm_note = 'widerruf.confirm_note' | t
+  assign t_success_heading = 'widerruf.success_heading' | t
+  assign t_success_text = 'widerruf.success_text' | t
+  assign t_privacy = 'widerruf.privacy_note' | t: url: privacy_url
+-%}
+
 {%- comment -%}
   Footer — carries the statutory identity block, the legal navigation and
   the withdrawal button required by § 13a FAGG.
@@ -39,7 +64,7 @@
 
 <footer class="footer">
   {%- if section.settings.show_withdrawal -%}
-    {%- assign w_label = section.settings.withdrawal_label | default: 'Vertrag widerrufen' -%}
+    {%- assign w_label = section.settings.withdrawal_label | default: t_button -%}
     <div class="footer__withdrawal">
       {%- comment -%}
         The button opens the form right here rather than linking away. That
@@ -49,22 +74,20 @@
       <button type="button" class="btn-withdraw" data-widerruf-open aria-haspopup="dialog">
         {{ w_label }}
       </button>
-      {%- if section.settings.withdrawal_note != blank -%}
-        <p class="footer__withdrawal-note">{{ section.settings.withdrawal_note }}</p>
-      {%- endif -%}
+      <p class="footer__withdrawal-note">{{ section.settings.withdrawal_note | default: t_note }}</p>
     </div>
 
     <dialog class="wdialog" id="WiderrufDialog" aria-label="{{ w_label }}">
       <div class="wdialog__inner">
-        <button type="button" class="wdialog__close" data-widerruf-close aria-label="Schließen">&times;</button>
+        <button type="button" class="wdialog__close" data-widerruf-close aria-label="{{ 'widerruf.close' | t }}">&times;</button>
         <h2 class="wdialog__title">{{ w_label }}</h2>
 
         {%- form 'contact', class: 'widerruf__form', id: 'WiderrufFooterForm' -%}
           {%- if form.posted_successfully? -%}
             <div class="widerruf__done" role="status" data-widerruf-success>
-              <h3>{{ section.settings.success_heading | default: 'Widerruf eingegangen' }}</h3>
-              <div class="rte">{{ section.settings.success_text }}</div>
-              <p class="widerruf__stamp">{{ 'now' | date: '%d.%m.%Y, %H:%M' }} (Wien)</p>
+              <h3>{{ section.settings.success_heading | default: t_success_heading }}</h3>
+              <div class="rte">{{ section.settings.success_text | default: t_success_text }}</div>
+              <p class="widerruf__stamp">{{ 'now' | date: '%d.%m.%Y, %H:%M' }} {{ 'widerruf.timezone' | t }}</p>
             </div>
           {%- else -%}
             {%- if form.errors -%}
@@ -72,36 +95,36 @@
             {%- endif -%}
 
             <div class="widerruf__step" data-step="1">
-              <div class="widerruf__intro rte">{{ section.settings.withdrawal_intro }}</div>
+              <div class="widerruf__intro rte">{{ section.settings.withdrawal_intro | default: t_intro }}</div>
 
-              <label class="field-label" for="WFName">Name *</label>
+              <label class="field-label" for="WFName">{{ 'widerruf.name' | t }} *</label>
               <input type="text" id="WFName" name="contact[name]" required autocomplete="name" data-required>
 
-              <label class="field-label" for="WFOrder">Bestellnummer *</label>
+              <label class="field-label" for="WFOrder">{{ 'widerruf.order' | t }} *</label>
               <input type="text" id="WFOrder" name="contact[Bestellnummer]" required placeholder="#1001" data-required>
 
-              <label class="field-label" for="WFEmail">E-Mail-Adresse für die Eingangsbestätigung *</label>
+              <label class="field-label" for="WFEmail">{{ 'widerruf.email' | t }} *</label>
               <input type="email" id="WFEmail" name="contact[email]" required autocomplete="email" data-required>
 
-              <label class="field-label" for="WFItems">Welche Artikel widerrufen Sie? (leer lassen für die gesamte Bestellung)</label>
+              <label class="field-label" for="WFItems">{{ 'widerruf.items' | t }}</label>
               <textarea id="WFItems" name="contact[Artikel]" rows="3"></textarea>
 
               <input type="hidden" name="contact[Art der Meldung]" value="Widerruf über die Rücktrittsfunktion">
               <input type="hidden" name="contact[Abgesendet am]" data-widerruf-stamp value="">
               <input type="hidden" name="contact[body]" data-widerruf-body value="Widerruf über die Rücktrittsfunktion der Website.">
 
-              <button type="button" class="btn btn--inline" data-widerruf-next>Weiter zur Bestätigung</button>
+              <button type="button" class="btn btn--inline" data-widerruf-next>{{ 'widerruf.next' | t }}</button>
             </div>
 
             <div class="widerruf__step" data-step="2" hidden>
-              <p class="widerruf__legend">Bitte prüfen und bestätigen</p>
+              <p class="widerruf__legend">{{ 'widerruf.step2' | t }}</p>
               <dl class="widerruf__review" data-widerruf-review></dl>
-              <div class="widerruf__note rte">{{ section.settings.withdrawal_confirm_note }}</div>
+              <div class="widerruf__note rte">{{ section.settings.withdrawal_confirm_note | default: t_confirm_note }}</div>
               <div class="widerruf__actions">
                 <button type="submit" class="btn btn--confirm">
-                  {{ section.settings.withdrawal_confirm_label | default: 'Widerruf bestätigen' }}
+                  {{ section.settings.withdrawal_confirm_label | default: t_confirm }}
                 </button>
-                <button type="button" class="btn btn--ghost btn--inline" data-widerruf-back>Zurück zur Bearbeitung</button>
+                <button type="button" class="btn btn--ghost btn--inline" data-widerruf-back>{{ 'widerruf.back' | t }}</button>
               </div>
             </div>
 
@@ -110,14 +133,12 @@
               Art. 13 DSGVO — the person has to be told what happens with the data
               at the moment it is collected, not somewhere else on the site.
             {%- endcomment -%}
-            {%- if section.settings.privacy_note != blank -%}
-              <div class="widerruf__privacy rte">{{ section.settings.privacy_note }}</div>
-            {%- endif -%}
+            <div class="widerruf__privacy rte">{{ section.settings.privacy_note | default: t_privacy }}</div>
 
             <noscript>
-              <p class="widerruf__note">Ohne JavaScript senden Sie das Formular direkt ab.</p>
+              <p class="widerruf__note">{{ 'widerruf.nojs' | t }}</p>
               <button type="submit" class="btn btn--confirm">
-                {{ section.settings.withdrawal_confirm_label | default: 'Widerruf bestätigen' }}
+                {{ section.settings.withdrawal_confirm_label | default: t_confirm }}
               </button>
             </noscript>
           {%- endif -%}
@@ -125,7 +146,7 @@
 
         {%- if section.settings.withdrawal_url != blank -%}
           <p class="wdialog__alt">
-            <a href="{{ section.settings.withdrawal_url }}">Widerruf auf eigener Seite öffnen</a>
+            <a href="{{ section.settings.withdrawal_url }}">{{ 'widerruf.open_page' | t }}</a>
           </p>
         {%- endif -%}
       </div>
@@ -234,27 +255,20 @@
   "settings": [
     { "type": "header", "content": "Withdrawal button (§ 13a FAGG)" },
     { "type": "checkbox", "id": "show_withdrawal", "label": "Show withdrawal button", "default": true },
+    { "type": "paragraph", "content": "Every field below may stay empty: the wording then comes from locales/de.json and locales/en.default.json and switches with the shop's language. Anything typed here overrides that, for all languages at once." },
     { "type": "text", "id": "withdrawal_label", "label": "Button label",
-      "info": "Statutory wording. Only change to an equally unambiguous phrase.",
-      "default": "Vertrag widerrufen" },
-    { "type": "richtext", "id": "withdrawal_intro", "label": "Intro inside the form",
-      "default": "<p>Sie können Ihren Vertrag hier widerrufen. Ein Kundenkonto ist nicht erforderlich. Den Eingang bestätigen wir Ihnen unverzüglich per E-Mail.</p>" },
+      "info": "Statutory wording. Only change to an equally unambiguous phrase." },
+    { "type": "richtext", "id": "withdrawal_intro", "label": "Intro inside the form" },
     { "type": "text", "id": "withdrawal_confirm_label", "label": "Confirmation button",
-      "info": "Statutory wording. Only change to an equally unambiguous phrase.",
-      "default": "Widerruf bestätigen" },
-    { "type": "richtext", "id": "withdrawal_confirm_note", "label": "Note above the confirmation button",
-      "default": "<p>Mit dem Bestätigen erklären Sie den Widerruf verbindlich. Der Eingang wird Ihnen unverzüglich per E-Mail bestätigt.</p>" },
-    { "type": "text", "id": "success_heading", "label": "Success heading", "default": "Widerruf eingegangen" },
-    { "type": "richtext", "id": "success_text", "label": "Success text",
-      "default": "<p>Wir haben Ihren Widerruf erhalten. Eine Eingangsbestätigung mit Datum und Uhrzeit geht Ihnen per E-Mail zu. Bitte senden Sie die Ware innerhalb von 14 Tagen zurück.</p>" },
+      "info": "Statutory wording. Only change to an equally unambiguous phrase." },
+    { "type": "richtext", "id": "withdrawal_confirm_note", "label": "Note above the confirmation button" },
+    { "type": "text", "id": "success_heading", "label": "Success heading" },
+    { "type": "richtext", "id": "success_text", "label": "Success text" },
     { "type": "url", "id": "withdrawal_url", "label": "Optional: link to a separate withdrawal page",
       "info": "Only needed if you also want a standalone page using the \"page.widerruf\" template." },
-    { "type": "text", "id": "withdrawal_note", "label": "Note under the button",
-      "default": "Widerruf ohne Kundenkonto – auch für Gastbestellungen" },
+    { "type": "text", "id": "withdrawal_note", "label": "Note under the button" },
     { "type": "richtext", "id": "privacy_note", "label": "Privacy note at the form",
-      "info": "Art. 13 DSGVO — shown with the form itself. Point the link at your privacy page.",
-      "default": "<p>Ihre Angaben werden ausschließlich zur Bearbeitung des Widerrufs verarbeitet (Art. 6 Abs. 1 lit. b und c DSGVO) und nicht für Werbung verwendet. Einzelheiten und Ihre Rechte: <a href=\"/pages/datenschutz\">Datenschutzerkl\u00e4rung</a>.</p>" },
-
+      "info": "Art. 13 DSGVO — shown with the form itself. The language-file version already links to your privacy page." },
     { "type": "header", "content": "Provider details" },
     { "type": "text", "id": "identity_heading", "label": "Heading", "default": "Company" },
     { "type": "richtext", "id": "identity_text", "label": "Provider details",

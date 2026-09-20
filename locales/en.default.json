@@ -45,6 +45,31 @@
     "checkout": "Checkout",
     "empty": "Your cart is empty."
   },
+  "widerruf": {
+    "button": "Withdraw from contract",
+    "close": "Close",
+    "note": "Withdrawal without an account — guest orders included",
+    "intro_dialog": "<p>You can withdraw from your contract here. No customer account is needed. We confirm receipt by email without delay.</p>",
+    "intro_page": "<p>Use this form to withdraw from your contract. No customer account is needed. After sending you receive a confirmation of receipt by email.</p>",
+    "step1": "Your details",
+    "name": "Name",
+    "order": "Order number",
+    "email": "Email address for the confirmation",
+    "items": "Which items are you withdrawing from? (leave empty for the whole order)",
+    "received": "Goods received on (optional)",
+    "next": "Continue to confirmation",
+    "step2": "Please check and confirm",
+    "confirm_note": "<p>Confirming declares the withdrawal bindingly. Receipt is confirmed to you by email without delay.</p>",
+    "confirm": "Confirm withdrawal",
+    "back": "Back to editing",
+    "nojs": "Without JavaScript, submit the form directly with the button below.",
+    "success_heading": "Withdrawal received",
+    "success_text": "<p>We have received your withdrawal. A confirmation of receipt with date and time will reach you by email. Please send the goods back within 14 days.</p>",
+    "privacy_note": "<p>Your details are processed solely to handle the withdrawal (Art. 6(1)(b) and (c) GDPR) and are not used for advertising. Details and your rights: <a href=\"{{ url }}\">Privacy policy</a>.</p>",
+    "alt_note": "<p>You can also declare the withdrawal informally by email or letter. The model withdrawal form is in the withdrawal policy.</p>",
+    "timezone": "(Vienna)",
+    "open_page": "Open the withdrawal form on its own page"
+  },
   "gift_cards": {
     "issued": {
       "title": "Gift card — {{ value }}"

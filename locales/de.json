@@ -45,6 +45,31 @@
     "checkout": "Zur Kasse",
     "empty": "Ihr Warenkorb ist leer."
   },
+  "widerruf": {
+    "button": "Vertrag widerrufen",
+    "close": "Schließen",
+    "note": "Widerruf ohne Kundenkonto – auch für Gastbestellungen",
+    "intro_dialog": "<p>Sie können Ihren Vertrag hier widerrufen. Ein Kundenkonto ist nicht erforderlich. Den Eingang bestätigen wir Ihnen unverzüglich per E-Mail.</p>",
+    "intro_page": "<p>Mit diesem Formular können Sie Ihren Vertrag widerrufen. Sie brauchen dafür kein Kundenkonto. Nach dem Absenden erhalten Sie eine Eingangsbestätigung per E-Mail.</p>",
+    "step1": "Ihre Angaben",
+    "name": "Name",
+    "order": "Bestellnummer",
+    "email": "E-Mail-Adresse für die Eingangsbestätigung",
+    "items": "Welche Artikel widerrufen Sie? (leer lassen für die gesamte Bestellung)",
+    "received": "Ware erhalten am (optional)",
+    "next": "Weiter zur Bestätigung",
+    "step2": "Bitte prüfen und bestätigen",
+    "confirm_note": "<p>Mit dem Bestätigen erklären Sie den Widerruf verbindlich. Der Eingang wird Ihnen unverzüglich per E-Mail bestätigt.</p>",
+    "confirm": "Widerruf bestätigen",
+    "back": "Zurück zur Bearbeitung",
+    "nojs": "Ohne aktiviertes JavaScript senden Sie das Formular direkt mit der folgenden Schaltfläche ab.",
+    "success_heading": "Widerruf eingegangen",
+    "success_text": "<p>Wir haben Ihren Widerruf erhalten. Eine Eingangsbestätigung mit Datum und Uhrzeit geht Ihnen per E-Mail zu. Bitte senden Sie die Ware innerhalb von 14 Tagen zurück.</p>",
+    "privacy_note": "<p>Ihre Angaben werden ausschließlich zur Bearbeitung des Widerrufs verarbeitet (Art. 6 Abs. 1 lit. b und c DSGVO) und nicht für Werbung verwendet. Einzelheiten und Ihre Rechte: <a href=\"{{ url }}\">Datenschutzerklärung</a>.</p>",
+    "alt_note": "<p>Sie können den Widerruf auch formlos per E-Mail oder Brief erklären. Das Muster-Widerrufsformular finden Sie in der Widerrufsbelehrung.</p>",
+    "timezone": "(Wien)",
+    "open_page": "Widerruf auf eigener Seite öffnen"
+  },
   "gift_cards": {
     "issued": {
       "title": "Geschenkkarte — {{ value }}"
