@@ -78,7 +78,7 @@
         "unit": "cm",
         "label_measure": "Measurement",
         "figure_alt": "Hooded jacket laid flat with measuring points A to C",
-        "note": "Half chest is measured flat from seam to seam — double it for the full circumference. Tolerance ±2 cm. If in doubt, take the larger size.",
+        "note": "Half chest is measured flat from seam to seam — double it for the full circumference. Tolerance ±2 cm. If in doubt, take the smaller size.",
         "garment": "jacket"
       }
     }

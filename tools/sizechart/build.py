@@ -121,7 +121,7 @@ GARMENTS = {
             ('C', 'Sleeve length',  ['76', '78', '80', '82', '84']),
         ],
         'note': ('Half chest is measured flat from seam to seam — double it for the full '
-                 'circumference. Tolerance ±2 cm. If in doubt, take the larger size.'),
+                 'circumference. Tolerance ±2 cm. If in doubt, take the smaller size.'),
     },
 }
 
