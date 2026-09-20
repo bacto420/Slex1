@@ -50,36 +50,34 @@ FIGURE_LONGSLEEVE = """
 </svg>
 """
 
-# Hooded zip jacket: hood, centre-front zip, two welt pockets, gathered hem,
-# tabbed cuffs. A is taken from the shoulder, so it runs beside the body
-# rather than through it.
+# Hooded zip jacket: hood, centre-front zip, two welt pockets, cuff tabs.
+# One stroke weight throughout and square line ends, so no line tapers or
+# rounds off against its neighbour. A is taken from the shoulder, so it runs
+# beside the body rather than through it.
 FIGURE_JACKET = """
 <svg viewBox="0 0 400 330" class="figure">
-  <g fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M122 110 L160 104 L240 104 L278 110
-             L334 236 L302 250 L264 162 L262 272
-             Q232 276 200 272 Q168 268 138 272
-             L136 162 L98 250 L66 236 Z"/>
-    <path d="M150 104 C 148 70 168 52 200 52 C 232 52 252 70 250 104"/>
+  <g fill="none" stroke="#fff" stroke-width="2.4"
+     stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="4">
+    <path d="M128 116 L172 106 L228 106 L272 116
+             L342 244 L316 262 L266 168 L266 286
+             L134 286 L134 168 L84 262 L58 244 Z"/>
+    <path d="M172 106 C 158 60 172 36 200 36 C 228 36 242 60 228 106"/>
+    <path d="M178 92 Q 200 110 222 92"/>
+    <path d="M200 106 L200 284"/>
+    <path d="M162 186 L174 252"/>
+    <path d="M238 186 L226 252"/>
+    <path d="M64 236 L90 254"/>
+    <path d="M336 236 L310 254"/>
   </g>
-  <g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.85">
-    <path d="M158 102 C 156 76 172 62 200 62 C 228 62 244 76 242 102"/>
-    <path d="M200 104 L200 270"/>
-    <path d="M137 252 L263 252"/>
-    <path d="M160 190 L170 232"/>
-    <path d="M240 190 L230 232"/>
-    <path d="M72 223 L104 237"/>
-    <path d="M328 223 L296 237"/>
-  </g>
-  <g fill="none" stroke="#fff" stroke-width="1.2" opacity="0.55">
-    <path d="M36 104 L36 272 M30 104 L42 104 M30 272 L42 272"/>
-    <path d="M137 186 L263 186 M137 180 L137 192 M263 180 L263 192"/>
-    <path d="M294 103 L350 229 M289 105 L299 100 M345 231 L355 226"/>
+  <g fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="square" opacity="0.55">
+    <path d="M36 106 L36 286 M30 106 L42 106 M30 286 L42 286"/>
+    <path d="M135 182 L265 182 M135 176 L135 188 M265 176 L265 188"/>
+    <path d="M288 107 L358 235 M283 109 L293 104 M353 237 L363 232"/>
   </g>
   <g fill="#fff" class="figure__letters">
-    <text x="26"  y="196" text-anchor="end">A</text>
-    <text x="168" y="176" text-anchor="middle">B</text>
-    <text x="364" y="160" text-anchor="start">C</text>
+    <text x="26"  y="203" text-anchor="end">A</text>
+    <text x="172" y="172" text-anchor="middle">B</text>
+    <text x="370" y="166" text-anchor="start">C</text>
   </g>
 </svg>
 """
