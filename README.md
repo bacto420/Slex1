@@ -66,39 +66,59 @@ Teil der „Blog und Media hängen zusammen"-Ursache.
 
 ## Größentabelle
 
-Der Abschnitt **Size chart** zeigt eine Zeichnung mit den Messpunkten A bis D
-und daneben die Tabelle. Zeichnung ist Inline-SVG, also kein Bild, das
-mitgepflegt werden muss.
+Die Größentabelle ist **kein Abschnitt im Theme**, sondern ein Bild. Vier
+fertige PNGs liegen unter `tools/sizechart/out/` — je Kleidungsstück eines im
+Hoch- und eines im Querformat. Das Hochformat hat dasselbe 4:5 wie die
+Produktfotos und passt damit ins Bilderraster, das Querformat in die
+Beschreibung oder einen Banner.
 
-Alles ist im Theme-Editor einstellbar: die Spalten über das kommagetrennte
-Feld *Sizes*, und pro Block ein Maß mit Buchstabe, Name und den Werten in
-derselben Reihenfolge. Eine Zeile gibt nur so viele Spalten aus, wie es
-Größen gibt.
+Hochladen wie jedes andere Produktbild. Zum Ändern der Maße oder der
+Zeichnung siehe `tools/sizechart/README.md`.
 
-### Eigene Maße je Kleidungsstück
+Ein Abschnitt im Theme hätte bedeutet, dass jede Produktvorlage ihre eigene
+Tabelle pflegt — beim Bild reicht es, die Datei auszutauschen.
 
-Ein Abschnitt gehört zur **Vorlage**, nicht zum einzelnen Produkt. Damit
-Jacke, Hoodie und Longsleeve eigene Maße haben können, gibt es drei
-zusätzliche Produktvorlagen:
+## Sprachen
 
-| Vorlage | Datei |
-| --- | --- |
-| `jacke` | `templates/product.jacke.json` |
-| `hoodie` | `templates/product.hoodie.json` |
-| `longsleeve` | `templates/product.longsleeve.json` |
-| Standard | `templates/product.json` |
+Der Shop läuft zweisprachig: Englisch als Standardsprache des Shops, Deutsch
+als veröffentlichte Übersetzung. Im Header steht rechts neben dem Warenkorb
+eine Auswahl, mit der Besucher umschalten können. Sie erscheint nur, wenn
+mehr als eine Sprache veröffentlicht ist — in einem einsprachigen Shop
+verschwindet sie von selbst.
 
-Zuweisen: **Produkte → das Produkt → rechts unter *Theme-Vorlage*** die
-passende wählen. Danach im Theme-Editor oben im Dropdown **Produkte → jacke**
-(bzw. hoodie, longsleeve) öffnen und dort die Maße eintragen — sie gelten
-dann nur für Produkte mit dieser Vorlage.
+### Was das Theme entscheidet und was nicht
 
-Alle drei starten mit denselben Werten aus der ersten Skizze. Die gehören je
-Kleidungsstück korrigiert; ein falscher sichtbarer Wert wird eher bemerkt als
-eine leere Tabelle.
+**Nicht das Theme:** in welcher Sprache jemand ankommt. Das steht in
+*Einstellungen → Sprachen* (Standardsprache je Domain) und in *Einstellungen
+→ Märkte*. Ist für `www.bacto-clothing.com` Deutsch als Standard gesetzt,
+liefert Shopify dort Deutsch aus, Englisch liegt dann unter `/en`. Das Theme
+folgt dem, was Shopify schickt — es kann und soll das nicht überschreiben.
 
-Braucht ein weiteres Kleidungsstück eigene Maße, eine der Dateien kopieren
-und umbenennen — der Name nach `product.` ist der, der im Dropdown steht.
+**Das Theme:** dass es zu jeder Sprache Wörter gibt und dass man wechseln
+kann.
+
+### Woher die Wörter kommen
+
+| Text | Quelle | Übersetzen in |
+| --- | --- | --- |
+| Navigation, Warenkorb, Formular-Beschriftungen, Kontoseiten | `locales/en.default.json` und `locales/de.json` | Translate & Adapt → *Theme* |
+| Alles, was im Theme-Editor eingetippt ist (Footer-Spalten, Widerrufs-Texte, Überschriften) | Abschnitts-Einstellungen | Translate & Adapt → *Theme* |
+| Produkte, Seiten, Blogbeiträge, Rechtstexte, Navigation | Shopify-Inhalte | Translate & Adapt → jeweilige Rubrik |
+
+Beide Sprachdateien sind Schlüssel für Schlüssel gleich. Kommt ein Text dazu,
+gehört er in **beide** — fehlt er in `de.json`, zeigt Shopify still die
+englische Fassung, und das fällt erst dem Kunden auf.
+
+Die deutschen Texte in den Dateien sind eine brauchbare Grundlage, keine
+Vorgabe: was in Translate & Adapt für Deutsch eingetragen wird, hat Vorrang.
+Dort geänderte Wörter überschreiben also nichts im Theme und gehen beim
+nächsten Theme-Update auch nicht verloren.
+
+### Wenn eine Sprache dazukommt
+
+Sprache in Shopify veröffentlichen, `locales/de.json` kopieren, umbenennen
+(z. B. `es.json`), übersetzen. Die Auswahl im Header nimmt sie automatisch
+auf — sie liest `localization.available_languages` und zählt nicht selbst.
 
 ## Bundle-Deal auf der Produktseite
 Unter jeder Produktseite sitzt der Abschnitt **Bundle deal**
@@ -179,8 +199,9 @@ Shop, Blog, Media und Warenkorb ab, zeigt also nur die Startseite.
 assets/     CSS, JS, Logo, Platzhaltergrafiken
 config/     Theme-Einstellungen
 layout/     theme.liquid
-locales/    Übersetzungen
+locales/    en.default.json und de.json — Schlüssel für Schlüssel gleich
 sections/   Sections inkl. Schema
-snippets/   gallery-blog (Vollbreite), gallery-media (Raster mit Links)
+snippets/   gallery-blog (Vollbreite), gallery-media (Raster mit Links),
+            language-switcher (Sprachauswahl im Header), price
 templates/  Templates je Route
 ```

@@ -7,11 +7,16 @@
     "nav": {
       "primary": "Primary navigation",
       "secondary": "Secondary navigation",
+      "menu": "Menu",
       "home": "Home",
       "shop": "Shop",
       "blog": "Blog",
       "media": "Media",
       "cart": "Cart"
+    },
+    "language": {
+      "label": "Language",
+      "submit": "Change"
     },
     "search": {
       "title": "Search",
@@ -39,6 +44,49 @@
     "remove": "Remove",
     "checkout": "Checkout",
     "empty": "Your cart is empty."
+  },
+  "widerruf": {
+    "close": "Close",
+    "name": "Name *",
+    "order": "Order number *",
+    "email": "Email address for the confirmation *",
+    "items": "Which items are you withdrawing from? (leave empty for the whole order)",
+    "next": "Continue to confirmation",
+    "review": "Please check and confirm",
+    "back": "Back to editing",
+    "nojs": "Without JavaScript the form is submitted directly.",
+    "open_page": "Open the withdrawal form on its own page"
+  },
+  "customer": {
+    "account": {
+      "title": "Account"
+    },
+    "addresses": {
+      "title": "Addresses"
+    },
+    "login": {
+      "title": "Login",
+      "submit": "Sign in"
+    },
+    "register": {
+      "title": "Create account",
+      "submit": "Create"
+    },
+    "activate": {
+      "title": "Activate account",
+      "submit": "Activate"
+    },
+    "reset": {
+      "title": "Reset password",
+      "submit": "Reset"
+    },
+    "field": {
+      "email": "Email",
+      "password": "Password",
+      "new_password": "New password",
+      "first_name": "First name",
+      "last_name": "Last name"
+    }
   },
   "gift_cards": {
     "issued": {

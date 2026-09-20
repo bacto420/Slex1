@@ -2,10 +2,7 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {
-        "show_size_link": true,
-        "size_link_label": "Size chart"
-      }
+      "settings": {}
     },
     "bundle": {
       "type": "product-bundle",
@@ -37,63 +34,10 @@
         "label_sold_out": "ausverkauft",
         "note": "The saving is applied automatically at checkout."
       }
-    },
-    "size_chart": {
-      "type": "size-chart",
-      "blocks": {
-        "a": {
-          "type": "row",
-          "settings": {
-            "letter": "A",
-            "label": "Shoulder width",
-            "values": "53, 55, 57, 59"
-          }
-        },
-        "b": {
-          "type": "row",
-          "settings": {
-            "letter": "B",
-            "label": "Length from armpit",
-            "values": "39, 40, 41, 43"
-          }
-        },
-        "c": {
-          "type": "row",
-          "settings": {
-            "letter": "C",
-            "label": "Sleeve length from shoulder",
-            "values": "67, 68, 69, 70"
-          }
-        },
-        "d": {
-          "type": "row",
-          "settings": {
-            "letter": "D",
-            "label": "Hem width",
-            "values": "55, 57, 60, 63"
-          }
-        }
-      },
-      "block_order": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "settings": {
-        "title": "Size chart",
-        "intro": "All measurements are taken from the garment laid flat, not from the body.",
-        "sizes": "S, M, L, XL",
-        "unit": "cm",
-        "label_measure": "Measurement",
-        "figure_alt": "Garment laid flat with measuring points A to D",
-        "note": "Measured with a tolerance of ±2 cm. If in doubt, take the larger size."
-      }
     }
   },
   "order": [
     "main",
-    "size_chart",
     "bundle"
   ]
 }

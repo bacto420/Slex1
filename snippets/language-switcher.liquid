@@ -1,0 +1,43 @@
+{%- comment -%}
+  Language picker.
+
+  Which language a visitor lands in is not decided here. Shopify decides it
+  from the domain and the market — Settings → Languages, Settings → Markets
+  in the admin. This control only lets a visitor change it afterwards, and
+  it removes itself when the shop publishes a single language, so a
+  one-language shop never shows a menu with one entry in it.
+
+  Nothing is translated in this file either. Theme wording comes from
+  locales/*.json, everything typed into the theme editor and every product,
+  page and policy comes from Shopify's own translations — the ones Translate
+  & Adapt writes. Switching the language switches both at once, because both
+  hang off the same request locale.
+
+  Pass `id_suffix` when the snippet appears more than once on a page, so the
+  label and the select keep unique ids.
+{%- endcomment -%}
+
+{%- if localization.available_languages.size > 1 -%}
+  {%- assign lang_id = 'LanguageSelect' | append: id_suffix -%}
+  <div class="lang" data-localization>
+    {%- form 'localization', class: 'lang__form' -%}
+      <label class="visually-hidden" for="{{ lang_id }}">{{ 'general.language.label' | t }}</label>
+      <select id="{{ lang_id }}" class="lang__select" name="locale_code">
+        {%- for language in localization.available_languages -%}
+          <option value="{{ language.iso_code }}"
+                  lang="{{ language.iso_code }}"
+                  {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+            {{ language.endonym_name }}
+          </option>
+        {%- endfor -%}
+      </select>
+      {%- comment -%}
+        Without JavaScript the select alone submits nothing, so it gets a
+        button. theme.js removes it again, because with JavaScript the
+        change event already submits and a second control would only be one
+        more thing to click.
+      {%- endcomment -%}
+      <button type="submit" class="lang__go" data-localization-go>{{ 'general.language.submit' | t }}</button>
+    {%- endform -%}
+  </div>
+{%- endif -%}

@@ -56,7 +56,7 @@
 
     <dialog class="wdialog" id="WiderrufDialog" aria-label="{{ w_label }}">
       <div class="wdialog__inner">
-        <button type="button" class="wdialog__close" data-widerruf-close aria-label="Schließen">&times;</button>
+        <button type="button" class="wdialog__close" data-widerruf-close aria-label="{{ 'widerruf.close' | t }}">&times;</button>
         <h2 class="wdialog__title">{{ w_label }}</h2>
 
         {%- form 'contact', class: 'widerruf__form', id: 'WiderrufFooterForm' -%}
@@ -74,34 +74,34 @@
             <div class="widerruf__step" data-step="1">
               <div class="widerruf__intro rte">{{ section.settings.withdrawal_intro }}</div>
 
-              <label class="field-label" for="WFName">Name *</label>
+              <label class="field-label" for="WFName">{{ 'widerruf.name' | t }}</label>
               <input type="text" id="WFName" name="contact[name]" required autocomplete="name" data-required>
 
-              <label class="field-label" for="WFOrder">Bestellnummer *</label>
+              <label class="field-label" for="WFOrder">{{ 'widerruf.order' | t }}</label>
               <input type="text" id="WFOrder" name="contact[Bestellnummer]" required placeholder="#1001" data-required>
 
-              <label class="field-label" for="WFEmail">E-Mail-Adresse für die Eingangsbestätigung *</label>
+              <label class="field-label" for="WFEmail">{{ 'widerruf.email' | t }}</label>
               <input type="email" id="WFEmail" name="contact[email]" required autocomplete="email" data-required>
 
-              <label class="field-label" for="WFItems">Welche Artikel widerrufen Sie? (leer lassen für die gesamte Bestellung)</label>
+              <label class="field-label" for="WFItems">{{ 'widerruf.items' | t }}</label>
               <textarea id="WFItems" name="contact[Artikel]" rows="3"></textarea>
 
               <input type="hidden" name="contact[Art der Meldung]" value="Widerruf über die Rücktrittsfunktion">
               <input type="hidden" name="contact[Abgesendet am]" data-widerruf-stamp value="">
               <input type="hidden" name="contact[body]" data-widerruf-body value="Widerruf über die Rücktrittsfunktion der Website.">
 
-              <button type="button" class="btn btn--inline" data-widerruf-next>Weiter zur Bestätigung</button>
+              <button type="button" class="btn btn--inline" data-widerruf-next>{{ 'widerruf.next' | t }}</button>
             </div>
 
             <div class="widerruf__step" data-step="2" hidden>
-              <p class="widerruf__legend">Bitte prüfen und bestätigen</p>
+              <p class="widerruf__legend">{{ 'widerruf.review' | t }}</p>
               <dl class="widerruf__review" data-widerruf-review></dl>
               <div class="widerruf__note rte">{{ section.settings.withdrawal_confirm_note }}</div>
               <div class="widerruf__actions">
                 <button type="submit" class="btn btn--confirm">
                   {{ section.settings.withdrawal_confirm_label | default: 'Widerruf bestätigen' }}
                 </button>
-                <button type="button" class="btn btn--ghost btn--inline" data-widerruf-back>Zurück zur Bearbeitung</button>
+                <button type="button" class="btn btn--ghost btn--inline" data-widerruf-back>{{ 'widerruf.back' | t }}</button>
               </div>
             </div>
 
@@ -115,7 +115,7 @@
             {%- endif -%}
 
             <noscript>
-              <p class="widerruf__note">Ohne JavaScript senden Sie das Formular direkt ab.</p>
+              <p class="widerruf__note">{{ 'widerruf.nojs' | t }}</p>
               <button type="submit" class="btn btn--confirm">
                 {{ section.settings.withdrawal_confirm_label | default: 'Widerruf bestätigen' }}
               </button>
@@ -125,7 +125,7 @@
 
         {%- if section.settings.withdrawal_url != blank -%}
           <p class="wdialog__alt">
-            <a href="{{ section.settings.withdrawal_url }}">Widerruf auf eigener Seite öffnen</a>
+            <a href="{{ section.settings.withdrawal_url }}">{{ 'widerruf.open_page' | t }}</a>
           </p>
         {%- endif -%}
       </div>

@@ -369,6 +369,27 @@
   Array.prototype.forEach.call(document.querySelectorAll('.widerruf__form'), setupWiderruf);
 
   /* ------------------------------------------------------------------
+     Language picker.
+
+     The select is the control: changing it submits. The submit button in
+     the markup is there for people without JavaScript, so it goes away as
+     soon as this runs — otherwise everyone else would see a second control
+     that does what the first one already did.
+     ------------------------------------------------------------------ */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-localization]'), function (root) {
+    var select = root.querySelector('select[name="locale_code"]');
+    var form = root.querySelector('form');
+    if (!select || !form) return;
+
+    var go = root.querySelector('[data-localization-go]');
+    if (go) go.parentNode.removeChild(go);
+
+    select.addEventListener('change', function () {
+      form.submit();
+    });
+  });
+
+  /* ------------------------------------------------------------------
      Dialog wiring, with a fallback for browsers without <dialog>.
      ------------------------------------------------------------------ */
   var dlg = document.getElementById('WiderrufDialog');

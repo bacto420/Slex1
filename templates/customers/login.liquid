@@ -1,10 +1,10 @@
 <div class="article">
-  <h1>Login</h1>
+  <h1>{{ 'customer.login.title' | t }}</h1>
   {%- form 'customer_login' -%}
-    <label class="field-label" for="CustomerEmail">Email</label>
+    <label class="field-label" for="CustomerEmail">{{ 'customer.field.email' | t }}</label>
     <input type="email" name="customer[email]" id="CustomerEmail">
-    <label class="field-label" for="CustomerPassword">Password</label>
+    <label class="field-label" for="CustomerPassword">{{ 'customer.field.password' | t }}</label>
     <input type="password" name="customer[password]" id="CustomerPassword">
-    <button type="submit" class="btn">Sign in</button>
+    <button type="submit" class="btn">{{ 'customer.login.submit' | t }}</button>
   {%- endform -%}
 </div>

@@ -1,0 +1,96 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Schlagwort \"{{ tags }}\"",
+      "page": "Seite {{ page }}"
+    },
+    "nav": {
+      "primary": "Hauptnavigation",
+      "secondary": "Zweite Navigation",
+      "menu": "Menü",
+      "home": "Start",
+      "shop": "Shop",
+      "blog": "Blog",
+      "media": "Media",
+      "cart": "Warenkorb"
+    },
+    "language": {
+      "label": "Sprache",
+      "submit": "Wechseln"
+    },
+    "search": {
+      "title": "Suche",
+      "submit": "Suchen",
+      "no_results": "Keine Ergebnisse gefunden."
+    },
+    "404": {
+      "subtext": "Diese Seite gibt es nicht."
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Zum Inhalt springen"
+  },
+  "products": {
+    "quantity": "Menge",
+    "add_to_cart": "In den Warenkorb",
+    "sold_out": "Ausverkauft"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "product": "Artikel",
+    "total": "Gesamt",
+    "subtotal": "Zwischensumme",
+    "update": "Aktualisieren",
+    "remove": "Entfernen",
+    "checkout": "Zur Kasse",
+    "empty": "Ihr Warenkorb ist leer."
+  },
+  "widerruf": {
+    "close": "Schließen",
+    "name": "Name *",
+    "order": "Bestellnummer *",
+    "email": "E-Mail-Adresse für die Eingangsbestätigung *",
+    "items": "Welche Artikel widerrufen Sie? (leer lassen für die gesamte Bestellung)",
+    "next": "Weiter zur Bestätigung",
+    "review": "Bitte prüfen und bestätigen",
+    "back": "Zurück zur Bearbeitung",
+    "nojs": "Ohne JavaScript senden Sie das Formular direkt ab.",
+    "open_page": "Widerruf auf eigener Seite öffnen"
+  },
+  "customer": {
+    "account": {
+      "title": "Konto"
+    },
+    "addresses": {
+      "title": "Adressen"
+    },
+    "login": {
+      "title": "Anmelden",
+      "submit": "Anmelden"
+    },
+    "register": {
+      "title": "Konto erstellen",
+      "submit": "Erstellen"
+    },
+    "activate": {
+      "title": "Konto aktivieren",
+      "submit": "Aktivieren"
+    },
+    "reset": {
+      "title": "Passwort zurücksetzen",
+      "submit": "Zurücksetzen"
+    },
+    "field": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "new_password": "Neues Passwort",
+      "first_name": "Vorname",
+      "last_name": "Nachname"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Geschenkkarte — {{ value }}"
+    }
+  }
+}

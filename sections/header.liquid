@@ -48,7 +48,7 @@
 <header class="header">
   <div class="header__inner">
     <nav class="header__nav" data-menu data-open="false" aria-label="{{ 'general.nav.primary' | t }}">
-      <button class="header__toggle" type="button" data-menu-toggle aria-expanded="false">Menu</button>
+      <button class="header__toggle" type="button" data-menu-toggle aria-expanded="false">{{ 'general.nav.menu' | t }}</button>
       <ul class="nav-list">
         <li>
           <a href="{{ routes.root_url }}" {% if template.name == 'index' %}aria-current="page"{% endif %}>
@@ -121,6 +121,17 @@
 
     <nav class="header__nav--right" aria-label="{{ 'general.nav.secondary' | t }}">
       <ul class="nav-list">
+        {%- comment -%}
+          The language picker sits beside the cart rather than in the menu,
+          because someone who landed in the wrong language cannot be expected
+          to find a button called "Menu" first. It renders nothing when the
+          shop publishes one language.
+        {%- endcomment -%}
+        {%- if localization.available_languages.size > 1 -%}
+          <li class="nav-list__lang">
+            {%- render 'language-switcher', id_suffix: 'Header' -%}
+          </li>
+        {%- endif -%}
         {%- if settings.show_cart -%}
           <li class="nav-list__cart">
             <a href="{{ routes.cart_url }}" {% if template.name == 'cart' %}aria-current="page"{% endif %}>
