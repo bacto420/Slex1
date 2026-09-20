@@ -1,5 +1,5 @@
 <div class="article">
-  <h1>{{ 'customer.addresses.title' | t }}</h1>
+  <h1>Addresses</h1>
   {%- for address in customer.addresses -%}
     <div class="rte">{{ address | format_address }}</div>
   {%- endfor -%}

@@ -101,9 +101,15 @@ kann.
 
 | Text | Quelle | Übersetzen in |
 | --- | --- | --- |
-| Navigation, Warenkorb, Formular-Beschriftungen, Kontoseiten | `locales/en.default.json` und `locales/de.json` | Translate & Adapt → *Theme* |
+| Navigation, Warenkorb, Suche, 404 | `locales/en.default.json` und `locales/de.json` | Translate & Adapt → *Theme* |
 | Alles, was im Theme-Editor eingetippt ist (Footer-Spalten, Widerrufs-Texte, Überschriften) | Abschnitts-Einstellungen | Translate & Adapt → *Theme* |
 | Produkte, Seiten, Blogbeiträge, Rechtstexte, Navigation | Shopify-Inhalte | Translate & Adapt → jeweilige Rubrik |
+
+Zwei Stellen laufen bewusst noch nicht über Schlüssel: das Widerrufsformular
+im Footer (fest auf Deutsch) und die Kontoseiten unter `templates/customers/`
+(fest auf Englisch). Das sind die einzigen Texte, die beim Umschalten stehen
+bleiben. Sie umzustellen wäre ein eigener Schritt — hier ist absichtlich nur
+die Sprachauswahl dazugekommen und sonst nichts.
 
 Beide Sprachdateien sind Schlüssel für Schlüssel gleich. Kommt ein Text dazu,
 gehört er in **beide** — fehlt er in `de.json`, zeigt Shopify still die

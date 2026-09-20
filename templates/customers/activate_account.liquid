@@ -1,8 +1,8 @@
 <div class="article">
-  <h1>{{ 'customer.activate.title' | t }}</h1>
+  <h1>Activate account</h1>
   {%- form 'activate_customer_password' -%}
-    <label class="field-label" for="apw">{{ 'customer.field.password' | t }}</label>
+    <label class="field-label" for="apw">Password</label>
     <input type="password" name="customer[password]" id="apw">
-    <button type="submit" class="btn">{{ 'customer.activate.submit' | t }}</button>
+    <button type="submit" class="btn">Activate</button>
   {%- endform -%}
 </div>
