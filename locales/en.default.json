@@ -16,7 +16,8 @@
     },
     "language": {
       "label": "Language",
-      "submit": "Change"
+      "submit": "Change",
+      "one_only": "The language picker appears once more than one language is active for this domain — Settings → Languages."
     },
     "search": {
       "title": "Search",

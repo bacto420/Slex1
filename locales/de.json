@@ -16,7 +16,8 @@
     },
     "language": {
       "label": "Sprache",
-      "submit": "Wechseln"
+      "submit": "Wechseln",
+      "one_only": "Die Sprachauswahl erscheint, sobald für diese Domain mehr als eine Sprache aktiv ist — Einstellungen → Sprachen."
     },
     "search": {
       "title": "Suche",

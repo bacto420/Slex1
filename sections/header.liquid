@@ -127,7 +127,7 @@
           to find a button called "Menu" first. It renders nothing when the
           shop publishes one language.
         {%- endcomment -%}
-        {%- if localization.available_languages.size > 1 -%}
+        {%- if localization.available_languages.size > 1 or request.design_mode -%}
           <li class="nav-list__lang">
             {%- render 'language-switcher', id_suffix: 'Header' -%}
           </li>

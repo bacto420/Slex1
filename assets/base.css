@@ -387,6 +387,18 @@ hr {
   text-transform: uppercase;
 }
 
+/* Editor-only note where the picker would be. Deliberately plain: it is not
+   something to click. */
+.lang--hint {
+  display: block;
+  max-width: 26ch;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #8a8a8a;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 /* ==========================================================================
    Homepage split — 3 images left / 3 products right
    ========================================================================== */

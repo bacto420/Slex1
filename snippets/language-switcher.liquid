@@ -40,4 +40,12 @@
       <button type="submit" class="lang__go" data-localization-go>{{ 'general.language.submit' | t }}</button>
     {%- endform -%}
   </div>
+
+{%- elsif request.design_mode -%}
+  {%- comment -%}
+    Editor only. A control that hides itself is indistinguishable from one
+    that was never installed, and the reason it hides sits in the admin, not
+    in the theme — so the editor says which.
+  {%- endcomment -%}
+  <span class="lang lang--hint">{{ 'general.language.one_only' | t }}</span>
 {%- endif -%}
