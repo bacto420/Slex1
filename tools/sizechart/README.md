@@ -33,6 +33,16 @@ Was über die Fläche hinausragt, wird beim Rendern kommentarlos
 abgeschnitten. Nach jeder Änderung die untere Zeile des Bildes prüfen: Steht
 der Hinweis zur Toleranz noch da, ist alles drin.
 
+Chromium malt 87 CSS-Pixel weniger, als `--window-size` verlangt. `build.py`
+zieht sie ab, damit nichts in diesem Streifen landet — er bleibt schwarz und
+fällt deshalb erst auf, wenn eine Textzeile darin verschwindet.
+
+## Woher die Jacke kommt
+
+Die Jacke ist von der Vorlagenskizze abgepaust — die Form stammt also aus
+der Zeichnung selbst, samt der Unruhe im Saum. Geändert wurde nur der Strich:
+eine Stärke, eckige Enden. Wer die Silhouette anfasst, verliert genau das.
+
 ## Verhältnis zum Theme
 
 `sections/size-chart.liquid` enthält dieselben zwei Zeichnungen und zeigt

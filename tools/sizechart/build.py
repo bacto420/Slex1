@@ -50,34 +50,47 @@ FIGURE_LONGSLEEVE = """
 </svg>
 """
 
-# Hooded zip jacket: hood, centre-front zip, two welt pockets, cuff tabs.
-# One stroke weight throughout and square line ends, so no line tapers or
-# rounds off against its neighbour. A is taken from the shoulder, so it runs
-# beside the body rather than through it.
+# Hooded zip jacket. The silhouette is traced off the reference sketch, down
+# to the hand-drawn wobble in the hem, so the shape is the sketch's and not a
+# redrawing of it. Only the stroke was changed: one weight throughout and
+# square line ends, so no line tapers or rounds off against its neighbour.
+# A is taken from the shoulder, so it runs beside the body rather than
+# through it.
 FIGURE_JACKET = """
 <svg viewBox="0 0 400 330" class="figure">
   <g fill="none" stroke="#fff" stroke-width="2.4"
      stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="4">
-    <path d="M128 116 L172 106 L228 106 L272 116
-             L342 244 L316 262 L266 168 L266 286
-             L134 286 L134 168 L84 262 L58 244 Z"/>
-    <path d="M172 106 C 158 60 172 36 200 36 C 228 36 242 60 228 106"/>
-    <path d="M178 92 Q 200 110 222 92"/>
-    <path d="M200 106 L200 284"/>
-    <path d="M162 186 L174 252"/>
-    <path d="M238 186 L226 252"/>
-    <path d="M64 236 L90 254"/>
-    <path d="M336 236 L310 254"/>
+    <path d="M169.1 69.5 C169.5 71.6 171.5 77.1 171.5 81.9 C171.5 86.7 169.7 94.2 169.3 98.3 C168.9 102.5 173.0 103.1 169.3 107.0 C165.6 110.8 153.1 117.5 147.2 121.7 C141.3 125.9 138.4 128.0 133.9 132.2 C129.5 136.3 125.5 140.6 120.6 146.7 C115.7 152.8 110.1 160.3 104.5 168.6 C98.9 176.9 92.6 186.6 87.0 196.5 C81.3 206.4 75.0 218.1 70.5 227.8 C66.1 237.5 62.1 249.1 60.2 254.7 C58.3 260.4 59.0 260.3 59.1 262.0 C59.2 263.6 60.4 264.4 60.7 264.9"/>
+    <path d="M228.5 74.5 C228.6 74.6 229.3 73.5 229.1 75.0 C229.0 76.6 227.4 80.3 227.6 83.8 C227.7 87.3 229.6 92.0 230.1 96.0 C230.6 100.0 227.1 103.4 230.5 107.6 C233.9 111.7 244.7 116.7 250.6 120.9 C256.4 125.0 261.0 128.3 265.6 132.5 C270.2 136.6 273.4 140.2 278.0 145.8 C282.6 151.4 287.3 157.6 293.2 166.1 C299.0 174.7 306.7 186.7 312.9 197.3 C319.0 207.9 325.6 220.5 329.9 229.9 C334.3 239.2 337.3 248.3 339.0 253.3 C340.8 258.4 340.4 258.5 340.6 260.2 C340.8 262.0 340.7 263.1 340.4 264.0 C340.2 264.9 339.4 265.3 339.1 265.6"/>
+    <path d="M195.8 278.0 C195.8 273.8 195.1 273.0 195.9 252.7 C196.7 232.4 199.5 182.3 200.5 156.1 C201.5 130.0 201.8 105.8 202.0 95.7"/>
+    <path d="M195.8 278.0 C206.9 278.3 250.9 280.6 262.3 279.8 C273.7 279.0 263.4 278.0 264.3 273.2 C265.3 268.5 266.8 261.8 267.8 251.3 C268.8 240.8 270.1 216.9 270.6 210.0"/>
+    <path d="M195.8 278.0 C186.0 278.2 147.2 280.4 137.1 279.0 C126.9 277.6 135.8 275.4 134.9 269.8 C133.9 264.2 132.4 255.6 131.4 245.5 C130.5 235.4 129.6 215.3 129.2 209.3"/>
+    <path d="M228.5 74.5 C228.9 73.8 230.5 71.9 231.2 69.9 C231.8 67.8 232.3 65.0 232.4 62.5 C232.5 60.0 232.2 57.1 231.6 54.7 C231.1 52.2 230.0 49.5 229.1 47.6 C228.2 45.7 227.6 44.8 226.3 43.4 C225.0 42.0 223.3 40.3 221.4 39.2 C219.6 38.0 217.4 37.0 215.2 36.3 C213.0 35.7 211.1 35.2 208.5 35.1 C205.8 35.0 202.4 35.1 199.5 35.6 C196.6 36.0 193.7 36.9 191.1 37.9 C188.4 38.9 186.3 39.8 183.7 41.4 C181.1 42.9 177.7 45.2 175.6 47.0 C173.5 48.8 172.3 50.2 171.0 52.0 C169.8 53.8 168.8 55.7 168.2 57.8 C167.6 59.9 167.5 62.7 167.6 64.7 C167.7 66.6 168.8 68.7 169.1 69.5"/>
+    <path d="M129.2 209.3 C128.9 209.4 133.2 199.4 127.7 210.1 C122.2 220.8 101.6 262.8 96.2 273.5 C90.8 284.3 95.9 274.4 95.4 274.6 C94.9 274.9 93.7 274.9 93.4 274.9"/>
+    <path d="M306.6 275.6 C306.1 275.5 309.7 285.6 304.0 274.8 C298.2 264.0 277.7 221.6 272.2 210.8 C266.6 200.0 270.8 210.1 270.6 210.0"/>
+    <path d="M138.5 252.9 L149.3 187.1"/>
+    <path d="M261.2 253.0 L250.4 187.7"/>
+    <path d="M256.5 160.8 C258.4 165.4 265.6 181.8 267.8 188.2 C270.0 194.6 269.4 195.5 269.8 199.2 C270.3 202.8 270.5 208.2 270.6 210.0"/>
+    <path d="M129.2 209.3 C129.4 207.0 129.8 199.4 130.3 195.6 C130.9 191.7 130.2 192.2 132.4 186.3 C134.5 180.4 141.5 164.5 143.3 160.2"/>
+    <path d="M60.7 264.9 C60.6 265.7 59.8 268.5 60.0 269.8 C60.2 271.1 59.1 271.1 61.9 272.6 C64.7 274.1 72.5 277.2 76.8 278.5 C81.0 279.9 84.7 281.2 87.4 280.6 C90.2 280.0 92.4 275.9 93.4 274.9"/>
+    <path d="M220.3 80.5 C218.7 80.9 214.0 82.6 210.8 83.2 C207.7 83.7 204.3 83.8 201.4 83.8 C198.5 83.7 196.9 83.7 193.4 82.8 C190.0 82.0 182.8 79.5 180.6 78.8"/>
+    <path d="M339.1 265.6 C339.2 266.4 339.9 269.6 339.7 270.9 C339.4 272.2 340.7 271.8 337.9 273.2 C335.2 274.6 327.3 277.8 323.1 279.2 C318.8 280.5 315.2 281.8 312.4 281.2 C309.7 280.6 307.5 276.6 306.6 275.6"/>
+    <path d="M93.4 274.9 L60.7 264.9"/>
+    <path d="M306.6 275.6 C308.8 274.8 314.8 272.4 320.2 270.7 C325.7 269.0 336.0 266.4 339.1 265.6"/>
+    <path d="M220.3 80.5 C220.0 81.8 219.2 86.6 218.6 88.5 C218.1 90.3 218.2 90.6 216.9 91.6 C215.6 92.6 213.4 93.9 211.0 94.6 C208.5 95.3 203.5 95.5 202.0 95.7"/>
+    <path d="M202.0 95.7 C201.1 95.6 198.3 95.7 196.2 95.1 C194.2 94.4 192.1 93.6 190.0 91.9 C187.9 90.2 185.3 87.1 183.7 84.9 C182.2 82.7 181.1 79.8 180.6 78.8"/>
+    <path d="M180.6 78.8 L169.1 69.5"/>
+    <path d="M220.3 80.5 C221.5 79.5 226.0 75.5 227.4 74.5 C228.8 73.6 228.3 74.5 228.5 74.5"/>
   </g>
   <g fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="square" opacity="0.55">
-    <path d="M36 106 L36 286 M30 106 L42 106 M30 286 L42 286"/>
-    <path d="M135 182 L265 182 M135 176 L135 188 M265 176 L265 188"/>
-    <path d="M288 107 L358 235 M283 109 L293 104 M353 237 L363 232"/>
+    <path d="M36 108 L36 280 M30 108 L42 108 M30 280 L42 280"/>
+    <path d="M129 209 L254 209 M129 203 L129 215 M254 203 L254 215"/>
+    <path d="M258.5 90.8 L364.7 252.4 M254.4 93.6 L262.7 88.1 M360.6 255.2 L368.9 249.7"/>
   </g>
   <g fill="#fff" class="figure__letters">
-    <text x="26"  y="203" text-anchor="end">A</text>
-    <text x="172" y="172" text-anchor="middle">B</text>
-    <text x="370" y="166" text-anchor="start">C</text>
+    <text x="26"  y="200" text-anchor="end">A</text>
+    <text x="168" y="201" text-anchor="middle">B</text>
+    <text x="323" y="164" text-anchor="middle">C</text>
   </g>
 </svg>
 """
@@ -221,8 +234,17 @@ def table(garment):
             + '</tr></thead><tbody>' + body + '</tbody></table>')
 
 
+# Headless Chromium paints 87 CSS pixels less than --window-size asks for, and
+# says so itself: window.innerHeight is 813 for a window of 900. The screenshot
+# is still the full window, the strip below is simply never painted — black on
+# black, invisible, until a line of text lands in it and disappears. So the page
+# is laid out against the height that actually paints.
+VIEWPORT_LOSS = 87
+
+
 def write(path, w, h, pad, measure, sizes, main, note):
-    s = (PAGE.replace('__FONT__', FONT).replace('__W__', str(w)).replace('__H__', str(h))
+    s = (PAGE.replace('__FONT__', FONT).replace('__W__', str(w))
+             .replace('__H__', str(h - VIEWPORT_LOSS))
              .replace('__PAD__', pad).replace('__MAIN__', main)
              .replace('__MEASURE__', str(measure))
              .replace('__INTROTEXT__', INTRO).replace('__NOTETEXT__', note))

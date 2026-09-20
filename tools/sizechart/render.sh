@@ -7,6 +7,9 @@
 # Numbers and drawings live in build.py — edit there, never in the generated
 # HTML, which is overwritten on every run. Check the bottom line of each
 # picture afterwards: content that overflows the canvas is cropped silently.
+# Chromium paints 87 CSS pixels less than --window-size asks for, which build.py
+# subtracts; the strip below it stays black, so the loss only shows when a line
+# of text falls into it.
 set -e
 
 HERE=$(cd "$(dirname "$0")" && pwd)
