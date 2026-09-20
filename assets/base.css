@@ -1836,10 +1836,20 @@ textarea:focus {
     display: none;
   }
 
-  /* Cart and language share the right-hand row on a phone, so they need a
-     gap of their own — the nav gap is sized for a full row of links. */
+  /* Cart and language stack on a phone, cart first. Side by side they cost
+     more width than the row has, and the cart paid for it by wrapping its
+     own count onto a second line. Stacked, each keeps one line. */
   .header__nav--right .nav-list {
-    gap: var(--space-sm);
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .nav-list__cart { order: 1; }
+  .nav-list__lang { order: 2; }
+
+  .nav-list__cart a {
+    white-space: nowrap;
   }
 
   .header__nav[data-open="true"] .nav-list {
