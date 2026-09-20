@@ -4,7 +4,7 @@
       "type": "main-product",
       "settings": {
         "show_size_link": true,
-        "size_link_label": "Größentabelle"
+        "size_link_label": "Size chart"
       }
     },
     "bundle": {
@@ -45,7 +45,7 @@
           "type": "row",
           "settings": {
             "letter": "A",
-            "label": "Schulterbreite",
+            "label": "Shoulder width",
             "values": "53, 55, 57, 59"
           }
         },
@@ -53,7 +53,7 @@
           "type": "row",
           "settings": {
             "letter": "B",
-            "label": "Länge ab Achsel",
+            "label": "Length from armpit",
             "values": "39, 40, 41, 43"
           }
         },
@@ -61,7 +61,7 @@
           "type": "row",
           "settings": {
             "letter": "C",
-            "label": "Ärmellänge ab Schulter",
+            "label": "Sleeve length from shoulder",
             "values": "67, 68, 69, 70"
           }
         },
@@ -69,7 +69,7 @@
           "type": "row",
           "settings": {
             "letter": "D",
-            "label": "Saumbreite",
+            "label": "Hem width",
             "values": "55, 57, 60, 63"
           }
         }
@@ -81,13 +81,13 @@
         "d"
       ],
       "settings": {
-        "title": "Größentabelle",
-        "intro": "Alle Angaben sind Maße des flach ausgelegten Kleidungsstücks, nicht Körpermaße.",
+        "title": "Size chart",
+        "intro": "All measurements are taken from the garment laid flat, not from the body.",
         "sizes": "S, M, L, XL",
         "unit": "cm",
-        "label_measure": "Maß",
-        "figure_alt": "Flach ausgelegtes Oberteil mit den Messpunkten A bis D",
-        "note": "Gemessen mit einer Toleranz von ±2 cm. Im Zweifel die größere Größe wählen."
+        "label_measure": "Measurement",
+        "figure_alt": "Garment laid flat with measuring points A to D",
+        "note": "Measured with a tolerance of ±2 cm. If in doubt, take the larger size."
       }
     }
   },

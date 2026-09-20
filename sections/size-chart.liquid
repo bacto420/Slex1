@@ -100,12 +100,12 @@
   "name": "Size chart",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Heading", "default": "Größentabelle" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Size chart" },
     {
       "type": "text",
       "id": "intro",
       "label": "Intro",
-      "default": "Alle Angaben sind Maße des flach ausgelegten Kleidungsstücks, nicht Körpermaße."
+      "default": "All measurements are taken from the garment laid flat, not from the body."
     },
     {
       "type": "text",
@@ -115,19 +115,19 @@
       "default": "S, M, L, XL"
     },
     { "type": "text", "id": "unit", "label": "Unit", "default": "cm" },
-    { "type": "text", "id": "label_measure", "label": "First column heading", "default": "Maß" },
+    { "type": "text", "id": "label_measure", "label": "First column heading", "default": "Measurement" },
     {
       "type": "text",
       "id": "figure_alt",
       "label": "Drawing description",
       "info": "Read aloud by screen readers.",
-      "default": "Flach ausgelegtes Oberteil mit den Messpunkten A bis D"
+      "default": "Garment laid flat with measuring points A to D"
     },
     {
       "type": "text",
       "id": "note",
       "label": "Note",
-      "default": "Gemessen mit einer Toleranz von ±2 cm. Im Zweifel die größere Größe wählen."
+      "default": "Measured with a tolerance of ±2 cm. If in doubt, take the larger size."
     }
   ],
   "blocks": [
@@ -136,7 +136,7 @@
       "name": "Measurement",
       "settings": [
         { "type": "text", "id": "letter", "label": "Letter", "default": "A" },
-        { "type": "text", "id": "label", "label": "Name", "default": "Schulterbreite" },
+        { "type": "text", "id": "label", "label": "Name", "default": "Shoulder width" },
         {
           "type": "text",
           "id": "values",
@@ -152,10 +152,10 @@
     {
       "name": "Size chart",
       "blocks": [
-        { "type": "row", "settings": { "letter": "A", "label": "Schulterbreite", "values": "53, 55, 57, 59" } },
-        { "type": "row", "settings": { "letter": "B", "label": "Länge ab Achsel", "values": "39, 40, 41, 43" } },
-        { "type": "row", "settings": { "letter": "C", "label": "Ärmellänge ab Schulter", "values": "67, 68, 69, 70" } },
-        { "type": "row", "settings": { "letter": "D", "label": "Saumbreite", "values": "55, 57, 60, 63" } }
+        { "type": "row", "settings": { "letter": "A", "label": "Shoulder width", "values": "53, 55, 57, 59" } },
+        { "type": "row", "settings": { "letter": "B", "label": "Length from armpit", "values": "39, 40, 41, 43" } },
+        { "type": "row", "settings": { "letter": "C", "label": "Sleeve length from shoulder", "values": "67, 68, 69, 70" } },
+        { "type": "row", "settings": { "letter": "D", "label": "Hem width", "values": "55, 57, 60, 63" } }
       ]
     }
   ]
