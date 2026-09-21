@@ -32,6 +32,7 @@
     "skip_to_text": "Skip to content"
   },
   "products": {
+    "variant": "Variant",
     "quantity": "Quantity",
     "add_to_cart": "Add to cart",
     "sold_out": "Sold out"

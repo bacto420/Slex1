@@ -20,33 +20,73 @@
 
   <div class="product__info">
     <h1 class="product__title">{{ product.title }}</h1>
-    <div class="product__price">{%- render 'price', product: product -%}</div>
+    <div class="product__price" data-variant-price>{%- render 'price', product: product -%}</div>
 
     {%- if product.description != blank -%}
       <div class="product__description rte">{{ product.description }}</div>
     {%- endif -%}
 
-    {%- form 'product', product -%}
-      {%- unless product.has_only_default_variant -%}
-        {%- for option in product.options_with_values -%}
-          <label class="field-label" for="Option-{{ forloop.index }}">{{ option.name }}</label>
-          <select id="Option-{{ forloop.index }}" name="options[{{ option.name | escape }}]">
-            {%- for value in option.values -%}
-              <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>
-                {{ value }}
-              </option>
-            {%- endfor -%}
-          </select>
-        {%- endfor -%}
-      {%- endunless -%}
+    {%- form 'product', product, data-product-form: 'main' -%}
+      {%- comment -%}
+        One select, named `id`, listing the variants themselves.
 
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        It used to be one select per option, named options[Größe], with the
+        chosen variant carried separately in a hidden `id` field that nothing
+        ever updated. Shopify's cart takes `id` when both are sent, so every
+        order arrived as the first available variant no matter what the
+        customer picked — pick XL, get S.
+
+        Sending the variant id directly is the whole fix: it is what the cart
+        reads, it needs no JavaScript to stay in step, and a variant that
+        cannot be bought is not offered in the first place.
+      {%- endcomment -%}
+      {%- assign chosen = product.selected_or_first_available_variant -%}
+
+      {%- if product.has_only_default_variant -%}
+        <input type="hidden" name="id" value="{{ chosen.id }}">
+      {%- else -%}
+        {%- assign option_label = 'products.variant' | t -%}
+        {%- if product.options.size == 1 -%}
+          {%- assign option_label = product.options.first -%}
+        {%- endif -%}
+
+        <label class="field-label" for="VariantSelect-{{ section.id }}">{{ option_label }}</label>
+        <select id="VariantSelect-{{ section.id }}" name="id" data-variant-select>
+          {%- for v in product.variants -%}
+            <option value="{{ v.id }}"
+                    {% if v.id == chosen.id %}selected{% endif %}
+                    {% unless v.available %}disabled{% endunless %}>
+              {{ v.title }}{% unless v.available %} — {{ 'products.sold_out' | t }}{% endunless %}
+            </option>
+          {%- endfor -%}
+        </select>
+
+        {%- comment -%}
+          The price beside the title follows the selection. Each variant's
+          price is rendered here by the same snippet that prints the one on
+          the page, so the money format and the struck-through comparison
+          cannot drift apart from it.
+        {%- endcomment -%}
+        <script type="application/json" data-variant-json>
+          [
+            {%- for v in product.variants -%}
+              {%- capture v_price -%}{%- render 'price', product: product, variant: v -%}{%- endcapture -%}
+              {"id": {{ v.id }}, "available": {{ v.available }}, "price": {{ v_price | strip | json }}}
+              {%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          ]
+        </script>
+      {%- endif -%}
 
       <label class="field-label" for="Quantity">{{ 'products.quantity' | t }}</label>
       <input type="number" id="Quantity" name="quantity" value="1" min="1">
 
-      <button type="submit" class="btn" {% unless product.available %}disabled{% endunless %}>
-        {%- if product.available -%}
+      <button type="submit" class="btn"
+              data-variant-button
+              data-label-add="{{ 'products.add_to_cart' | t | escape }}"
+              data-label-sold-out="{{ 'products.sold_out' | t | escape }}"
+              {% unless chosen.available %}disabled{% endunless %}>
+        {%- if chosen.available -%}
           {{ 'products.add_to_cart' | t }}
         {%- else -%}
           {{ 'products.sold_out' | t }}

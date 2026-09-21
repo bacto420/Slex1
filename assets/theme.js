@@ -369,6 +369,56 @@
   Array.prototype.forEach.call(document.querySelectorAll('.widerruf__form'), setupWiderruf);
 
   /* ------------------------------------------------------------------
+     Product form.
+
+     The select carries the variant id, so the cart is already correct
+     without any of this. What this adds is the price beside the title
+     following the selection, and the button refusing a size that is sold
+     out — both rendered by Liquid up front, so nothing here has to know how
+     money is written or what the button says in which language.
+     ------------------------------------------------------------------ */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-product-form]'), function (form) {
+    var select = form.querySelector('[data-variant-select]');
+    var json = form.querySelector('[data-variant-json]');
+    if (!select || !json) return;
+
+    var variants;
+    try {
+      variants = JSON.parse(json.textContent);
+    } catch (e) {
+      return;
+    }
+
+    var priceEl = document.querySelector('[data-variant-price]');
+    var button = form.querySelector('[data-variant-button]');
+
+    select.addEventListener('change', function () {
+      var id = select.value;
+      var chosen = null;
+      variants.forEach(function (v) {
+        if (String(v.id) === String(id)) chosen = v;
+      });
+      if (!chosen) return;
+
+      if (priceEl) priceEl.innerHTML = chosen.price;
+
+      if (button) {
+        button.disabled = !chosen.available;
+        button.textContent = chosen.available
+          ? button.getAttribute('data-label-add')
+          : button.getAttribute('data-label-sold-out');
+      }
+
+      /* Keep the address in step, so a copied link opens on the same size. */
+      if (window.history && window.history.replaceState) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('variant', id);
+        window.history.replaceState({}, '', url.toString());
+      }
+    });
+  });
+
+  /* ------------------------------------------------------------------
      Language picker.
 
      The select is the control: changing it submits. The submit button in
